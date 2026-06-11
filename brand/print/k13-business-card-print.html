@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>K13 Business Card print master (File &gt; Print &gt; Save as PDF)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @page{size:3.5in 2in;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-family:"Space Grotesk",sans-serif}
+  .card{width:3.5in;height:2in;position:relative;overflow:hidden;page-break-after:always}
+  .front{background:#15130F;color:#EFE9DC}
+  .front .bg3{position:absolute;right:-0.55in;top:-0.35in;width:2.4in;height:2.8in}
+  .front .mark{position:absolute;left:.25in;top:.22in;width:.47in;height:.47in}
+  .front .name{position:absolute;left:.25in;bottom:.52in;display:flex;align-items:baseline;gap:.11in}
+  .front .name b{font-size:26pt;font-weight:700;letter-spacing:.02em;line-height:1}
+  .front .name i{font-style:normal;font-weight:400;font-size:10.5pt;letter-spacing:.02em;color:rgba(239,233,220,.66)}
+  .front .tag{position:absolute;left:.25in;bottom:.2in;font-family:"Fraunces",serif;font-style:italic;font-size:10pt;color:#FF4F00}
+  .back{background:#F1ECE2;color:#15130F}
+  .back .stripe{position:absolute;left:0;right:0;top:0;height:.07in;background:#FF4F00}
+  .back .mark{position:absolute;left:.25in;top:.25in;width:.36in;height:.36in}
+  .back .ask{position:absolute;left:.25in;top:.78in;font-family:"Fraunces",serif;font-style:italic;font-size:12.5pt}
+  .back .email{position:absolute;left:.25in;top:1.12in;font-weight:500;font-size:8pt;letter-spacing:.08em}
+  .back .web{position:absolute;left:.25in;top:1.3in;font-weight:500;font-size:8pt;letter-spacing:.08em;color:#6F6755}
+  .back .tags{position:absolute;left:.25in;bottom:.18in;font-weight:500;font-size:5.8pt;letter-spacing:.1em;color:#6F6755}
+</style>
+</head>
+<body>
+<div class="card front">
+  <svg class="bg3" viewBox="46 18 30 64" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#231F18"/></svg>
+  <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#EFE9DC"/><path d="M30 22 h12 v56 h-12 z" fill="#15130F"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/></svg>
+  <div class="name"><b>K13</b><i>software studio</i></div>
+  <div class="tag">make it sharp.</div>
+</div>
+<div class="card back">
+  <div class="stripe"></div>
+  <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#15130F"/><path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/></svg>
+  <div class="ask">Tell us what you're building.</div>
+  <div class="email">PROJECTS.K13@GMAIL.COM</div>
+  <div class="web">K13PROJECTS.COM</div>
+  <div class="tags">WEB APPS · WEBSITES · AI PRODUCTS · MVP SPRINTS</div>
+</div>
+</body>
+</html>

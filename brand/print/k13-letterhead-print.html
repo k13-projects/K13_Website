@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>K13 Letterhead print master (File &gt; Print &gt; Save as PDF)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @page{size:A4;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:210mm;height:297mm}
+  body{background:#F1ECE2;font-family:"Space Grotesk",sans-serif;color:#15130F;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;position:relative;overflow:hidden}
+  .page{position:absolute;inset:0;padding:16mm 16mm 14mm}
+  header{display:flex;justify-content:space-between;align-items:flex-start}
+  .lock{display:flex;align-items:center;gap:5mm}
+  .lock svg{width:11mm;height:11mm}
+  .lock b{font-size:14pt;font-weight:700;letter-spacing:.04em}
+  .lock i{font-style:normal;font-weight:400;font-size:10pt;letter-spacing:.02em;color:#6F6755;margin-left:1mm}
+  .contact{text-align:right;font-weight:500;font-size:7pt;letter-spacing:.22em}
+  .contact .sub{color:#6F6755;margin-top:1.6mm}
+  .rule{margin-top:7mm;height:0;border-top:.35pt solid rgba(21,19,15,.35);position:relative}
+  .rule::before{content:"";position:absolute;left:0;top:-1pt;width:12mm;height:1.6pt;background:#FF4F00}
+  .wm{position:absolute;right:-30mm;bottom:6mm;width:120mm;opacity:.55;pointer-events:none}
+  footer{position:absolute;left:16mm;right:16mm;bottom:12mm;border-top:.35pt solid rgba(21,19,15,.35);
+    padding-top:3.4mm;display:flex;justify-content:space-between;align-items:baseline;
+    font-weight:500;font-size:6.5pt;letter-spacing:.12em;color:#6F6755}
+  footer .sq{display:inline-block;width:1.6mm;height:1.6mm;background:#FF4F00;margin-right:2.4mm;vertical-align:baseline}
+  footer i{font-family:"Fraunces",serif;font-style:italic;font-size:8.5pt;letter-spacing:0;text-transform:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="lock">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#15130F"/><path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/></svg>
+      <span><b>K13</b><i>software studio</i></span>
+    </div>
+    <div class="contact">
+      <div>PROJECTS.K13@GMAIL.COM</div>
+      <div class="sub">K13PROJECTS.COM</div>
+    </div>
+  </header>
+  <div class="rule"></div>
+  <svg class="wm" viewBox="26 20 56 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 22 h12 v56 h-12 z" fill="#E7E1D3"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#EAE2D0"/></svg>
+  <footer>
+    <span><span class="sq"></span>K13 SOFTWARE STUDIO</span>
+    <i>software with an edge.</i>
+    <span>PROJECTS.K13@GMAIL.COM&nbsp;&nbsp;/&nbsp;&nbsp;K13PROJECTS.COM</span>
+  </footer>
+</div>
+</body>
+</html>

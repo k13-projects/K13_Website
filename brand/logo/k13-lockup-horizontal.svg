@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" width="680" height="160">
+  <!-- Horizontal lockup. Uses Google webfonts when rendered in a browser/site.
+       For design tools, install Space Grotesk + Fraunces (both free on Google Fonts),
+       or use the site/header markup directly. -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;display=swap');
+      .k13{font-family:'Space Grotesk',Futura,Arial,sans-serif;font-weight:700;font-size:34px;letter-spacing:.04em;fill:#15130F}
+      .studio{font-family:'Space Grotesk',Futura,Arial,sans-serif;font-weight:400;font-size:19px;letter-spacing:.03em;fill:#6F6755}
+    </style>
+  </defs>
+  <g transform="translate(8,8) scale(0.64)">
+    <rect width="100" height="100" rx="22" fill="#15130F"/>
+    <path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/>
+    <path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/>
+  </g>
+  <text class="k13" x="88" y="52">K13</text>
+  <text class="studio" x="164" y="52">software studio</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 64" width="448" height="512">
+  <!-- Naked glyph, single color, transparent background.
+       Recolor via CSS `fill` or replace #15130F. -->
+  <g transform="translate(-26,-20)">
+    <path d="M30 22 h12 v56 h-12 z" fill="#15130F"/>
+    <path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#15130F"/>
+  </g>
+</svg>
