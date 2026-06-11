@@ -255,6 +255,10 @@ section{position:relative;z-index:2}
 .pillar p{color:var(--muted);font-size:15.5px}
 .pillar .pnum{position:absolute;right:18px;top:14px;font-family:var(--display);font-weight:900;font-style:italic;
   font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--outline-faint)}
+.pillar .pnum b{font-weight:900;-webkit-text-stroke:0}
+.pillar:nth-child(1) .pnum b{color:var(--red)}
+.pillar:nth-child(2) .pnum b{color:var(--yellow)}
+.pillar:nth-child(3) .pnum b{color:var(--ember)}
 
 /* ---------- reviews ---------- */
 .reviews{overflow:hidden}
@@ -452,19 +456,19 @@ footer{background:var(--bg);border-top:1px solid var(--line)}
     <h2 class="h2 rv">One spark,<br><span class="red">three</span> <em>moves.</em></h2>
     <div class="pillar-grid">
       <div class="pillar rv">
-        <span class="pnum">01</span>
+        <span class="pnum">0<b>1</b></span>
         <div class="glyph">&lt;/&gt;</div>
         <h3>Code.</h3>
         <p>Engineering first. Clean, fast and reliable foundations, built daily with the newest AI tooling so weeks do the work of quarters.</p>
       </div>
       <div class="pillar rv">
-        <span class="pnum">02</span>
+        <span class="pnum">0<b>2</b></span>
         <div class="glyph">✦</div>
         <h3>Create.</h3>
         <p>Design with intent. Bold interfaces, cinematic motion and details tuned until the product feels inevitable.</p>
       </div>
       <div class="pillar rv">
-        <span class="pnum">03</span>
+        <span class="pnum">0<b>3</b></span>
         <div class="glyph">↑</div>
         <h3>Elevate.</h3>
         <p>Business impact. We ship products that move your numbers and excite your stakeholders, not just your pixels.</p>
