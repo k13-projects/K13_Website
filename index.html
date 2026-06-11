@@ -50,8 +50,11 @@ html[data-theme="light"]{
 body,header,.marquee,.pillars,.contact,footer,.pillar,.rev{transition:background-color .5s,color .5s,border-color .5s}
 /* light-mode legibility: warm yellow shifts toward ember on cream */
 html[data-theme="light"] .hero .big13 i{-webkit-text-stroke-color:rgba(255,106,0,.6)}
-html[data-theme="light"] h1 .w-elevate{background:linear-gradient(92deg,var(--ember) 25%,var(--red))}
+html[data-theme="light"] h1 .w-elevate{background-image:linear-gradient(92deg,var(--ember) 25%,var(--red))}
 html[data-theme="light"] .sparkline path{stroke:var(--ember)}
+html[data-theme="light"] .cursor{background:var(--ember);mix-blend-mode:multiply}
+html[data-theme="light"] .streak{opacity:.16}
+html[data-theme="light"] .spotlight{display:none}
 html[data-theme="light"] .contact-left .mailto{color:var(--ember)}
 html[data-theme="light"] .rev .stars{color:var(--ember)}
 html[data-theme="light"] .h2 .yellow{color:var(--ember)}
