@@ -37,7 +37,7 @@ The public domain is **k13projects.com**.
 ## What's in this kit
 
 ```
-site/index.html                 One-page site in a single file, zero build step.
+index.html                      One-page site in a single file, zero build step.
                                 Lenis smooth scrolling, scroll-driven reveals,
                                 parallax "K13" backdrop, animated underline,
                                 marquee, magnetic buttons, custom cursor,
@@ -61,9 +61,9 @@ brand/print/previews/               PNG previews of the print pieces.
 
 The site is one static file, so any host works:
 
-1. **Vercel / Netlify / Cloudflare Pages:** drag the `site` folder into their dashboard,
-   add `k13projects.com` as a custom domain, and point your DNS where they tell you.
+1. **Vercel (current setup):** the repo is imported as the `k13-website` project;
+   `main` serves production and branch subdomains (b1, b2, ...) serve stakeholder previews.
 2. **Any shared host:** upload `index.html` to the web root. Done.
 
 To change the contact address later, search for `projects.k13@gmail.com` in
-`site/index.html` and replace all occurrences.
+`index.html` and replace all occurrences.
