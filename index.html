@@ -156,8 +156,8 @@ html[data-theme="light"] .theme-btn .ic-moon{opacity:0;transform:scale(.4) rotat
 /* ---------- hero ---------- */
 .hero{min-height:calc(100svh - 165px);display:flex;flex-direction:column;justify-content:center;position:relative;
   padding:54px clamp(20px,4vw,56px) 100px;overflow:hidden}
-.hero .big13{position:absolute;right:8vw;top:50%;font-family:var(--display);font-weight:900;font-style:italic;
-  letter-spacing:-.03em;font-size:clamp(150px,20vw,360px);line-height:.8;z-index:0;
+.hero .big13{position:absolute;right:33vw;top:50%;font-family:var(--display);font-weight:900;font-style:italic;
+  letter-spacing:-.03em;font-size:clamp(140px,17vw,330px);line-height:.8;z-index:0;
   user-select:none;pointer-events:none;will-change:transform;transform:translateY(-50%) skewX(-4deg)}
 .hero .big13 b{color:transparent;-webkit-text-stroke:3px rgba(227,38,35,.65);font-weight:900}
 .hero .big13 i{color:transparent;-webkit-text-stroke:3px rgba(255,208,0,.5);font-style:italic;font-weight:900}
@@ -339,7 +339,10 @@ footer{background:var(--bg);border-top:1px solid var(--line)}
   .work .tags{grid-column:2;justify-content:flex-start}
   .pillar-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
-  .hero .big13{right:-14vw;opacity:.55}
+  /* mascot rises next to the headline; K13 sits below it, centered and fully on screen */
+  .hero .big13{left:50%;right:auto;top:auto;bottom:4px;opacity:.55;
+    font-size:clamp(110px,23vw,200px);transform:translateX(-50%) skewX(-4deg)}
+  .mascot-wrap{opacity:.55;width:clamp(150px,42vw,250px);top:92px;bottom:auto;right:2vw}
 }
 @media(max-width:560px){
   .brand .logo{font-size:26px}
@@ -600,7 +603,11 @@ function onScroll(){
   var h = document.documentElement.scrollHeight - window.innerHeight;
   pbar.style.transform = "scaleX(" + (h > 0 ? y/h : 0) + ")";
   if (big13 && !reduced) {
-    big13.style.transform = "translateY(" + (-50 + y * -0.05) + "%) skewX(-4deg)";
+    if (window.innerWidth > 980) {
+      big13.style.transform = "translateY(" + (-50 + y * -0.05) + "%) skewX(-4deg)";
+    } else {
+      big13.style.transform = ""; /* CSS handles placement on small screens */
+    }
   }
   if (revtrack && revSection && !reduced) {
     var r = revSection.getBoundingClientRect();
