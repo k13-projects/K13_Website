@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K13 Software Studio | Software with an edge</title>
-<meta name="description" content="K13 is a versatile software studio. We design and ship custom web applications, websites and AI-powered products. Swift, crafted with care and style.">
+<title>K13 — Collected Works, Vol. I</title>
+<meta name="description" content="The collected works of K13 Software Studio, presented as a monograph: six shipped products as plates, their real interfaces rebuilt in situ — not screenshotted. Commissions considered.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Space+Grotesk:wght@400;500;700&family=Playfair+Display:ital,wght@1,600&family=Josefin+Sans:wght@600;700&family=Big+Shoulders+Stencil+Display:wght@600;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%2315130F"/><path d="M30 22 h12 v56 h-12 z" fill="%23F1ECE2"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="%23FF4F00"/></svg>'>
 <style>
+/* =========================================================
+   K13 — beta_v4 "THE MONOGRAPH"
+   Collected Works, Vol. I. The portfolio as a printed book:
+   six plates, figures rebuilt in situ, footnotes from the
+   real commit logs, an index, an author's note.
+   ========================================================= */
 :root{
   --paper:#F1ECE2;
   --paper-2:#E9E1CF;
+  --page-bg:var(--paper);
   --ink:#15130F;
   --ink-soft:#26221B;
   --muted:#6F6755;
@@ -30,30 +37,26 @@ html{scroll-behavior:auto}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 body{
-  background:var(--paper);
+  background:var(--page-bg);
   color:var(--ink);
   font-family:var(--sans);
-  font-size:17px;
-  line-height:1.6;
+  font-size:17px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  transition:background-color 1.1s var(--ease);
 }
 ::selection{background:var(--accent);color:var(--paper)}
 a{color:inherit;text-decoration:none}
 img,svg{display:block}
 button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
 
-/* ---------- grain ---------- */
+/* ---------- grain / progress / cursor ---------- */
 .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:9000;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 7s steps(8) infinite;}
+  animation:grain 7s steps(8) infinite}
 @keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-3%,-3%)}}
-
-/* ---------- progress ---------- */
-.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:1001;background:transparent}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:1001}
 .progress span{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0)}
-
-/* ---------- cursor ---------- */
 .cursor{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--accent);
   pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),opacity .3s;opacity:0;mix-blend-mode:multiply}
 .cursor.on{opacity:1}
@@ -64,30 +67,23 @@ button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
 header{position:fixed;top:0;left:0;right:0;z-index:1000;
   display:flex;align-items:center;justify-content:space-between;
   padding:18px clamp(20px,4vw,56px);
-  transition:background .4s,box-shadow .4s,padding .4s var(--ease);}
-header.scrolled{background:rgba(241,236,226,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:12px clamp(20px,4vw,56px);box-shadow:0 1px 0 var(--line)}
+  transition:background .4s,box-shadow .4s,padding .4s var(--ease)}
+header.scrolled{background:rgba(241,236,226,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:12px clamp(20px,4vw,56px);box-shadow:0 1px 0 var(--line)}
 .brand{display:flex;align-items:center;gap:14px}
-.brand .mark{width:68px;height:68px;border-radius:15px;flex:none;transition:transform .5s var(--ease),width .4s var(--ease),height .4s var(--ease),border-radius .4s var(--ease)}
+.brand .mark{width:58px;height:58px;border-radius:13px;flex:none;transition:transform .5s var(--ease),width .4s var(--ease),height .4s var(--ease)}
 .brand:hover .mark{transform:rotate(-8deg) scale(1.05)}
-header.scrolled .brand .mark{width:42px;height:42px;border-radius:10px}
-.brand .word{font-family:var(--sans);font-weight:700;letter-spacing:.04em;font-size:30px;line-height:1.15;
-  overflow:hidden;display:inline-block;transition:font-size .4s var(--ease)}
-.brand .word-in{display:inline-block;position:relative;padding-bottom:4px;transform:translateY(115%);
-  animation:wordup .9s var(--ease) .45s forwards}
-.brand .word-in::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);
-  transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s var(--ease)}
-.brand:hover .word-in::after{transform:scaleX(1);transform-origin:0 50%}
-@keyframes wordup{to{transform:translateY(0)}}
-.brand .word em{font-family:var(--sans);font-style:normal;font-weight:700;color:var(--ink);letter-spacing:.04em;
-  margin-left:10px;font-size:26px;transition:font-size .4s var(--ease)}
-header.scrolled .brand .word{font-size:22px}
-header.scrolled .brand .word em{font-size:19px}
-nav{display:flex;gap:30px;align-items:center}
-nav .nl{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:4px 0}
-nav .nl::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:100% 50%;transition:transform .4s var(--ease)}
+header.scrolled .brand .mark{width:40px;height:40px;border-radius:9px}
+.brand .word{font-weight:700;letter-spacing:.04em;font-size:26px;line-height:1.15;transition:font-size .4s var(--ease)}
+.brand .word i{font-family:var(--serif);font-style:italic;font-weight:400;font-size:.72em;color:var(--muted);margin-left:10px;letter-spacing:0}
+header.scrolled .brand .word{font-size:20px}
+nav{display:flex;gap:26px;align-items:center}
+nav .nl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;position:relative;padding:4px 0;font-weight:500}
+nav .nl::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--ink);
+  transform:scaleX(0);transform-origin:100% 50%;transition:transform .4s var(--ease)}
 nav .nl:hover::after{transform:scaleX(1);transform-origin:0 50%}
 .btn{display:inline-flex;align-items:center;gap:10px;position:relative;overflow:hidden;
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
   padding:13px 24px;border-radius:100px;border:1px solid var(--ink);color:var(--ink);background:transparent;
   transition:color .35s var(--ease),border-color .35s var(--ease);white-space:nowrap}
 .btn::before{content:"";position:absolute;inset:0;background:var(--ink);border-radius:inherit;
@@ -99,197 +95,463 @@ nav .nl:hover::after{transform:scaleX(1);transform-origin:0 50%}
 .btn.solid::before{background:var(--accent)}
 .btn.solid:hover{border-color:var(--accent)}
 .btn.solid:hover span{color:var(--ink)}
+.btn.orange{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.orange::before{background:var(--ink)}
+.btn.orange span{color:#fff}
+.btn.orange:hover span{color:var(--paper)}
 .btn.light{border-color:var(--cream-on-ink);color:var(--cream-on-ink)}
 .btn.light::before{background:var(--accent)}
 .btn.light:hover span{color:var(--ink)}
 .btn.light:hover{border-color:var(--accent)}
 nav .btn{padding:10px 20px}
 
-/* ---------- hero ---------- */
-.hero{min-height:calc(100svh - 172px);display:flex;flex-direction:column;justify-content:center;position:relative;
-  padding:60px clamp(20px,4vw,56px) 110px;overflow:hidden}
-.hero .big13{position:absolute;right:11vw;top:50%;font-family:var(--serif);font-weight:600;letter-spacing:-.04em;
+/* ---------- cover (hero) ---------- */
+.cover{min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;position:relative;
+  padding:120px clamp(20px,4vw,56px) 110px;overflow:hidden}
+.cover .big13{position:absolute;right:9vw;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:600;letter-spacing:-.04em;
   font-size:clamp(170px,22vw,400px);line-height:.8;color:transparent;
   -webkit-text-stroke:4px var(--ink);z-index:0;user-select:none;pointer-events:none;will-change:transform}
-.hero .big13 b{font-weight:600;color:var(--accent);-webkit-text-stroke:0}
-.hero-inner{position:relative;z-index:1;max-width:1200px}
-.hero-inner::before,.hero-inner::after{content:"";position:absolute;width:20px;height:20px;pointer-events:none;opacity:.55;
+.cover .big13 b{font-weight:600;color:var(--accent);-webkit-text-stroke:0}
+.cover-inner{position:relative;z-index:1;max-width:1100px}
+.cover-inner::before,.cover-inner::after{content:"";position:absolute;width:20px;height:20px;pointer-events:none;opacity:.55;
   background:linear-gradient(var(--line-strong),var(--line-strong)) center/100% 1.5px no-repeat,
              linear-gradient(var(--line-strong),var(--line-strong)) center/1.5px 100% no-repeat}
-.hero-inner::before{left:-1px;top:-54px}
-.hero-inner::after{right:14vw;top:-54px}
-.hero-tags{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:34px;
-  font-weight:500;font-size:11.5px;letter-spacing:.18em;color:var(--muted)}
-@media(max-height:949px){.hero-foot{display:none}}
-.hero-tags .hstar{color:var(--accent);font-size:9px}
+.cover-inner::before{left:-1px;top:-54px}
+.cover-inner::after{right:10vw;top:-54px}
+.edition{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-strong);
+  border-radius:100px;padding:8px 18px;margin-bottom:36px}
+.edition .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,79,0,.5)}60%{box-shadow:0 0 0 9px rgba(255,79,0,0)}}
+h1{font-weight:700;letter-spacing:-.035em;font-size:clamp(48px,8.4vw,128px);line-height:.98}
+h1 .row{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+h1 .row>span{display:inline-block;transform:translateY(115%);will-change:transform}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em}
+h1 .accent{color:var(--accent)}
 h1 .edge-w{position:relative;display:inline-block}
 .scribble{position:absolute;left:2%;bottom:-.05em;width:96%;height:.16em;overflow:visible}
 .scribble path{stroke-dasharray:260;stroke-dashoffset:260;animation:scrib .9s cubic-bezier(.22,1,.36,1) 1.55s forwards}
 @keyframes scrib{to{stroke-dashoffset:0}}
-.pill{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line-strong);
-  border-radius:100px;padding:8px 18px;margin-bottom:36px}
-.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,79,0,.5)}60%{box-shadow:0 0 0 9px rgba(255,79,0,0)}}
-h1{font-family:var(--sans);font-weight:700;letter-spacing:-.035em;
-  font-size:clamp(52px,9.2vw,142px);line-height:.96;text-transform:none}
-h1 .row{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
-h1 .row>span{display:inline-block;transform:translateY(115%);will-change:transform}
-h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--ink)}
-h1 .accent{color:var(--accent)}
-.hero-sub{max-width:560px;margin-top:30px;font-size:clamp(17px,1.45vw,20px);color:var(--muted);line-height:1.65}
-.hero-sub strong{color:var(--ink);font-weight:500}
-.hero-cta{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;align-items:center}
-.hero-foot{position:absolute;bottom:28px;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);
-  display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);
-  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);z-index:2}
-.hero-foot .scrolldown{display:flex;align-items:center;gap:10px}
-.hero-foot .lineanim{width:48px;height:1px;background:var(--muted);position:relative;overflow:hidden}
-.hero-foot .lineanim::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);animation:slideline 2.4s var(--ease) infinite}
+.cover-sub{max-width:600px;margin-top:30px;font-size:clamp(17px,1.45vw,20px);color:var(--muted);line-height:1.65}
+.cover-sub strong{color:var(--ink);font-weight:500}
+.cover-sub em{font-family:var(--serif);font-style:italic;color:var(--ink)}
+.cover-cta{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;align-items:center}
+.key-hint{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:8px;font-weight:500}
+.key-hint kbd{border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:5px;padding:2px 7px;font-size:11px;color:var(--ink)}
+@media(hover:none){.key-hint{display:none}}
+.cover-foot{position:absolute;bottom:26px;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);z-index:2;font-weight:500}
+.cover-foot .lineanim{width:48px;height:1px;background:var(--muted);position:relative;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:10px}
+.cover-foot .lineanim::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);animation:slideline 2.4s var(--ease) infinite}
 @keyframes slideline{40%{transform:translateX(0)}100%{transform:translateX(101%)}}
+@media(max-height:760px){.cover-foot{display:none}}
 
 /* ---------- marquee ---------- */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  overflow:hidden;white-space:nowrap;padding:16px 0;background:var(--paper);margin-top:104px}
-.marquee .track{display:inline-flex;gap:0;will-change:transform;animation:marq 30s linear infinite}
+  overflow:hidden;white-space:nowrap;padding:15px 0;position:relative;z-index:2}
+.marquee .track{display:inline-flex;will-change:transform;animation:marq 30s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 .marquee .unit{display:inline-flex;align-items:center;gap:28px;padding-right:28px;
-  font-family:var(--sans);font-weight:500;font-size:clamp(18px,2vw,26px);letter-spacing:-.01em}
+  font-weight:500;font-size:clamp(17px,1.9vw,24px);letter-spacing:-.01em}
 .marquee .unit em{font-family:var(--serif);font-style:italic;font-weight:400}
 .marquee .unit .star{color:var(--accent);font-size:.85em}
 @keyframes marq{to{transform:translateX(-50%)}}
 
+/* ---------- specifications strip ---------- */
+.specs{border-bottom:1px solid var(--line)}
+.specs-grid{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.spec{padding:clamp(22px,3vw,38px) clamp(16px,2.4vw,34px);border-right:1px solid var(--line)}
+.spec:last-child{border-right:none}
+.spec b{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.4vw,50px);line-height:1;color:var(--ink)}
+.spec b i{font-style:normal;color:var(--accent)}
+.spec span{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
 /* ---------- sections ---------- */
-section{position:relative}
+section{position:relative;z-index:2}
 .wrap{max-width:1380px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(20px,4vw,56px)}
-.kicker{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;
+.kicker{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:500;
   letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .kicker::before{content:"";width:34px;height:1px;background:var(--accent)}
-.h2{font-family:var(--sans);font-weight:700;letter-spacing:-.03em;
-  font-size:clamp(38px,5.4vw,82px);line-height:1.02;max-width:900px}
+.h2{font-weight:700;letter-spacing:-.03em;font-size:clamp(36px,5vw,76px);line-height:1.02;max-width:920px}
 .h2 em{font-family:var(--serif);font-style:italic;font-weight:400}
 .h2 .accent{color:var(--accent)}
-
-/* reveal */
+.lede{max-width:620px;margin-top:26px;color:var(--muted);font-size:clamp(16px,1.3vw,18px)}
+.lede em{font-family:var(--serif);font-style:italic;color:var(--ink)}
 .rv{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.vis{opacity:1;transform:none}
 
-/* ---------- work list ---------- */
-.worklist{margin-top:clamp(48px,6vw,90px);border-top:1px solid var(--line)}
-.work{display:grid;grid-template-columns:90px 1.1fr 1.4fr auto;gap:clamp(16px,3vw,48px);align-items:center;
-  padding:clamp(28px,3.4vw,46px) 8px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;cursor:pointer}
-.work::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--ease);z-index:0}
-.work:hover::before{transform:scaleY(1);transform-origin:50% 0}
-.work>*{position:relative;z-index:1;transition:color .4s var(--ease)}
-.work .num{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.work .name{font-family:var(--sans);font-weight:700;letter-spacing:-.02em;font-size:clamp(22px,2.6vw,36px);line-height:1.1}
-.work .name em{font-family:var(--serif);font-style:italic;font-weight:400}
-.work .desc{color:var(--muted);font-size:15.5px;max-width:520px}
-.work .tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.work .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  border:1px solid var(--line-strong);border-radius:100px;padding:6px 13px;transition:border-color .4s,color .4s}
-.work:hover .num{color:var(--accent)}
-.work:hover .name,.work:hover .desc{color:var(--cream-on-ink)}
-.work:hover .desc{color:rgba(239,233,220,.65)}
-.work:hover .tag{color:var(--cream-on-ink);border-color:rgba(239,233,220,.4)}
-.work .arrow{position:absolute;right:8px;top:24px;z-index:1;font-size:20px;color:var(--accent);opacity:0;transform:translate(-10px,10px);transition:all .4s var(--ease)}
-.work:hover .arrow{opacity:1;transform:none}
+/* ---------- table of contents ---------- */
+.toc{margin-top:clamp(44px,5vw,72px);border-top:1px solid var(--line-strong);max-width:920px}
+.toc-row{display:flex;align-items:baseline;gap:18px;padding:clamp(18px,2.2vw,26px) 6px;
+  border-bottom:1px solid var(--line);cursor:pointer;position:relative;transition:padding-left .4s var(--ease)}
+.toc-row:hover{padding-left:18px}
+.toc-row .pl{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--accent);flex:none;width:74px}
+.toc-row .ti{font-weight:700;letter-spacing:-.02em;font-size:clamp(19px,2.2vw,30px);line-height:1.15;white-space:nowrap}
+.toc-row .ti em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted);font-size:.78em;margin-left:10px}
+.toc-row .leader{flex:1;border-bottom:2px dotted var(--line-strong);transform:translateY(-6px);min-width:30px}
+.toc-row .pg{font-size:13px;font-weight:500;letter-spacing:.08em;color:var(--muted);flex:none}
+.toc-row:hover .pg{color:var(--accent)}
+.toc-row::after{content:"→";position:absolute;left:-26px;top:50%;transform:translateY(-50%);color:var(--accent);
+  opacity:0;transition:opacity .3s,left .4s var(--ease)}
+.toc-row:hover::after{opacity:1;left:-12px}
 
-/* ---------- manifesto ---------- */
-.manifesto{background:var(--paper-2)}
-.mani-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,64px);margin-top:clamp(48px,6vw,90px)}
-.mani{border-top:1px solid var(--line-strong);padding-top:28px}
-.mani .mn{font-family:var(--serif);font-style:italic;font-size:clamp(54px,5vw,84px);line-height:1;color:var(--accent)}
-.mani h3{font-family:var(--sans);font-weight:700;letter-spacing:-.02em;font-size:clamp(20px,1.8vw,26px);margin:20px 0 12px}
-.mani p{color:var(--muted);font-size:15.5px;max-width:360px}
+/* ---------- plates ---------- */
+.plate{border-top:1px solid var(--line)}
+.folio{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  font-size:11.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--line-strong);padding-bottom:14px;margin-bottom:clamp(36px,4.5vw,64px)}
+.folio .fl em{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:13px;color:var(--accent);margin-right:10px}
+.plate-grid{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:clamp(36px,5vw,96px);align-items:start}
+.plate-rail{position:sticky;top:96px}
+.plate-rail .pnum{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(58px,6vw,104px);line-height:1;color:var(--accent)}
+.plate-rail h3{font-weight:700;letter-spacing:-.025em;font-size:clamp(30px,3vw,48px);line-height:1.02;margin-top:14px}
+.plate-rail h3 em{font-family:var(--serif);font-style:italic;font-weight:400}
+.colophon{margin-top:26px;border-top:1px solid var(--line-strong);max-width:380px}
+.colophon .crow{display:flex;justify-content:space-between;gap:14px;padding:10px 2px;border-bottom:1px solid var(--line);
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.colophon .crow .k{color:var(--muted)}
+.colophon .crow .v{text-align:right;color:var(--ink)}
+.colophon .crow .v a{color:var(--accent)}
+.colophon .crow .v a:hover{text-decoration:underline}
+.swatchline{display:flex;gap:0;margin-top:18px;height:14px;border:1px solid var(--line-strong);border-radius:3px;overflow:hidden;max-width:380px}
+.swatchline i{flex:1;transition:flex .4s var(--ease)}
+.swatchline i:hover{flex:2.4}
+.swatch-cap{margin-top:8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.plate-body{min-width:0}
+.plate-story{max-width:660px;position:relative}
+.plate-story .opener{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(22px,2.1vw,30px);line-height:1.42;color:var(--ink)}
+.plate-story>p{margin-top:20px;color:var(--ink-soft);font-size:16.5px;line-height:1.7}
+.plate-story>p strong{font-weight:700}
+.plate-story>p .fn{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.8em;vertical-align:super;margin-left:1px}
+.plate-story .dropcap::first-letter{font-family:var(--serif);font-weight:600;float:left;
+  font-size:3.4em;line-height:.84;padding:.04em .12em 0 0;color:var(--accent)}
+.footnotes{margin-top:30px;border-top:1px solid var(--line-strong);padding-top:14px;max-width:660px}
+.footnotes .fcap{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px}
+.footnotes .fn-row{display:flex;gap:12px;font-size:12.5px;line-height:1.55;color:var(--muted);padding:4px 0}
+.footnotes .fn-row .m{font-family:var(--serif);font-style:italic;color:var(--accent);flex:none}
+.footnotes .fn-row code{font-family:var(--mono);font-weight:500;color:var(--ink);background:rgba(21,19,15,.06);
+  border-radius:4px;padding:1px 6px;font-size:11px;letter-spacing:.02em;margin-right:6px}
+/* figure */
+.figure{position:relative;margin-top:clamp(36px,4vw,56px);border:1.5px solid var(--ink);background:#fff;
+  box-shadow:10px 10px 0 -2px var(--paper-2),10px 10px 0 -.5px var(--ink)}
+.figure .reg{position:absolute;width:18px;height:18px;pointer-events:none;z-index:5;opacity:.7;
+  background:linear-gradient(var(--ink),var(--ink)) center/100% 1.5px no-repeat,
+             linear-gradient(var(--ink),var(--ink)) center/1.5px 100% no-repeat}
+.figure .reg.tl{left:-9px;top:-9px}.figure .reg.tr{right:-9px;top:-9px}
+.figure .reg.bl{left:-9px;bottom:-9px}.figure .reg.br{right:-9px;bottom:-9px}
+.figure .stage{padding:clamp(18px,3vw,42px);display:flex;justify-content:center;align-items:center;min-height:300px;
+  background:repeating-linear-gradient(0deg,transparent,transparent 23px,rgba(21,19,15,.025) 23px,rgba(21,19,15,.025) 24px)}
+.figure figcaption{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline;
+  border-top:1.5px solid var(--ink);padding:12px 18px;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper)}
+.figure figcaption b{color:var(--ink);font-weight:700}
+.figure figcaption .fig-n{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:13px;color:var(--accent)}
 
-/* ---------- reviews ---------- */
-.reviews{overflow:hidden}
-.rev-track{display:flex;gap:24px;margin-top:clamp(48px,6vw,80px);will-change:transform;width:max-content;padding:4px}
-.rev{width:clamp(300px,28vw,420px);flex:none;background:var(--paper);
-  border:1px solid var(--line);border-radius:18px;padding:34px 30px;display:flex;flex-direction:column;gap:24px;
-  transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s}
-.rev:hover{transform:translateY(-8px);border-color:var(--ink);box-shadow:0 24px 50px -28px rgba(21,19,15,.35)}
-.rev .stars{color:var(--accent);letter-spacing:4px;font-size:15px}
-.rev p{font-family:var(--serif);font-size:clamp(17px,1.35vw,20px);line-height:1.5;font-weight:350}
-.rev p::before{content:"“"}.rev p::after{content:"”"}
-.rev .who{margin-top:auto;display:flex;align-items:center;gap:14px}
-.rev .who .ava{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--paper);
-  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;flex:none;letter-spacing:.02em}
-.rev:nth-child(odd) .who .ava{background:var(--accent);color:#fff}
-.rev .who .meta b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
-.rev .who .meta span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
-.rev-hint{margin-top:28px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
-.rev-hint::before{content:"";width:34px;height:1px;background:var(--muted)}
+/* =========================================================
+   FIGURES — the works themselves, rebuilt in situ
+   ========================================================= */
 
-/* ---------- contact ---------- */
+/* ---- Fig.1 Edisyn ---- */
+.sp-edisyn{width:100%;max-width:620px;background:#F5F5F7;border-radius:14px;overflow:hidden;
+  color:#1D1D1F;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  box-shadow:0 24px 50px -24px rgba(21,19,15,.4);text-align:left}
+.sp-edisyn .bar{display:flex;align-items:center;gap:8px;background:#fff;border-bottom:1px solid #E5E5E7;padding:10px 14px}
+.sp-edisyn .bar i{width:10px;height:10px;border-radius:50%;background:#E5E5E7}
+.sp-edisyn .bar i:nth-child(1){background:#ff5f57}.sp-edisyn .bar i:nth-child(2){background:#febc2e}.sp-edisyn .bar i:nth-child(3){background:#28c840}
+.sp-edisyn .bar .url{margin-left:8px;font-size:10.5px;color:#6E6E73;letter-spacing:.04em}
+.sp-edisyn .bar .rec{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:9.5px;letter-spacing:.14em;color:#E32623;font-weight:600}
+.sp-edisyn .bar .rec::before{content:"";width:7px;height:7px;border-radius:50%;background:#E32623;animation:pulse2 1.6s infinite}
+@keyframes pulse2{0%,100%{box-shadow:0 0 0 0 rgba(227,38,35,.5)}60%{box-shadow:0 0 0 7px rgba(227,38,35,0)}}
+.sp-edisyn .cols{display:grid;grid-template-columns:1.15fr 1fr;min-height:230px}
+.sp-edisyn .tcol{padding:14px;border-right:1px solid #E5E5E7;display:flex;flex-direction:column;gap:9px;overflow:hidden;justify-content:flex-end}
+.sp-edisyn .lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6E6E73;margin-bottom:2px;font-weight:600}
+.sp-edisyn .bub{display:flex;gap:8px;align-items:flex-start;animation:bubin .5s var(--ease)}
+@keyframes bubin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sp-edisyn .bub .sp{flex:none;width:8px;height:8px;border-radius:50%;margin-top:5px}
+.sp-edisyn .bub.s1 .sp{background:#007AFF}.sp-edisyn .bub.s2 .sp{background:#A5B4FC}
+.sp-edisyn .bub .tx{background:#fff;border:1px solid #E5E5E7;border-radius:10px;padding:7px 11px;font-size:12.5px;line-height:1.45}
+.sp-edisyn .bub .who{font-size:8.5px;letter-spacing:.12em;color:#6E6E73;display:block;margin-bottom:2px;text-transform:uppercase;font-weight:600}
+.sp-edisyn .acol{padding:14px;background:linear-gradient(180deg,#EEF0FE,#F5F5F7);display:flex;flex-direction:column}
+.sp-edisyn .acard{background:#fff;border:1px solid #C7D2FE;border-radius:12px;padding:11px 13px;flex:1;display:flex;flex-direction:column}
+.sp-edisyn .acard .q{font-size:11px;color:#6E6E73;font-style:italic;margin-bottom:7px}
+.sp-edisyn .acard .a{font-size:12.5px;line-height:1.5;flex:1}
+.sp-edisyn .acard .a::after{content:"▍";color:#6366F1;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sp-edisyn .meta{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.sp-edisyn .meta .m{font-size:9px;letter-spacing:.08em;border-radius:100px;padding:3px 9px;background:#E0E7FF;color:#3730A3;font-weight:600}
+.sp-edisyn .meta .m.lat{background:#ECFDF5;color:#047857}
+
+/* ---- Fig.2 Tiger Hospitality ---- */
+.sp-thg{width:100%;max-width:560px;background:#0a0a0a;border:1px solid rgba(201,169,97,.35);border-radius:14px;
+  padding:22px;position:relative;color:#fafafa;box-shadow:0 24px 50px -24px rgba(21,19,15,.5);text-align:left}
+.sp-thg .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.sp-thg .hd .t{font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:#c9a961}
+.sp-thg .hd .s{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,250,250,.45);font-weight:500}
+.sp-thg svg{width:100%;height:auto}
+.sp-thg .coast{fill:none;stroke:rgba(201,169,97,.5);stroke-width:1.6;stroke-dasharray:5 6;stroke-linecap:round}
+.sp-thg .pin{cursor:pointer}
+.sp-thg .pin circle.core{fill:#c9a961;transition:r .25s}
+.sp-thg .pin circle.halo{fill:none;stroke:#c9a961;opacity:.6;animation:halo 2.4s infinite}
+.sp-thg .pin:hover circle.core{r:6}
+@keyframes halo{0%{r:5;opacity:.6}100%{r:16;opacity:0}}
+.sp-thg .pin text{fill:rgba(250,250,250,.75);font-family:var(--sans);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase}
+.sp-thg .pop{position:absolute;background:#161616;border:1px solid #b8954d;border-radius:12px;padding:13px 15px;width:230px;
+  opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .35s,transform .35s var(--ease);z-index:4}
+.sp-thg .pop.on{opacity:1;pointer-events:auto;transform:none}
+.sp-thg .pop .city{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#b8954d;margin-bottom:8px;font-weight:500}
+.sp-thg .pop .logos{display:flex;gap:8px;flex-wrap:wrap}
+.sp-thg .pop .lg{border:1px solid rgba(201,169,97,.4);border-radius:8px;padding:6px 10px;
+  font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fafafa}
+.sp-thg .pop a{display:inline-block;margin-top:10px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#c9a961;font-weight:500}
+.sp-thg .pop a:hover{text-decoration:underline}
+
+/* ---- Fig.3 Miramar ---- */
+.sp-mir{width:100%;max-width:560px;background:#f6f4ed;border:1px solid rgba(4,96,84,.25);border-radius:14px;overflow:hidden;position:relative;
+  color:#1a1a1a;box-shadow:0 24px 50px -24px rgba(21,19,15,.35);text-align:center}
+.sp-mir .bulbs{display:flex;justify-content:space-around;padding:10px 16px 0}
+.sp-mir .bulbs i{width:8px;height:8px;border-radius:50%;background:#A94d00;opacity:.25}
+.sp-mir .bulbs i:nth-child(3n+1){animation:bulb 1.2s steps(1) infinite}
+.sp-mir .bulbs i:nth-child(3n+2){animation:bulb 1.2s steps(1) .4s infinite}
+.sp-mir .bulbs i:nth-child(3n){animation:bulb 1.2s steps(1) .8s infinite}
+@keyframes bulb{0%,32%{opacity:1}33%,100%{opacity:.22}}
+.sp-mir .name{font-family:"Josefin Sans",sans-serif;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  font-size:clamp(26px,4vw,40px);color:#046054;padding:18px 16px 4px;text-indent:.3em}
+.sp-mir .est{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:#555;font-weight:500}
+.sp-mir .tagline{margin:16px auto 0;max-width:84%;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;
+  overflow:hidden;white-space:nowrap;padding:8px 0}
+.sp-mir .tagline div{display:inline-flex;gap:18px;animation:marq 14s linear infinite;font-family:"Josefin Sans",sans-serif;
+  font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#169080}
+.sp-mir .stamp{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%) rotate(-9deg) scale(2.6);opacity:0;
+  font-weight:700;text-transform:uppercase;font-size:clamp(17px,2.4vw,24px);letter-spacing:.12em;
+  color:#A94d00;border:3px solid #A94d00;border-radius:8px;padding:8px 18px;mix-blend-mode:multiply;pointer-events:none}
+.sp-mir.stamped .stamp{animation:slam .55s cubic-bezier(.16,1.4,.4,1) forwards}
+@keyframes slam{to{opacity:.92;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}}
+.sp-mir svg.wave{width:100%;height:36px;display:block;margin-top:14px}
+.sp-mir .foot{background:#046054;color:#f6f4ed;font-size:9.5px;letter-spacing:.22em;
+  text-transform:uppercase;padding:10px 14px;font-weight:500}
+
+/* ---- Fig.4 STATION8 ---- */
+.sp-s8{width:100%;max-width:560px;background:#31261d;border-radius:14px;padding:24px;color:#ddcba4;
+  position:relative;overflow:hidden;box-shadow:0 24px 50px -24px rgba(21,19,15,.55);text-align:left}
+.sp-s8 .big8{position:absolute;right:-12px;top:-30px;font-family:"Big Shoulders Stencil Display",Impact,sans-serif;
+  font-weight:800;font-size:190px;line-height:1;color:rgba(94,103,56,.35);user-select:none;pointer-events:none}
+.sp-s8 .brand8{font-family:"Big Shoulders Stencil Display",Impact,sans-serif;font-weight:800;letter-spacing:.06em;
+  font-size:26px;color:#ddcba4;text-transform:uppercase}
+.sp-s8 .sub8{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(221,203,164,.55);margin-top:3px;font-weight:500}
+.sp-s8 .nav8{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px;position:relative;z-index:2}
+.sp-s8 .nav8 a{position:relative;font-weight:500;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(221,203,164,.7);padding:7px 12px;border-radius:100px;overflow:hidden;transition:color .35s;cursor:pointer}
+.sp-s8 .nav8 a::before{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;
+  background:#5e6738;transform:translate(-50%,-50%) scale(0);transition:transform .45s var(--ease);z-index:-1}
+.sp-s8 .nav8 a:hover{color:#ddcba4}
+.sp-s8 .nav8 a:hover::before{transform:translate(-50%,-50%) scale(16)}
+.sp-s8 .rows{margin-top:18px;border-top:1px solid rgba(221,203,164,.2);position:relative;z-index:2}
+.sp-s8 .row8{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 2px;
+  border-bottom:1px solid rgba(221,203,164,.2);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.sp-s8 .row8 .nm{display:flex;align-items:center;gap:10px;color:#ddcba4}
+.sp-s8 .row8 .nm::before{content:"✛";color:#dc4405;font-size:12px}
+.sp-s8 .row8 .vl{color:#b6cfd0}
+.sp-s8 .mapchip{margin-top:16px;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(182,207,208,.4);
+  border-radius:100px;padding:7px 14px;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#b6cfd0;position:relative;z-index:2;font-weight:500}
+.sp-s8 .mapchip i{width:8px;height:8px;border-radius:50%;background:#5c7f71;box-shadow:0 0 12px #5c7f71}
+
+/* ---- Fig.5 TrustMeBro ---- */
+.sp-tmb{width:100%;max-width:420px;background:#15151a;border:1px solid rgba(255,184,0,.3);border-radius:16px;
+  padding:20px;color:#f7f7fa;box-shadow:0 24px 50px -24px rgba(21,19,15,.6);text-align:left}
+.sp-tmb .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.sp-tmb .hd .t{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#FFB800}
+.sp-tmb .hd .ev{font-size:9.5px;letter-spacing:.12em;border:1px solid rgba(16,185,129,.5);
+  color:#10b981;border-radius:100px;padding:3px 10px;font-weight:500}
+.sp-tmb .leg{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;
+  border-bottom:1px dashed rgba(255,255,255,.12);opacity:.35;transition:opacity .5s}
+.sp-tmb .leg.on{opacity:1}
+.sp-tmb .leg .pick{font-weight:500;font-size:13.5px}
+.sp-tmb .leg .mkt{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8b8b94;margin-top:2px;font-weight:500}
+.sp-tmb .leg .res{flex:none;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border-radius:100px;padding:4px 10px;opacity:0;transform:scale(.6);transition:all .4s cubic-bezier(.16,1.4,.4,1)}
+.sp-tmb .leg.on .res{opacity:1;transform:none}
+.sp-tmb .leg .res.win{background:rgba(16,185,129,.15);color:#10b981}
+.sp-tmb .leg .res.void{background:rgba(139,139,148,.18);color:#8b8b94}
+.sp-tmb .leg.voided .pick{text-decoration:line-through;color:#8b8b94}
+.sp-tmb .pay{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px}
+.sp-tmb .pay .lbl{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#8b8b94;font-weight:500}
+.sp-tmb .pay .x{font-weight:700;font-size:28px;color:#FFB800;line-height:1}
+.sp-tmb .pay .x .old{font-size:15px;color:#8b8b94;text-decoration:line-through;font-weight:400;margin-right:10px;opacity:0;transition:opacity .4s}
+.sp-tmb.repriced .pay .x .old{opacity:1}
+.sp-tmb .note{margin-top:12px;font-size:9.5px;letter-spacing:.08em;color:#FF6B35;font-weight:500;
+  opacity:0;transform:translateY(6px);transition:all .5s var(--ease)}
+.sp-tmb.repriced .note{opacity:1;transform:none}
+
+/* ---- Fig.6 baa atelier ---- */
+.sp-baa{width:100%;max-width:560px;background:#f4f1e9;border:1px solid rgba(26,23,20,.18);border-radius:14px;padding:clamp(26px,4vw,44px);
+  color:#1a1714;box-shadow:0 24px 50px -24px rgba(21,19,15,.3);text-align:left;position:relative;overflow:hidden}
+.sp-baa .eyebrow{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a8377;font-weight:500}
+.sp-baa h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;
+  font-size:clamp(26px,3.4vw,40px);line-height:1.18;margin-top:14px;color:#1a1714}
+.sp-baa h4 .reveal{display:inline-block;background:linear-gradient(90deg,#3c4740,#3c4740) no-repeat 0 88%/0% 8%;
+  transition:background-size .8s var(--ease)}
+.sp-baa:hover h4 .reveal{background-size:100% 8%}
+.sp-baa .sw{display:flex;gap:0;margin-top:24px;border:1px solid #d9d2c2;border-radius:10px;overflow:hidden}
+.sp-baa .sw i{flex:1;height:44px;position:relative;transition:flex .45s var(--ease);cursor:pointer}
+.sp-baa .sw i:hover{flex:2.2}
+.sp-baa .sw i::after{content:attr(data-n);position:absolute;left:8px;bottom:5px;
+  font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transition:opacity .3s;font-weight:500}
+.sp-baa .sw i:hover::after{opacity:1}
+.sp-baa .cta-line{display:inline-block;margin-top:24px;font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#3c4740;border-bottom:1px solid #a8896b;padding-bottom:4px;font-weight:500}
+
+/* ---------- index (back of book) ---------- */
+.index-list{margin-top:clamp(44px,5vw,72px);border-top:1px solid var(--line-strong);max-width:1000px}
+.idx{display:flex;align-items:baseline;gap:16px;padding:clamp(18px,2.2vw,26px) 8px;border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden}
+.idx::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--ease);z-index:0}
+.idx:hover::before{transform:scaleY(1);transform-origin:50% 0}
+.idx>*{position:relative;z-index:1;transition:color .4s var(--ease)}
+.idx .nm{font-weight:700;letter-spacing:-.01em;font-size:clamp(17px,1.7vw,24px);flex:none;min-width:170px}
+.idx .ds{color:var(--muted);font-size:14.5px;line-height:1.5}
+.idx .leader{flex:1;border-bottom:2px dotted var(--line-strong);transform:translateY(-5px);min-width:24px}
+.idx .st{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;flex:none;
+  border:1px solid var(--line-strong);border-radius:100px;padding:5px 12px;color:var(--muted)}
+.idx .st.live{color:var(--accent);border-color:rgba(255,79,0,.5)}
+.idx:hover .nm,.idx:hover .ds{color:var(--cream-on-ink)}
+.idx:hover .ds{color:rgba(239,233,220,.65)}
+.idx:hover .st{color:var(--cream-on-ink);border-color:rgba(239,233,220,.4)}
+.idx:hover .st.live{color:#FF8A50;border-color:rgba(255,138,80,.6)}
+
+/* ---------- author's note ---------- */
+.note-sec{background:var(--paper-2)}
+.authors-note{max-width:880px}
+.authors-note .big-line{font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(26px,3.4vw,46px);line-height:1.38;color:var(--ink)}
+.authors-note .big-line .hl{color:var(--accent)}
+.authors-note .sig{margin-top:34px;display:flex;align-items:center;gap:16px}
+.authors-note .sig svg{width:54px;height:54px;border-radius:12px}
+.authors-note .sig .who b{display:block;font-weight:700;font-size:15px}
+.authors-note .sig .who span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,64px);margin-top:clamp(48px,6vw,90px)}
+.crit{border-top:1px solid var(--line-strong);padding-top:28px}
+.crit .cn{font-family:var(--serif);font-style:italic;font-size:clamp(44px,4.4vw,72px);line-height:1;color:var(--accent)}
+.crit h3{font-weight:700;letter-spacing:-.02em;font-size:clamp(19px,1.7vw,24px);margin:18px 0 10px}
+.crit p{color:var(--muted);font-size:15px;max-width:360px}
+
+/* ---------- commission (contact) ---------- */
 .contact{background:var(--ink);color:var(--cream-on-ink);border-radius:clamp(20px,3vw,40px) clamp(20px,3vw,40px) 0 0}
 .contact ::selection{background:var(--accent);color:var(--ink)}
 .contact .kicker{color:rgba(239,233,220,.55)}
 .contact .h2{color:var(--cream-on-ink)}
 .contact-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,110px);margin-top:clamp(48px,5vw,80px)}
-.contact-left p{color:rgba(239,233,220,.66);max-width:430px;font-size:16.5px}
+.contact-left p{color:rgba(239,233,220,.66);max-width:460px;font-size:16.5px}
+.contact-left p em{font-family:var(--serif);font-style:italic;color:var(--cream-on-ink)}
 .contact-left .mailto{display:inline-block;margin-top:34px;font-family:var(--serif);font-style:italic;
   font-size:clamp(22px,2.4vw,34px);color:var(--cream-on-ink);position:relative}
-.contact-left .mailto::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:1px;background:var(--accent);transform:scaleX(.3);transform-origin:0 50%;transition:transform .5s var(--ease)}
+.contact-left .mailto::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:1px;background:var(--accent);
+  transform:scaleX(.3);transform-origin:0 50%;transition:transform .5s var(--ease)}
 .contact-left .mailto:hover::after{transform:scaleX(1)}
-.contact-meta{margin-top:48px;display:flex;flex-direction:column;gap:10px;font-family:var(--mono);
-  font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,233,220,.45)}
+.contact-meta{margin-top:48px;display:flex;flex-direction:column;gap:10px;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,233,220,.45);font-weight:500}
 .contact-meta b{color:var(--cream-on-ink);font-weight:500}
-form{display:flex;flex-direction:column;gap:0}
-.field{position:relative;border-bottom:1px solid rgba(239,233,220,.22);padding:26px 0 14px;transition:border-color .4s}
+.contact-meta a:hover b{color:var(--accent)}
+form{display:flex;flex-direction:column}
+.f-lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(239,233,220,.5);margin-top:18px;font-weight:500}
+.chiprow{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 16px}
+.chiprow .pick{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border:1px solid rgba(239,233,220,.35);border-radius:100px;padding:9px 16px;color:rgba(239,233,220,.7);
+  transition:all .3s var(--ease)}
+.chiprow .pick:hover{border-color:var(--accent);color:var(--cream-on-ink)}
+.chiprow .pick.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.field{position:relative;border-bottom:1px solid rgba(239,233,220,.22);padding:24px 0 14px;transition:border-color .4s}
 .field:focus-within{border-color:var(--accent)}
-.field label{position:absolute;top:30px;left:0;font-family:var(--mono);font-size:13px;letter-spacing:.1em;
+.field label{position:absolute;top:28px;left:0;font-size:13px;letter-spacing:.1em;font-weight:500;
   text-transform:uppercase;color:rgba(239,233,220,.5);pointer-events:none;transition:all .35s var(--ease)}
-.field input,.field textarea,.field select{width:100%;background:transparent;border:none;outline:none;
+.field input,.field textarea{width:100%;background:transparent;border:none;outline:none;
   color:var(--cream-on-ink);font-family:var(--sans);font-size:18px;padding:6px 0;resize:vertical}
 .field textarea{min-height:90px}
-.field select{appearance:none;cursor:pointer}
-.field select option{color:var(--ink);background:var(--paper)}
-.field.has-val label,.field:focus-within label{top:4px;font-size:10px;color:var(--accent)}
-.field .sel-arrow{position:absolute;right:2px;top:36px;color:var(--accent);pointer-events:none;font-size:13px}
+.field.has-val label,.field:focus-within label{top:2px;font-size:10px;color:var(--accent)}
 form .btn{margin-top:38px;align-self:flex-start;padding:17px 34px}
 .form-note{margin-top:18px;font-size:13px;color:rgba(239,233,220,.45)}
-.form-ok{display:none;margin-top:18px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--accent)}
+.form-ok{display:none;margin-top:18px;font-size:12.5px;letter-spacing:.08em;color:var(--accent);font-weight:500}
 .form-ok.show{display:block}
 
-/* ---------- footer ---------- */
+/* ---------- footer / colophon ---------- */
 footer{background:var(--ink);color:rgba(239,233,220,.5);border-top:1px solid rgba(239,233,220,.12)}
-.foot-inner{max-width:1380px;margin:0 auto;padding:40px clamp(20px,4vw,56px);
-  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
-.foot-inner .fb{display:flex;align-items:center;gap:12px;color:var(--cream-on-ink)}
-.foot-inner .fb .mark{width:26px;height:26px;border-radius:6px}
-.foot-inner a:hover{color:var(--accent)}
-
-/* big outro word */
 .outro-word{max-width:1380px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(20px,4vw,56px) 0;overflow:hidden}
-.outro-word .w{font-family:var(--sans);font-weight:700;letter-spacing:-.04em;line-height:.95;
-  font-size:clamp(44px,7.1vw,118px);color:transparent;-webkit-text-stroke:1.5px rgba(239,233,220,.25);
+.outro-word .w{font-weight:700;letter-spacing:-.04em;line-height:.95;
+  font-size:clamp(38px,6.6vw,110px);color:transparent;-webkit-text-stroke:1.5px rgba(239,233,220,.25);
   white-space:nowrap;transition:color .6s var(--ease)}
 .outro-word .w em{font-family:var(--serif);font-style:italic;font-weight:400;-webkit-text-stroke:0;color:var(--accent)}
 .outro-word:hover .w{color:rgba(239,233,220,.92)}
+.foot-inner{max-width:1380px;margin:0 auto;padding:40px clamp(20px,4vw,56px);
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.foot-inner .fb{display:flex;align-items:center;gap:12px;color:var(--cream-on-ink)}
+.foot-inner .fb svg{width:26px;height:26px;border-radius:6px}
+.foot-inner a:hover{color:var(--accent)}
+.foot-inner .colo em{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0}
+
+/* ---------- READ MODE (guided) ---------- */
+.lamp{position:fixed;inset:0;pointer-events:none;z-index:1900;opacity:0;transition:opacity .7s;
+  background:radial-gradient(120% 90% at 50% 42%,transparent 52%,rgba(21,19,15,.5) 100%)}
+body.reading .lamp{opacity:1}
+.ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2000;transform:translateY(110%);
+  transition:transform .7s var(--ease);background:var(--ink);color:var(--cream-on-ink);
+  border-top:3px solid var(--accent)}
+body.reading .ribbon{transform:none}
+.ribbon .tab{position:absolute;top:-34px;right:clamp(24px,6vw,80px);width:34px;height:34px;background:var(--accent);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%)}
+.ribbon-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:clamp(14px,3vw,36px);
+  padding:16px clamp(16px,4vw,56px)}
+.ribbon .rcap{flex:1;min-width:0;font-family:var(--serif);font-style:italic;font-size:clamp(13.5px,1.5vw,18px);
+  line-height:1.45;color:var(--cream-on-ink);opacity:0;transition:opacity .45s}
+.ribbon .rcap.on{opacity:1}
+.ribbon .rcap .rch{display:block;font-family:var(--sans);font-style:normal;font-size:9.5px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:4px;font-weight:500}
+.ribbon .rctrl{display:flex;gap:8px;align-items:center;flex:none}
+.ribbon .rbtn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(239,233,220,.3);display:flex;
+  align-items:center;justify-content:center;color:var(--cream-on-ink);font-size:13px;transition:all .3s;flex:none}
+.ribbon .rbtn:hover{border-color:var(--accent);color:var(--accent)}
+.ribbon .pages{display:flex;gap:5px;align-items:center;flex:none}
+.ribbon .pg-dot{width:26px;height:26px;border-radius:50%;border:1px solid rgba(239,233,220,.25);display:flex;
+  align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:11px;
+  color:rgba(239,233,220,.55);cursor:pointer;transition:all .3s}
+.ribbon .pg-dot:hover{border-color:var(--accent)}
+.ribbon .pg-dot.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+.ribbon .pg-dot.done{color:var(--accent);border-color:rgba(255,79,0,.5)}
+.ribbon .rexit{flex:none;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  color:rgba(239,233,220,.6);border:1px solid rgba(239,233,220,.25);border-radius:100px;padding:8px 16px;transition:all .3s}
+.ribbon .rexit:hover{border-color:var(--accent);color:var(--accent)}
 
 /* ---------- responsive ---------- */
-/* unified label weight (single type family, two voices) */
-.btn,nav .nl,.pill,.kicker,.hero-foot,.work .num,.work .tag,.contact-meta,.rev-hint,.foot-inner,.field label,.form-ok,.rev .who .meta span{font-weight:500}
-
+@media(max-width:1060px){
+  .plate-grid{grid-template-columns:1fr}
+  .plate-rail{position:static}
+  .criteria{grid-template-columns:1fr}
+  .specs-grid{grid-template-columns:repeat(2,1fr)}
+  .spec:nth-child(2){border-right:none}
+  .spec:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .cover .big13{right:-18vw;opacity:.6}
+}
 @media(max-width:980px){
   nav .nl{display:none}
-  .work{grid-template-columns:48px 1fr;grid-template-rows:auto auto auto;align-items:start}
-  .work .desc{grid-column:2}
-  .work .tags{grid-column:2;justify-content:flex-start}
-  .mani-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
-  .hero .big13{right:-20vw;opacity:.7}
+  .toc-row .ti{white-space:normal}
+  .toc-row .ti em{display:block;margin-left:0;margin-top:2px}
+  .idx{flex-wrap:wrap}
+  .idx .ds{flex-basis:100%;order:3}
+  .sp-edisyn .cols{grid-template-columns:1fr}
+  .sp-edisyn .tcol{border-right:none;border-bottom:1px solid #E5E5E7}
+  .ribbon .pages{display:none}
 }
 @media(max-width:560px){
-  .brand .word em{display:none}
-  .brand .word{font-size:22px}
-  .brand .mark{width:48px;height:48px;border-radius:11px}
+  .brand .word{font-size:19px}
+  .brand .word i{display:none}
+  nav .btn.solid{display:none}
+  nav{gap:10px}
   nav .btn{padding:9px 14px;font-size:11px}
-  .marquee{margin-top:84px}
-  .hero{padding-top:50px}
+  .figure .stage{padding:14px;min-height:240px}
+  .figure{box-shadow:6px 6px 0 -2px var(--paper-2),6px 6px 0 -.5px var(--ink)}
+  .ribbon .rcap{font-size:12.5px}
+  .toc-row .pl{width:54px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
@@ -306,220 +568,575 @@ footer{background:var(--ink);color:rgba(239,233,220,.5);border-top:1px solid rgb
 
 <header id="hdr">
   <a class="brand" href="#top" data-cursor>
-    <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="K13 logo">
-      <rect width="100" height="100" rx="22" fill="#15130F"/>
-      <path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/>
-      <path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/>
-    </svg>
-    <span class="word"><span class="word-in">K13<em>Software Studio</em></span></span>
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#15130F"/><path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/></svg>
+    <span class="word">K13<i>Collected Works</i></span>
   </a>
   <nav>
-    <a class="nl" href="#work" data-cursor>Work we take on</a>
-    <a class="nl" href="#studio" data-cursor>Studio</a>
-    <a class="nl" href="#reviews" data-cursor>Reviews</a>
-    <a class="btn solid" href="#contact" data-cursor><span>Start a project</span></a>
+    <a class="nl" href="#toc" data-cursor>Contents</a>
+    <a class="nl" href="#bookindex" data-cursor>Index</a>
+    <a class="nl" href="#note" data-cursor>Author's note</a>
+    <button class="btn orange" id="readBtn" type="button" data-cursor><span>❧ Read mode</span></button>
+    <a class="btn solid" href="#commission" data-cursor><span>Commission</span></a>
   </nav>
 </header>
 
+<!-- COVER -->
+<section class="cover" id="top">
+  <div class="big13" id="big13" aria-hidden="true">1<b>3</b></div>
+  <div class="cover-inner">
+    <div class="edition rv"><span class="dot"></span>First edition — open for commissions, 2026</div>
+    <h1 aria-label="The work, collected and in print.">
+      <span class="row"><span>The work,</span></span>
+      <span class="row"><span><em>collected</em> &amp;</span></span>
+      <span class="row"><span class="edge-w"><span class="accent">in print.</span><svg class="scribble" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 70 24, 150 2, 214 12" fill="none" stroke="#FF4F00" stroke-width="5" stroke-linecap="round"/></svg></span></span>
+    </h1>
+    <p class="cover-sub rv">This is not a portfolio. It is a record of <strong>decisions</strong> — six shipped works, each presented as a plate: why I built it the way I built it, footnoted from the real commit log, its interface <em>rebuilt in situ, not screenshotted.</em> Most studios show you what they made. I'd rather show you <em>what I meant.</em></p>
+    <div class="cover-cta rv">
+      <button class="btn orange" type="button" data-read data-cursor><span>❧ Begin reading</span></button>
+      <a class="btn" href="#toc" data-cursor><span>Table of contents</span></a>
+      <span class="key-hint">or press <kbd>R</kbd></span>
+    </div>
+  </div>
+  <div class="cover-foot" aria-hidden="true">
+    <span><span class="lineanim"></span>Vol. I — 2025–2026</span>
+    <span>Software with an edge</span>
+  </div>
+</section>
+
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
-  <div class="track" id="mtrack">
-    <span class="unit">Web applications <span class="star">✦</span> Websites with edge <span class="star">✦</span> AI-powered products <span class="star">✦</span> Shipped swiftly <span class="star">✦</span> Crafted with care <span class="star">✦</span>&nbsp;</span>
-    <span class="unit">Web applications <span class="star">✦</span> Websites with edge <span class="star">✦</span> AI-powered products <span class="star">✦</span> Shipped swiftly <span class="star">✦</span> Crafted with care <span class="star">✦</span>&nbsp;</span>
+  <div class="track">
+    <span class="unit">Collected works <span class="star">✳</span> <em>Six plates</em> <span class="star">✳</span> Figures rebuilt in situ <span class="star">✳</span> <em>No reproductions</em> <span class="star">✳</span> Software with an <em>edge.</em> <span class="star">✳</span>&nbsp;</span>
+    <span class="unit">Collected works <span class="star">✳</span> <em>Six plates</em> <span class="star">✳</span> Figures rebuilt in situ <span class="star">✳</span> <em>No reproductions</em> <span class="star">✳</span> Software with an <em>edge.</em> <span class="star">✳</span>&nbsp;</span>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="big13" id="big13" aria-hidden="true"><b>K</b>13</div>
-  <div class="hero-inner">
-    <div class="pill rv"><span class="dot"></span>Accepting new projects for Q3 2026</div>
-    <h1 aria-label="Software with an edge.">
-      <span class="row"><span>Software</span></span>
-      <span class="row"><span>with <em>an</em> <em class="accent edge-w">edge.<svg class="scribble" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 70 24, 150 2, 214 12" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></em></span></span>
-    </h1>
-    <p class="hero-sub rv">K13 is a versatile software studio. We use the latest AI tooling to design and ship
-      <strong>custom web applications, websites and AI-powered products</strong>. Swift to ship, crafted with care,
-      delivered with style.</p>
-    <div class="hero-cta rv">
-      <a class="btn solid" href="#contact" data-cursor><span>Start a project →</span></a>
-      <a class="btn" href="#work" data-cursor><span>What we take on</span></a>
-    </div>
-    <div class="hero-tags rv">WEB APPS <span class="hstar">✦</span> WEBSITES <span class="hstar">✦</span> AI PRODUCTS <span class="hstar">✦</span> MVP SPRINTS</div>
+<!-- SPECIFICATIONS -->
+<div class="specs rv">
+  <div class="specs-grid">
+    <div class="spec"><b data-count="1122">0</b><span>commits on the flagship alone</span></div>
+    <div class="spec"><b data-count="14">0</b><span>works on the shelf</span></div>
+    <div class="spec"><b data-count="6">0</b><span>live in production</span></div>
+    <div class="spec"><b>3<i>+</i></b><span>food halls, one coastline</span></div>
   </div>
-  <div class="hero-foot">
-    <span class="scrolldown"><span class="lineanim"></span> Scroll</span>
-    <span>K13PROJECTS.COM</span>
-  </div>
-</section>
+</div>
 
-<!-- WORK -->
-<section id="work">
+<!-- TABLE OF CONTENTS -->
+<section id="toc">
   <div class="wrap">
-    <div class="kicker rv">Now accepting</div>
-    <h2 class="h2 rv">The work we<br>take <em>on.</em></h2>
-    <div class="worklist">
-      <a class="work rv" href="#contact" data-cursor>
-        <span class="num">/ 01</span>
-        <span class="name">Web applications</span>
-        <span class="desc">Custom platforms, portals and internal tools, built around how your business actually runs, not how a template thinks it should.</span>
-        <span class="tags"><span class="tag">SaaS</span><span class="tag">Dashboards</span><span class="tag">Portals</span></span>
-        <span class="arrow">↗</span>
-      </a>
-      <a class="work rv" href="#contact" data-cursor>
-        <span class="num">/ 02</span>
-        <span class="name">Websites with presence</span>
-        <span class="desc">Marketing and brand sites that move, persuade and convert. Bold enough to be remembered, fast enough to rank.</span>
-        <span class="tags"><span class="tag">Brand</span><span class="tag">Marketing</span><span class="tag">E-commerce</span></span>
-        <span class="arrow">↗</span>
-      </a>
-      <a class="work rv" href="#contact" data-cursor>
-        <span class="num">/ 03</span>
-        <span class="name">AI-powered products</span>
-        <span class="desc">Copilots, automation and intelligent features woven into your product. We build with the newest AI tools every single day.</span>
-        <span class="tags"><span class="tag">LLM features</span><span class="tag">Automation</span><span class="tag">Agents</span></span>
-        <span class="arrow">↗</span>
-      </a>
-      <a class="work rv" href="#contact" data-cursor>
-        <span class="num">/ 04</span>
-        <span class="name">Rapid MVP sprints</span>
-        <span class="desc">From idea to working product in weeks. Tight scope, sharp execution, a real thing in your stakeholders' hands.</span>
-        <span class="tags"><span class="tag">Prototypes</span><span class="tag">Launches</span><span class="tag">Weeks, not quarters</span></span>
-        <span class="arrow">↗</span>
-      </a>
+    <div class="kicker rv">Table of contents</div>
+    <h2 class="h2 rv">Six works,<br>presented as <em class="accent">plates.</em></h2>
+    <p class="lede rv">Each plate is printed on its client's own stock — the page changes color beneath you — and tells you not just what was built, but <em>why.</em> The intent behind every move, in the maker's own hand. <em>Every caption, commit and number is real.</em></p>
+    <div class="toc rv">
+      <a class="toc-row" href="#plate-1" data-cursor><span class="pl">Plate I</span><span class="ti">Edisyn<em>the AI meeting copilot</em></span><span class="leader"></span><span class="pg">p. 04</span></a>
+      <a class="toc-row" href="#plate-2" data-cursor><span class="pl">Plate II</span><span class="ti">Tiger Hospitality<em>a family of brands, one address</em></span><span class="leader"></span><span class="pg">p. 12</span></a>
+      <a class="toc-row" href="#plate-3" data-cursor><span class="pl">Plate III</span><span class="ti">Miramar<em>a 1938 theatre, reopened</em></span><span class="leader"></span><span class="pg">p. 20</span></a>
+      <a class="toc-row" href="#plate-4" data-cursor><span class="pl">Plate IV</span><span class="ti">Station8<em>20,000 square feet in pixels</em></span><span class="leader"></span><span class="pg">p. 28</span></a>
+      <a class="toc-row" href="#plate-5" data-cursor><span class="pl">Plate V</span><span class="ti">TrustMeBro<em>betting math with receipts</em></span><span class="leader"></span><span class="pg">p. 36</span></a>
+      <a class="toc-row" href="#plate-6" data-cursor><span class="pl">Plate VI</span><span class="ti">baa atelier<em>editorial restraint, by hand</em></span><span class="leader"></span><span class="pg">p. 44</span></a>
     </div>
   </div>
 </section>
 
-<!-- MANIFESTO -->
-<section class="manifesto" id="studio">
+<!-- ========== PLATE I — EDISYN ========== -->
+<section class="plate" id="plate-1" data-pl="1" data-stock="#E9E7F0"
+  data-cap="Plate I — Edisyn. I taught a page to listen, so the answer arrives while the question still hangs in the air. 1,122 commits. Live at edisyn.ai.">
   <div class="wrap">
-    <div class="kicker rv">The studio</div>
-    <h2 class="h2 rv">They call 13 <em>unlucky</em>.<br>We make our <span class="accent">own luck.</span></h2>
-    <div class="mani-grid">
-      <div class="mani rv">
-        <div class="mn">01</div>
-        <h3>Swift, on purpose</h3>
-        <p>AI-accelerated workflows mean we move in weeks, not quarters. Momentum is a feature: your stakeholders see progress at every demo.</p>
-      </div>
-      <div class="mani rv">
-        <div class="mn">02</div>
-        <h3>Crafted, not assembled</h3>
-        <p>No template energy. Every interface is designed with intent, every interaction tuned until it feels inevitable.</p>
-      </div>
-      <div class="mani rv">
-        <div class="mn">03</div>
-        <h3>Bold, with a point</h3>
-        <p>The edge isn't decoration. Distinctive work earns attention, and attention is what your product needs to win.</p>
+    <div class="folio rv"><span class="fl"><em>Plate I</em> Edisyn · 2025—</span><span>pp. 04–11</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">I.</div>
+        <h3>The meeting,<br><em>answered.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Web + desktop product</span></div>
+          <div class="crow"><span class="k">Role</span><span class="v">Product · Eng · Design</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">React, Supabase, Deepgram, 5 LLMs, Stripe</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v"><a href="https://edisyn.ai" target="_blank" rel="noopener" data-cursor>Live — edisyn.ai ↗</a></span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">1,122 commits &amp; counting</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#A5B4FC"></i><i style="background:#007AFF"></i><i style="background:#1D1D1F"></i><i style="background:#F5F5F7"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">Everyone I know is brilliant one hour after the meeting ends. I built Edisyn because I believe that hour belongs inside the room.</p>
+          <p class="dropcap">It began with a question I couldn't put down: what if the answer arrived while the question was still hanging in the air? So I taught a page to listen. Live speech-to-text that knows who is speaking. A copilot that hears a question form and drafts the response before the silence gets awkward. Profiles, summaries, billing, an admin panel — and a prompt lab, where the AI rehearses against mock meetings before it is ever trusted with a real one. Then a desktop app, because confidence has to live where the meetings live.<span class="fn">¹</span></p>
+          <p>Every choice underneath serves one conviction: <strong>trust is engineered, not promised.</strong> Five AI providers stand behind one router that picks per request — because no single model deserves blind faith.<span class="fn">²</span> The night Stripe said “paid” while the app said “free tier,” I stayed in it until the webhook told the truth. The fix shipped. So did the nightly Playwright suite that interrogates production while I sleep<span class="fn">³</span> — because at 9 a.m., people walk into rooms with my software open and something real at stake.</p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-edisyn" id="spEdisyn">
+              <div class="bar"><i></i><i></i><i></i><span class="url">edisyn.ai — live session</span><span class="rec">REC</span></div>
+              <div class="cols">
+                <div class="tcol">
+                  <span class="lbl">Live transcript · diarized</span>
+                  <div id="edBubbles"></div>
+                </div>
+                <div class="acol">
+                  <span class="lbl">AI copilot</span>
+                  <div class="acard">
+                    <div class="q" id="edQ">“Can it handle Turkish and English in the same call?”</div>
+                    <div class="a" id="edA"></div>
+                    <div class="meta">
+                      <span class="m" id="edModel">Gemini 2.5 Flash</span>
+                      <span class="m lat" id="edLat">0.9s</span>
+                      <span class="m">EN · TR</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 1</span> &nbsp;<b>Live transcript &amp; copilot panel</b> — rebuilt in situ</span><span>Not a reproduction</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>9e8bec1</code>fix(desktop): save transcript bubbles once on close with complete text (#226)</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>5671537</code>feat(admin): OpenRouter balance monitor with low-balance email alert (#228)</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>cf10867</code>feat(testing): nightly prod smoke — Playwright suite, HTML report, failed-only video follow-up</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section class="reviews" id="reviews">
+<!-- ========== PLATE II — TIGER HOSPITALITY ========== -->
+<section class="plate" id="plate-2" data-pl="2" data-stock="#EFE5CC"
+  data-cap="Plate II — Tiger Hospitality. A parent brand in velvet black and gold; every location a pin, every pin a bet on a neighborhood. Live at tigerhospitalitygroup.com.">
   <div class="wrap">
-    <div class="kicker rv">Kind words</div>
-    <h2 class="h2 rv">Word gets <em class="accent">around.</em></h2>
-    <div class="rev-track" id="revtrack">
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>K13 took our back-office chaos and turned it into a portal the team actually enjoys using. First version was live in four weeks.</p>
-        <div class="who"><span class="ava">MV</span><span class="meta"><b>Marta V.</b><span>Operations Director · Logistics</span></span></div>
-      </div>
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>They speak business first, code second. Every demo had the whole room excited for the next one. That never happens with dev shops.</p>
-        <div class="who"><span class="ava">JK</span><span class="meta"><b>Jonas K.</b><span>Founder · Retail brand</span></span></div>
-      </div>
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>The AI features they shipped felt like science fiction, until our numbers proved them very practical. Pragmatic and ahead of the curve.</p>
-        <div class="who"><span class="ava">SD</span><span class="meta"><b>Sofia D.</b><span>Head of Product · SaaS</span></span></div>
-      </div>
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>Sharp design, sharper deadlines. K13 promised both and hit both. Our new site doubled inbound inquiries in the first month.</p>
-        <div class="who"><span class="ava">AB</span><span class="meta"><b>Adam B.</b><span>Marketing Lead · Hospitality</span></span></div>
-      </div>
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>We came for a website and stayed for a partner. They treat your product like it's their own name on the door.</p>
-        <div class="who"><span class="ava">LN</span><span class="meta"><b>Lena N.</b><span>CEO · Consultancy</span></span></div>
-      </div>
-      <div class="rev rv">
-        <div class="stars">★★★★★</div>
-        <p>Their MVP sprint took us from slides to a live product before our next board meeting. Sharp work, zero drama.</p>
-        <div class="who"><span class="ava">DT</span><span class="meta"><b>Derya T.</b><span>Founder · Fintech</span></span></div>
+    <div class="folio rv"><span class="fl"><em>Plate II</em> Tiger Hospitality · 2025–26</span><span>pp. 12–19</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">II.</div>
+        <h3>A family of brands,<br><em>one address.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Brand site · maps · motion</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">Vanilla JS, Leaflet, GitHub Pages</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v"><a href="https://tigerhospitalitygroup.com" target="_blank" rel="noopener" data-cursor>Live ↗</a></span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">21 release branches</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#0a0a0a"></i><i style="background:#b8954d"></i><i style="background:#c9a961"></i><i style="background:#fafafa"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">A parent brand has exactly one job: make every child look like the favorite. Tiger Hospitality needed a single address that raised all of its names at once.</p>
+          <p class="dropcap">I dressed the group in black and gold deliberately — a house brand should be the velvet in the case, not the loudest jewel inside it. The tiger reveals itself once, in the loading screen, then steps back and lets the concepts take the light. The heart of the site is an <strong>interactive map</strong> where every location opens with its brands' logos standing side by side,<span class="fn">¹</span> because this family's true story is geography: every pin is a bet the group has placed on a neighborhood, and the map lets you watch the bets multiply.</p>
+          <p>Hospitality is the art of letting people in — so even the vendor pitch became an invitation: a card that flips over to reveal the email, like a door quietly opened.<span class="fn">²</span> Twenty-one release branches later, this is the group's front door. When <strong>Oceanside</strong> opened, the pin was on the map before the ribbon was cut.<span class="fn">³</span></p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-thg" id="spThg">
+              <div class="hd"><span class="t">Where we are</span><span class="s">Southern California</span></div>
+              <svg viewBox="0 0 320 200" aria-hidden="true">
+                <path class="coast" d="M38 6 C 60 40, 52 70, 84 96 C 116 122, 128 130, 168 150 C 208 170, 244 178, 300 190"/>
+                <g class="pin" data-pop="popOC" transform="translate(120,84)">
+                  <circle class="halo" r="5"/><circle class="core" r="4.5"/>
+                  <text x="11" y="3">Orange County</text>
+                </g>
+                <g class="pin" data-pop="popSC" transform="translate(170,124)">
+                  <circle class="halo" r="5"/><circle class="core" r="4.5"/>
+                  <text x="11" y="3">San Clemente</text>
+                </g>
+                <g class="pin" data-pop="popO" transform="translate(216,150)">
+                  <circle class="halo" r="5"/><circle class="core" r="4.5"/>
+                  <text x="11" y="3">Oceanside</text>
+                </g>
+              </svg>
+              <div class="pop" id="popOC" style="left:8%;top:14%">
+                <div class="city">Orange County</div>
+                <div class="logos"><span class="lg">Lobster Lab</span><span class="lg">Egg &amp; Out</span></div>
+                <a data-cursor>View website ↗</a>
+              </div>
+              <div class="pop" id="popSC" style="left:30%;top:30%">
+                <div class="city">San Clemente</div>
+                <div class="logos"><span class="lg">Miramar</span><span class="lg">Global Fork</span></div>
+                <a data-cursor>View website ↗</a>
+              </div>
+              <div class="pop" id="popO" style="left:42%;top:48%">
+                <div class="city">Oceanside</div>
+                <div class="logos"><span class="lg">New concept</span></div>
+                <a data-cursor>View website ↗</a>
+              </div>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 2</span> &nbsp;<b>Location map with grouped brand popups</b> — hover the pins</span><span>Rebuilt in situ</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>92b5d1b</code>Group map locations with side-by-side logos display</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>8e5973c</code>🤝 Add Vendor Opportunities CTA with flip-to-reveal email</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>dc9d9c1</code>📍 Add Oceanside location, location icons, and mobile refinements</span></div>
+        </div>
       </div>
     </div>
-    <div class="rev-hint rv">Keep scrolling, the cards follow</div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- ========== PLATE III — MIRAMAR ========== -->
+<section class="plate" id="plate-3" data-pl="3" data-stock="#E2EDE6"
+  data-cap="Plate III — Miramar. A 1938 theatre trusted me with its first impression in a new century. I gave it a drumroll, not a placeholder.">
   <div class="wrap">
-    <div class="kicker rv">Get in touch</div>
-    <h2 class="h2 rv">Tell us what<br>you're <em class="accent">building.</em></h2>
+    <div class="folio rv"><span class="fl"><em>Plate III</em> Miramar Food Hall · 2025–26</span><span>pp. 20–27</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">III.</div>
+        <h3>A landmark,<br><em>reopened.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Site · brand · client reporting</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">HTML/CSS/JS, GitHub Actions</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v"><a href="https://k13-projects.github.io/Miramar/" target="_blank" rel="noopener" data-cursor>Live ↗</a> · venue opening</span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">Est. 1938 · San Clemente</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#046054"></i><i style="background:#169080"></i><i style="background:#A94d00"></i><i style="background:#f6f4ed"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">Some clients hand you a brief. This one handed me a building from 1938 — and the responsibility of being its first impression in a new century.</p>
+          <p class="dropcap">The Miramar Theatre showed films before most of us were born; I was not going to wrap it in a template. The teal, the cream, the burnt orange — they come from its Spanish Colonial bones. The marquee returns as pixels, bulbs and all. And across the hero, an animated <strong>Coming Soon stamp</strong> slams down<span class="fn">¹</span> — because anticipation is part of hospitality, and a landmark deserves a drumroll, not a placeholder.</p>
+          <p>The move I'm proudest of is one visitors never see: every month, stakeholders receive the project's progress as a <strong>single HTML file</strong> — images embedded, Gmail-safe, forwardable to any partner with one click.<span class="fn">²</span> Because trust is not a deliverable; it is a rhythm. And the site was security-hardened before the first stakeholder ever touched it<span class="fn">³</span> — a first impression is also a promise.</p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-mir" id="spMir">
+              <div class="bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="name">Miramar</div>
+              <div class="est">Est. 1938 · San Clemente, California</div>
+              <div class="tagline" aria-hidden="true"><div>
+                <span>Global Bites</span><span>✺</span><span>Local Vibes</span><span>✺</span>
+                <span>Global Bites</span><span>✺</span><span>Local Vibes</span><span>✺</span>
+                <span>Global Bites</span><span>✺</span><span>Local Vibes</span><span>✺</span>
+              </div></div>
+              <div class="stamp">Coming Soon</div>
+              <svg class="wave" viewBox="0 0 560 36" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0 18 Q 35 0, 70 18 T 140 18 T 210 18 T 280 18 T 350 18 T 420 18 T 490 18 T 560 18 V36 H0 Z" fill="#169080" opacity=".25"/>
+                <path d="M0 24 Q 35 8, 70 24 T 140 24 T 210 24 T 280 24 T 350 24 T 420 24 T 490 24 T 560 24 V36 H0 Z" fill="#046054"/>
+              </svg>
+              <div class="foot">150 W Avenida Pico · A landmark, reopened</div>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 3</span> &nbsp;<b>Theatre marquee, stamp &amp; wave footer</b> — the stamp re-slams</span><span>Rebuilt in situ</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>9853245</code>✨ Add animated Coming Soon stamp to hero + hide contact form</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>c7f79d6</code>feat: Embed all images as base64 for fully shareable progress report</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>f944b03</code>🔒 Security hardening + stakeholder UI revisions</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLATE IV — STATION8 ========== -->
+<section class="plate" id="plate-4" data-pl="4" data-stock="#EBE0C8"
+  data-cap="Plate IV — Station8. A public square in pixels: owned by its team, open to everyone — accessible by law, and by conviction.">
+  <div class="wrap">
+    <div class="folio rv"><span class="fl"><em>Plate IV</em> Station8 Public Market · 2026</span><span>pp. 28–35</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">IV.</div>
+        <h3>Industrial bones,<br><em>warm light.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Next-gen site · CMS · maps</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">Next.js 15, Tailwind v4, GSAP, Sanity, Mapbox</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v">Pre-launch hardened</span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">20,000 sq ft · La Jolla, CA</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#31261d"></i><i style="background:#ddcba4"></i><i style="background:#5e6738"></i><i style="background:#dc4405"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">Twenty thousand square feet at a university is not a restaurant — it is a public square. So I built the site the way you build a public square: to be owned, to be entered, to outlive its maker.</p>
+          <p class="dropcap">Every decision answers one question: <em>who does this belong to?</em> It belongs to the team — so <strong>Sanity CMS</strong> lets them rewrite vendors, events and every line of copy without ever calling me; a site you cannot edit is a site you rent. It belongs to everyone — so it is <strong>508-compliant and axe-tested in CI</strong>,<span class="fn">¹</span> because a public market that turns anyone away at the door has already failed. It even belongs to the building: the map wears a <strong>custom Mapbox style</strong> mixed to its olive and green-glass, down to the last hex.</p>
+          <p>One night the homepage went silent — a security header was quietly strangling every animation. The commit that brought it back is titled, plainly, <strong>“Unbreak the homepage.”</strong><span class="fn">²</span> I left that title in the log on purpose. The work is real, and real work has scars.</p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-s8">
+              <div class="big8" aria-hidden="true">8</div>
+              <div class="brand8">Station8</div>
+              <div class="sub8">Public Market · La Jolla, CA</div>
+              <div class="nav8" aria-hidden="true">
+                <a data-cursor>Vendors</a><a data-cursor>Events</a><a data-cursor>Planning</a><a data-cursor>Visit</a>
+              </div>
+              <div class="rows">
+                <div class="row8"><span class="nm">Bookings</span><span class="vl">Open</span></div>
+                <div class="row8"><span class="nm">Where we are</span><span class="vl">Theater District</span></div>
+                <div class="row8"><span class="nm">Square feet</span><span class="vl">20,000</span></div>
+              </div>
+              <div class="mapchip"><i></i>Custom Mapbox style · olive / green-glass</div>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 4</span> &nbsp;<b>Stencil brand board + ink-fill nav</b> — hover the links</span><span>Rebuilt in situ</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>618c932</code>Pre-launch hardening — legal pages, 508 compliance, security headers, SEO infra</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>e92697e</code>Unbreak the homepage — fix CSP that was silently hiding all motion content</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>fc927c7</code>Add a circular ink-fill hover effect to the SectionNav links</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLATE V — TRUSTMEBRO ========== -->
+<section class="plate" id="plate-5" data-pl="5" data-stock="#E8E4DC"
+  data-cap="Plate V — TrustMeBro. Bravado, forced to show its math. Integrity is what you build when only the code is watching.">
+  <div class="wrap">
+    <div class="folio rv"><span class="fl"><em>Plate V</em> TrustMeBro · 2026</span><span>pp. 36–43</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">V.</div>
+        <h3>Show<br><em>the math.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Product · odds engine · UI</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">Next.js, TypeScript, EV engine</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v">Private beta</span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">48 pull requests of probability</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#0a0a0c"></i><i style="background:#FFB800"></i><i style="background:#FF6B35"></i><i style="background:#10b981"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">The name is a joke. The ledger is not. I built TrustMeBro to see what happens when bravado is finally forced to show its math.</p>
+          <p class="dropcap">Every group chat has the friend with a lock of the week. I gave him an expected-value engine and, more dangerously, a <strong>public record</strong>: picks scored in the open on the Bro Board, every coupon tracked leg by leg, win by win, void by void.<span class="fn">¹</span> Forty-eight pull requests of probability and edge cases — including an alt-line engine that waits, patiently, for its live June trial.<span class="fn">²</span> The interface never flatters a bad pick. That honesty <em>is</em> the design.</p>
+          <p>The decision I would defend in court: when a game is cancelled mid-coupon, the engine does not lazily refund the ticket. It <strong>re-prices the remaining legs</strong> — exactly as the real sportsbooks do.<span class="fn">³</span> No user asked for that. That is precisely the point. Integrity is what you build when only the code is watching.</p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-tmb" id="spTmb">
+              <div class="hd"><span class="t">Bro Board · 3-leg combo</span><span class="ev">+EV 6.2%</span></div>
+              <div class="leg"><div class="l"><div class="pick">Lakers −3.5</div><div class="mkt">Spread · NBA</div></div><span class="res win">Won ✓</span></div>
+              <div class="leg"><div class="l"><div class="pick">Knicks ML</div><div class="mkt">Moneyline · NBA</div></div><span class="res win">Won ✓</span></div>
+              <div class="leg" data-void><div class="l"><div class="pick">Celtics o212.5</div><div class="mkt">Total · postponed</div></div><span class="res void">Void ⊘</span></div>
+              <div class="pay">
+                <span class="lbl">Payout</span>
+                <span class="x"><span class="old">4.12×</span><span id="tmbX">4.12×</span></span>
+              </div>
+              <div class="note">↺ voided leg re-priced — not refunded</div>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 5</span> &nbsp;<b>Coupon with per-leg outcomes &amp; re-pricing</b> — watch it settle</span><span>Rebuilt in situ</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>9880a6c</code>Show per-leg outcomes on Bro Board coupons</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>f11069e</code>Wire the alt-line engine into generation (DRAFT — needs a June live smoke-test)</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>abf7abf</code>Re-price coupons on voided legs instead of refunding the whole thing</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PLATE VI — BAA ATELIER ========== -->
+<section class="plate" id="plate-6" data-pl="6" data-stock="#F4F1E9"
+  data-cap="Plate VI — baa atelier. The hardest voice to engineer is a whisper. The commit log says the rest: make the site sell, not just show.">
+  <div class="wrap">
+    <div class="folio rv"><span class="fl"><em>Plate VI</em> baa atelier · 2026</span><span>pp. 44–51</span></div>
+    <div class="plate-grid">
+      <aside class="plate-rail rv">
+        <div class="pnum">VI.</div>
+        <h3>Quiet luxury,<br><em>loud craft.</em></h3>
+        <div class="colophon">
+          <div class="crow"><span class="k">Medium</span><span class="v">Editorial site · art direction</span></div>
+          <div class="crow"><span class="k">Materials</span><span class="v">Next.js 15, Motion, Lenis, Resend</span></div>
+          <div class="crow"><span class="k">Status</span><span class="v">Shipped</span></div>
+          <div class="crow"><span class="k">Provenance</span><span class="v">For Baha Irs's studio</span></div>
+        </div>
+        <div class="swatchline" aria-hidden="true">
+          <i style="background:#f4f1e9"></i><i style="background:#7c8a7a"></i><i style="background:#a8896b"></i><i style="background:#1c322d"></i>
+        </div>
+        <div class="swatch-cap">Printed on the client's stock</div>
+      </aside>
+      <div class="plate-body">
+        <div class="plate-story rv">
+          <p class="opener">Baha Irs paints surfaces the way other people write memoirs. Her site had to whisper — and a whisper, it turns out, is the hardest voice to engineer.</p>
+          <p class="dropcap">I built it like a magazine because her work belongs in one: Playfair italics, paper and sage and clay, headlines that unmask themselves as you arrive, scroll that moves like a page being turned.<span class="fn">¹</span> The discipline was restraint. Every pixel had to earn its quiet; every animation had to justify its existence to the work it framed.<span class="fn">²</span> Maximalism is easy — you just keep adding. Reduction is a negotiation with everything you love.</p>
+          <p>And because beauty without business is just decoration, the most honest commit in the repository reads: <strong>“Make the site sell, not just show.”</strong><span class="fn">³</span> That sentence outgrew the project. It is now the bar every K13 work must clear — including the monograph you are holding.</p>
+        </div>
+        <figure class="figure rv">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="stage">
+            <div class="sp-baa">
+              <div class="eyebrow">baa atelier · artisan finishes</div>
+              <h4><span class="reveal">Surfaces that tell stories,</span><br>finished by hand.</h4>
+              <div class="sw" aria-hidden="true">
+                <i style="background:#f4f1e9" data-n="paper"></i>
+                <i style="background:#aab3a4" data-n="sage soft"></i>
+                <i style="background:#7c8a7a" data-n="sage"></i>
+                <i style="background:#a8896b" data-n="clay"></i>
+                <i style="background:#3c4740" data-n="sage deep"></i>
+                <i style="background:#1c322d" data-n="teal deep"></i>
+              </div>
+              <span class="cta-line">View the collection</span>
+            </div>
+          </div>
+          <figcaption><span><span class="fig-n">Fig. 6</span> &nbsp;<b>Editorial spread &amp; material swatches</b> — hover everything</span><span>Rebuilt in situ</span></figcaption>
+        </figure>
+        <div class="footnotes rv">
+          <div class="fcap">Notes — from the actual commit log</div>
+          <div class="fn-row"><span class="m">¹</span><span><code>2119f5c</code>🧩 Add services, process, and call-to-action building blocks</span></div>
+          <div class="fn-row"><span class="m">²</span><span><code>1fd28b5</code>✍️ Refine all copy to read naturally (no em dashes)</span></div>
+          <div class="fn-row"><span class="m">³</span><span><code>c24cd2b</code>🏠 Make the site sell, not just show</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INDEX ========== -->
+<section id="bookindex" class="plate" data-reset>
+  <div class="wrap">
+    <div class="kicker rv">Index</div>
+    <h2 class="h2 rv">The rest of<br>the <em class="accent">shelf.</em></h2>
+    <p class="lede rv">Not everything earns a plate. <em>Everything gets shipped.</em></p>
+    <div class="index-list">
+      <div class="idx rv" data-cursor>
+        <span class="nm">Global Fork</span>
+        <span class="ds">sister food-hall brand site; vendor piazza walk, built to Lorena's vision</span>
+        <span class="leader"></span><span class="st live">Client</span>
+      </div>
+      <div class="idx rv" data-cursor>
+        <span class="nm">CENGO</span>
+        <span class="ds">DJ &amp; producer site; live YouTube stats, a Google Sheet as the events CMS — zero backend</span>
+        <span class="leader"></span><span class="st live">Live</span>
+      </div>
+      <div class="idx rv" data-cursor>
+        <span class="nm">NoxZipper</span>
+        <span class="ds">ops dashboard for a kitchen-exhaust cleaning firm; scheduling algorithm, 80/10/10 revenue splits</span>
+        <span class="leader"></span><span class="st">Internal</span>
+      </div>
+      <div class="idx rv" data-cursor>
+        <span class="nm">Tap-N-Grab</span>
+        <span class="ds">smart-store vending pitch site for property managers; machine lineup, one-pager download</span>
+        <span class="leader"></span><span class="st live">Live</span>
+      </div>
+      <div class="idx rv" data-cursor>
+        <span class="nm">SecuriVision</span>
+        <span class="ds">market analysis &amp; sales strategy engine; city-by-city reports as polished, shareable HTML</span>
+        <span class="leader"></span><span class="st">Client</span>
+      </div>
+      <div class="idx rv" data-cursor>
+        <span class="nm">K13 WarRoom</span>
+        <span class="ds">the studio's own command center; this monograph passed through it first</span>
+        <span class="leader"></span><span class="st">Lab</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AUTHOR'S NOTE ========== -->
+<section id="note" class="note-sec plate" data-reset>
+  <div class="wrap">
+    <div class="kicker rv">Author's note</div>
+    <h2 class="h2 rv">I'm not looking<br>for <em>work.</em></h2>
+    <div class="authors-note" style="margin-top:clamp(36px,4vw,60px)">
+      <p class="big-line rv">I'm looking for the projects I'll <span class="hl">obsess over.</span> Every plate in this book exists because something clicked — a building, a problem, a person worth building for. I build with passion, and passion needs connection: to you, to the problem, to the people it serves. When it clicks, I don't act like a vendor. I act like it's my name on the cover. <span class="hl">Here, it literally is.</span></p>
+      <div class="sig rv">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#15130F"/><path d="M30 22 h12 v56 h-12 z" fill="#F1ECE2"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/></svg>
+        <div class="who"><b>Kazim K.</b><span>Author &amp; studio lead — K13</span></div>
+      </div>
+    </div>
+    <div class="criteria">
+      <div class="crit rv">
+        <div class="cn">i.</div>
+        <h3>You care how it feels</h3>
+        <p>Not just that it works. The Coming Soon stamp, the flip-to-reveal email, the re-priced coupon — the details are the product.</p>
+      </div>
+      <div class="crit rv">
+        <div class="cn">ii.</div>
+        <h3>The problem is real</h3>
+        <p>Someone's day gets better when this ships — a team, a kitchen, a stakeholder, a city block. That's fuel I can run on.</p>
+      </div>
+      <div class="crit rv">
+        <div class="cn">iii.</div>
+        <h3>We can talk like humans</h3>
+        <p>Two honest sentences beat twenty pages of requirements. If the first call feels like a conversation, we're already building.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMMISSION ========== -->
+<section class="contact" id="commission">
+  <div class="wrap">
+    <div class="kicker rv">Commissions</div>
+    <h2 class="h2 rv">If it clicked,<br><em>write to me.</em></h2>
     <div class="contact-grid">
       <div class="contact-left rv">
-        <p>Two sentences is enough. Tell us what you need and where it hurts, and we'll reply within one business day with honest thoughts and a clear next step.</p>
+        <p>Volume has never interested me; <em>the next plate does.</em> I take on a few commissions at a time, chosen by connection, not calendar pressure. Tell me what you're building and why it matters to you — that is genuinely what I read for. You'll hear back within a day, with honest thoughts either way. <em>If your project belongs in Vol. II, we'll both know it.</em></p>
         <a class="mailto" href="mailto:projects.k13@gmail.com" data-cursor>projects.k13@gmail.com</a>
         <div class="contact-meta">
-          <span>Response time: <b>under 24 hours</b></span>
-          <span>Engagements: <b>fixed scope or sprints</b></span>
+          <span>Author: <b>Kazim K.</b></span>
+          <a href="tel:+19493066998" data-cursor><span>Phone: <b>+1 949 306 6998</b></span></a>
+          <span>Reply: <b>under 24 hours</b></span>
           <span>Working: <b>remote, worldwide</b></span>
         </div>
       </div>
-      <form id="inquiry" novalidate>
-        <div class="field">
-          <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
+      <form id="inquiry" novalidate class="rv">
+        <div class="f-lbl">We're building…</div>
+        <div class="chiprow" id="typeChips">
+          <button type="button" class="pick" data-v="A product">A product</button>
+          <button type="button" class="pick" data-v="A brand site">A brand site</button>
+          <button type="button" class="pick" data-v="An AI thing">An AI thing</button>
+          <button type="button" class="pick" data-v="Something weird">Something weird</button>
         </div>
-        <div class="field">
-          <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="f-type">What do you need?</label>
-          <select id="f-type" name="type">
-            <option value="" selected hidden></option>
-            <option>A web application</option>
-            <option>A website</option>
-            <option>An AI-powered product</option>
-            <option>A rapid MVP sprint</option>
-            <option>Something else</option>
-          </select>
-          <span class="sel-arrow">▾</span>
-        </div>
-        <div class="field">
-          <label for="f-msg">About your project</label>
-          <textarea id="f-msg" name="message" rows="3"></textarea>
-        </div>
-        <button class="btn light" type="submit" data-cursor><span>Send inquiry →</span></button>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-msg">Why does it matter to you?</label><textarea id="f-msg" name="message" rows="3"></textarea></div>
+        <button class="btn light" type="submit" data-cursor><span>Send the letter →</span></button>
         <div class="form-note">Submitting opens your mail app with everything pre-filled. Nothing is stored on this site.</div>
-        <div class="form-ok" id="formok">✓ Your mail app should open now. We'll get back to you within a day.</div>
+        <div class="form-ok" id="formok">✓ Your mail app should open now. Talk soon.</div>
       </form>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="outro-word" id="outro" aria-hidden="true"><div class="w">K13 <em>makes it sharp.</em></div></div>
+  <div class="outro-word" id="outro" aria-hidden="true"><div class="w">Software with an <em>edge.</em></div></div>
   <div class="foot-inner">
-    <span class="fb">
-      <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" rx="22" fill="#EFE9DC"/>
-        <path d="M30 22 h12 v56 h-12 z" fill="#15130F"/>
-        <path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="#FF4F00"/>
-      </svg>
-      K13 Software Studio
-    </span>
-    <span>Software with an edge, crafted with care.</span>
+    <span class="fb"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#EFE9DC"/><path d="M30 22 h12 v56 h-12 z" fill="#15130F"/><path d="M48 22 h26 l-16 26 l16 30 h-26 l5 -8 h7 l-12 -22 l12 -18 h-7 z" fill="%23FF4F00" fill="#FF4F00"/></svg> K13 Software Studio</span>
+    <span class="colo">Colophon — set in <em>Fraunces</em> &amp; Space Grotesk · no templates were used</span>
     <span><a href="mailto:projects.k13@gmail.com" data-cursor>projects.k13@gmail.com</a> &nbsp;·&nbsp; © 2026 K13</span>
   </div>
 </footer>
+
+<!-- READ MODE -->
+<div class="lamp" aria-hidden="true"></div>
+<div class="ribbon" id="ribbon" aria-hidden="true">
+  <div class="tab" aria-hidden="true"></div>
+  <div class="ribbon-inner">
+    <div class="rctrl">
+      <button class="rbtn" id="rdPrev" type="button" aria-label="Previous plate">‹</button>
+      <button class="rbtn" id="rdPlay" type="button" aria-label="Play / pause">∥</button>
+      <button class="rbtn" id="rdNext" type="button" aria-label="Next plate">›</button>
+    </div>
+    <div class="rcap" id="rdCap"><span class="rch" id="rdChn"></span><span id="rdTxt"></span></div>
+    <div class="pages" id="rdPages"></div>
+    <button class="rexit" id="rdExit" type="button">Close ✕ esc</button>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script>
@@ -527,15 +1144,15 @@ footer{background:var(--ink);color:rgba(239,233,220,.5);border-top:1px solid rgb
 "use strict";
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------- buttery smooth scroll (Lenis with graceful fallback) ---------- */
+/* ---------- smooth scroll ---------- */
 var lenis = null;
 if (!reduced && window.Lenis) {
   lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true });
-  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+  var raf = function(t){ lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
 }
-function scrollToEl(el){
-  if (lenis) lenis.scrollTo(el, { offset: -70, duration: 1.4 });
+function scrollToEl(el, dur){
+  if (lenis) lenis.scrollTo(el, { offset: -56, duration: dur || 1.4 });
   else el.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
 }
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
@@ -548,40 +1165,37 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 
-/* ---------- header + progress + parallax ---------- */
+/* ---------- header + progress + cover parallax + stock tint ---------- */
 var hdr = document.getElementById("hdr"),
     pbar = document.getElementById("pbar"),
-    big13 = document.getElementById("big13"),
-    revtrack = document.getElementById("revtrack"),
-    revSection = document.querySelector(".reviews");
-
+    big13 = document.getElementById("big13");
+var plates = Array.prototype.slice.call(document.querySelectorAll(".plate[data-pl]"));
+function stockCheck(){
+  var mid = window.innerHeight * 0.5, active = null;
+  for (var i=0;i<plates.length;i++){
+    var r = plates[i].getBoundingClientRect();
+    if (r.top < mid && r.bottom > mid){ active = plates[i]; break; }
+  }
+  document.body.style.setProperty("--page-bg", active ? active.getAttribute("data-stock") : "var(--paper)");
+}
 function onScroll(){
   var y = window.scrollY || document.documentElement.scrollTop;
   hdr.classList.toggle("scrolled", y > 40);
   var h = document.documentElement.scrollHeight - window.innerHeight;
   pbar.style.transform = "scaleX(" + (h > 0 ? y/h : 0) + ")";
-  if (big13 && !reduced) {
-    big13.style.transform = "translateY(" + (-50 + y * -0.06) + "%) rotate(" + (y * 0.004) + "deg)";
+  if (big13 && !reduced && window.innerWidth > 1060) {
+    big13.style.transform = "translateY(" + (-50 + y * -0.05) + "%)";
   }
-  /* reviews: horizontal drift tied to vertical scroll */
-  if (revtrack && revSection && !reduced) {
-    var r = revSection.getBoundingClientRect();
-    var p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
-    var over = revtrack.scrollWidth - revSection.clientWidth + 160;
-    if (over < 260) over = 260; /* always drift, even on wide screens where cards fit */
-    revtrack.style.transform = "translateX(" + (-p * over * 0.85) + "px)";
-  }
+  stockCheck();
 }
 window.addEventListener("scroll", onScroll, { passive:true });
-onScroll();
 
-/* ---------- reveal on view (scroll-driven, bulletproof) ---------- */
+/* ---------- reveal on view ---------- */
 var rvEls = Array.prototype.slice.call(document.querySelectorAll(".rv"));
 function checkReveal(){
   var vh = window.innerHeight;
   for (var i = rvEls.length - 1; i >= 0; i--) {
-    var el = rvEls[i];
-    var r = el.getBoundingClientRect();
+    var el = rvEls[i], r = el.getBoundingClientRect();
     if (r.top < vh * 0.94 && r.bottom > 0) {
       var siblings = Array.prototype.filter.call(el.parentElement.children, function(c){ return c.classList && c.classList.contains("rv"); });
       var idx = siblings.indexOf(el);
@@ -594,22 +1208,16 @@ function checkReveal(){
 window.addEventListener("scroll", checkReveal, { passive:true });
 window.addEventListener("resize", checkReveal, { passive:true });
 window.addEventListener("load", checkReveal);
-var rvTimer = setInterval(function(){
-  checkReveal();
-  if (!rvEls.length) clearInterval(rvTimer);
-}, 250);
+var rvTimer = setInterval(function(){ checkReveal(); if (!rvEls.length) clearInterval(rvTimer); }, 250);
 checkReveal();
-/* hero content must never wait */
-setTimeout(function(){
-  document.querySelectorAll(".hero .rv").forEach(function(el){ el.classList.add("vis"); });
-}, 350);
+setTimeout(function(){ document.querySelectorAll(".cover .rv").forEach(function(el){ el.classList.add("vis"); }); }, 350);
 
-/* ---------- hero headline entrance ---------- */
+/* ---------- cover headline entrance ---------- */
 var h1done = false;
 function revealH1(){
   if (h1done) return; h1done = true;
   document.querySelectorAll("h1 .row > span").forEach(function(s, i){
-    s.style.transition = "transform 1.15s cubic-bezier(.22,1,.36,1) " + (160 + i*130) + "ms";
+    s.style.transition = "transform 1.1s cubic-bezier(.22,1,.36,1) " + (160 + i*150) + "ms";
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ s.style.transform = "translateY(0)"; }); });
   });
 }
@@ -617,7 +1225,31 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(revealH1);
 window.addEventListener("load", revealH1);
 setTimeout(revealH1, 1100);
 
-/* ---------- custom cursor + magnetic buttons ---------- */
+/* ---------- specs count-up ---------- */
+var counted = false;
+function countUp(){
+  if (counted) return;
+  var els = document.querySelectorAll("[data-count]");
+  if (!els.length) return;
+  var r = els[0].getBoundingClientRect();
+  if (r.top > window.innerHeight * 0.92) return;
+  counted = true;
+  els.forEach(function(el){
+    var target = parseInt(el.getAttribute("data-count"), 10), start = null;
+    if (reduced){ el.textContent = target.toLocaleString(); return; }
+    function step(t){
+      if (!start) start = t;
+      var p = Math.min(1, (t - start) / 1400);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * p).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+window.addEventListener("scroll", countUp, { passive:true });
+
+/* ---------- cursor + magnetic ---------- */
 var cursor = document.getElementById("cursor"), cx=0, cy=0, tx=0, ty=0, cursorOn=false;
 if (window.matchMedia("(hover:hover)").matches && !reduced) {
   document.addEventListener("mousemove", function(e){
@@ -629,11 +1261,10 @@ if (window.matchMedia("(hover:hover)").matches && !reduced) {
     cursor.style.left = cx + "px"; cursor.style.top = cy + "px";
     requestAnimationFrame(moveCursor);
   })();
-  document.querySelectorAll("[data-cursor], a, button, .work, .rev").forEach(function(el){
+  document.querySelectorAll("[data-cursor], a, button, .idx").forEach(function(el){
     el.addEventListener("mouseenter", function(){ cursor.classList.add("grow"); });
     el.addEventListener("mouseleave", function(){ cursor.classList.remove("grow"); });
   });
-  /* magnetic pull on primary buttons */
   document.querySelectorAll(".btn").forEach(function(b){
     b.addEventListener("mousemove", function(e){
       var r = b.getBoundingClientRect();
@@ -648,8 +1279,233 @@ if (window.matchMedia("(hover:hover)").matches && !reduced) {
   });
 }
 
-/* ---------- form: floating labels + mailto ---------- */
-document.querySelectorAll(".field input, .field textarea, .field select").forEach(function(inp){
+/* =========================================================
+   FIGURE ENGINES — run only while visible
+   ========================================================= */
+function whenVisible(el, cb){
+  if (!el) return;
+  if (!("IntersectionObserver" in window)) { cb(true); return; }
+  new IntersectionObserver(function(es){
+    es.forEach(function(en){ cb(en.isIntersecting); });
+  }, { threshold: 0.25 }).observe(el);
+}
+
+/* ---- Fig.1 Edisyn ---- */
+(function(){
+  var box = document.getElementById("edBubbles"),
+      aEl = document.getElementById("edA"),
+      qEl = document.getElementById("edQ"),
+      mEl = document.getElementById("edModel"),
+      lEl = document.getElementById("edLat");
+  if (!box) return;
+  var lines = [
+    ["s1","Speaker 1","So walk me through how the routing works."],
+    ["s2","Speaker 2","Five providers behind one router — it picks by cost and latency per request."],
+    ["s1","Speaker 1","Can it handle Turkish and English in the same call?"],
+    ["s2","Speaker 2","Yes — diarization tags the speaker, detection tags the language."],
+    ["s1","Speaker 1","And if a provider goes down mid-meeting?"],
+    ["s2","Speaker 2","Fallback chain kicks in. The user never sees it."]
+  ];
+  var answers = [
+    ["Yes — Edisyn auto-detects per utterance and answers in the speaker's language.","Gemini 2.5 Flash","0.9s","“Can it handle Turkish and English in the same call?”"],
+    ["The router falls back automatically: provider down → next in chain, mid-stream.","GPT-4o-mini","1.2s","“And if a provider goes down mid-meeting?”"],
+    ["Per-request routing weighs cost, latency and capability — config lives in the DB.","DeepSeek Chat","1.4s","“So walk me through how the routing works.”"]
+  ];
+  var li = 0, ai = 0, typeTimer = null, lineTimer = null, running = false;
+  function addLine(){
+    var L = lines[li % lines.length]; li++;
+    var d = document.createElement("div");
+    d.className = "bub " + L[0];
+    d.innerHTML = '<span class="sp"></span><span class="tx"><span class="who">' + L[1] + '</span>' + L[2] + '</span>';
+    box.appendChild(d);
+    while (box.children.length > 3) box.removeChild(box.firstChild);
+  }
+  function typeAnswer(){
+    var A = answers[ai % answers.length]; ai++;
+    qEl.textContent = A[3]; mEl.textContent = A[1]; lEl.textContent = A[2];
+    var txt = A[0], n = 0;
+    clearInterval(typeTimer);
+    aEl.textContent = "";
+    if (reduced){ aEl.textContent = txt; return; }
+    typeTimer = setInterval(function(){
+      n += 2;
+      aEl.textContent = txt.slice(0, n);
+      if (n >= txt.length) clearInterval(typeTimer);
+    }, 38);
+  }
+  function start(){
+    if (running) return; running = true;
+    addLine(); addLine(); typeAnswer();
+    lineTimer = setInterval(function(){
+      addLine();
+      if (li % 3 === 0) typeAnswer();
+    }, 2600);
+  }
+  function stop(){ running = false; clearInterval(lineTimer); clearInterval(typeTimer); }
+  whenVisible(document.getElementById("spEdisyn"), function(v){ v ? start() : stop(); });
+})();
+
+/* ---- Fig.2 THG map ---- */
+(function(){
+  var sp = document.getElementById("spThg");
+  if (!sp) return;
+  var pins = sp.querySelectorAll(".pin"), pops = sp.querySelectorAll(".pop"), idx = 0, auto = null;
+  function show(id){ pops.forEach(function(p){ p.classList.toggle("on", p.id === id); }); }
+  pins.forEach(function(p){
+    var open = function(){ show(p.getAttribute("data-pop")); clearInterval(auto); };
+    p.addEventListener("mouseenter", open);
+    p.addEventListener("click", open);
+  });
+  whenVisible(sp, function(v){
+    clearInterval(auto);
+    if (v && !reduced){
+      auto = setInterval(function(){
+        show(pins[idx % pins.length].getAttribute("data-pop")); idx++;
+      }, 2800);
+    }
+  });
+})();
+
+/* ---- Fig.3 Miramar stamp ---- */
+(function(){
+  var sp = document.getElementById("spMir");
+  if (!sp) return;
+  var t = null;
+  function slam(){
+    sp.classList.remove("stamped");
+    void sp.offsetWidth;
+    sp.classList.add("stamped");
+  }
+  whenVisible(sp, function(v){
+    clearInterval(t);
+    if (v){ slam(); if (!reduced) t = setInterval(slam, 5200); }
+  });
+})();
+
+/* ---- Fig.5 TrustMeBro coupon ---- */
+(function(){
+  var sp = document.getElementById("spTmb");
+  if (!sp) return;
+  var legs = sp.querySelectorAll(".leg"), xEl = document.getElementById("tmbX"), timers = [], loop = null;
+  function run(){
+    timers.forEach(clearTimeout); timers = [];
+    sp.classList.remove("repriced");
+    xEl.textContent = "4.12×";
+    legs.forEach(function(l){ l.classList.remove("on","voided"); });
+    legs.forEach(function(l, i){
+      timers.push(setTimeout(function(){
+        l.classList.add("on");
+        if (l.hasAttribute("data-void")) l.classList.add("voided");
+      }, 700 + i * 900));
+    });
+    timers.push(setTimeout(function(){
+      sp.classList.add("repriced");
+      xEl.textContent = "2.61×";
+    }, 700 + legs.length * 900 + 400));
+  }
+  whenVisible(sp, function(v){
+    clearInterval(loop); timers.forEach(clearTimeout);
+    if (v){ run(); if (!reduced) loop = setInterval(run, 7600); }
+  });
+})();
+
+/* =========================================================
+   READ MODE — the guided reading ribbon
+   ========================================================= */
+(function(){
+  var caps = plates.map(function(c){ return c.getAttribute("data-cap") || ""; });
+  var ribbon = document.getElementById("ribbon"),
+      capBox = document.getElementById("rdCap"),
+      capTxt = document.getElementById("rdTxt"),
+      capChn = document.getElementById("rdChn"),
+      pages = document.getElementById("rdPages"),
+      playBtn = document.getElementById("rdPlay");
+  var ROMAN = ["I","II","III","IV","V","VI"];
+  var dots = plates.map(function(c, i){
+    var d = document.createElement("button");
+    d.type = "button"; d.className = "pg-dot"; d.textContent = ROMAN[i] || (i+1);
+    d.setAttribute("aria-label","Go to plate " + (ROMAN[i] || (i+1)));
+    d.addEventListener("click", function(){ go(i, true); });
+    pages.appendChild(d);
+    return d;
+  });
+  var on = false, cur = -1, playing = false, advTimer = null;
+  function setDots(){
+    dots.forEach(function(d, i){
+      d.classList.toggle("done", i < cur);
+      d.classList.toggle("cur", i === cur);
+    });
+  }
+  function showCap(i){
+    capBox.classList.remove("on");
+    setTimeout(function(){
+      capChn.textContent = "Plate " + (ROMAN[i] || (i+1)) + " · pp. " + String(4 + i*8).padStart(2,"0") + "–" + (11 + i*8);
+      capTxt.textContent = caps[i];
+      capBox.classList.add("on");
+    }, 250);
+  }
+  function go(i, manual){
+    if (i < 0) i = 0;
+    if (i >= plates.length){ exit(); return; }
+    cur = i; setDots(); showCap(i);
+    scrollToEl(plates[i], reduced ? 0 : 1.6);
+    clearTimeout(advTimer);
+    if (playing) schedule();
+  }
+  function schedule(){
+    clearTimeout(advTimer);
+    advTimer = setTimeout(function(){ if (playing) go(cur + 1); }, 9000);
+  }
+  function setPlaying(p){
+    playing = p;
+    playBtn.textContent = p ? "∥" : "▶";
+    if (p) schedule(); else clearTimeout(advTimer);
+  }
+  function enter(){
+    if (on) return; on = true;
+    document.body.classList.add("reading");
+    ribbon.setAttribute("aria-hidden","false");
+    setPlaying(true);
+    go(0, true);
+  }
+  function exit(){
+    if (!on) return; on = false;
+    document.body.classList.remove("reading");
+    ribbon.setAttribute("aria-hidden","true");
+    setPlaying(false);
+    capBox.classList.remove("on");
+    cur = -1; setDots();
+  }
+  document.getElementById("readBtn").addEventListener("click", enter);
+  document.querySelectorAll("[data-read]").forEach(function(b){ b.addEventListener("click", enter); });
+  document.getElementById("rdExit").addEventListener("click", exit);
+  document.getElementById("rdPrev").addEventListener("click", function(){ go(cur - 1, true); });
+  document.getElementById("rdNext").addEventListener("click", function(){ go(cur + 1, true); });
+  playBtn.addEventListener("click", function(){ setPlaying(!playing); });
+  document.addEventListener("keydown", function(e){
+    var tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if (e.key === "r" || e.key === "R"){ on ? exit() : enter(); }
+    if (!on) return;
+    if (e.key === "Escape") exit();
+    if (e.key === "ArrowRight") go(cur + 1, true);
+    if (e.key === "ArrowLeft") go(cur - 1, true);
+    if (e.key === " "){ e.preventDefault(); setPlaying(!playing); }
+  });
+  window.addEventListener("wheel", function(){ if (on && playing) setPlaying(false); }, { passive:true });
+  window.addEventListener("touchmove", function(){ if (on && playing) setPlaying(false); }, { passive:true });
+})();
+
+/* ---------- form: chips + floating labels + mailto ---------- */
+var chosenType = "";
+document.querySelectorAll("#typeChips .pick").forEach(function(c){
+  c.addEventListener("click", function(){
+    document.querySelectorAll("#typeChips .pick").forEach(function(x){ x.classList.remove("sel"); });
+    c.classList.add("sel");
+    chosenType = c.getAttribute("data-v");
+  });
+});
+document.querySelectorAll(".field input, .field textarea").forEach(function(inp){
   function upd(){ inp.closest(".field").classList.toggle("has-val", !!inp.value); }
   inp.addEventListener("input", upd); inp.addEventListener("change", upd); upd();
 });
@@ -657,13 +1513,14 @@ document.getElementById("inquiry").addEventListener("submit", function(e){
   e.preventDefault();
   var name = document.getElementById("f-name").value.trim(),
       email = document.getElementById("f-email").value.trim(),
-      type = document.getElementById("f-type").value,
       msg = document.getElementById("f-msg").value.trim();
-  var subject = "Project inquiry" + (type ? ": " + type : "") + (name ? " (" + name + ")" : "");
-  var bodyText = "Hi K13,\r\n\r\n" + (msg ? msg + "\r\n\r\n" : "") + "--\r\n" + name + (email ? "\r\n" + email : "");
+  var subject = "Commission inquiry" + (chosenType ? ": " + chosenType : "") + (name ? " (" + name + ")" : "");
+  var bodyText = "Hi K13,\r\n\r\n" + (chosenType ? "We're building: " + chosenType + "\r\n\r\n" : "") + (msg ? "Why it matters: " + msg + "\r\n\r\n" : "") + "--\r\n" + name + (email ? "\r\n" + email : "");
   window.location.href = "mailto:projects.k13@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(bodyText);
   document.getElementById("formok").classList.add("show");
 });
+
+onScroll();
 })();
 </script>
 </body>
