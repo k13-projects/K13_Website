@@ -108,10 +108,19 @@ nav .btn{padding:10px 20px}
 /* ---------- cover (hero) ---------- */
 .cover{min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;position:relative;
   padding:120px clamp(20px,4vw,56px) 110px;overflow:hidden}
-.cover .big13{position:absolute;right:9vw;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:600;letter-spacing:-.04em;
-  font-size:clamp(170px,22vw,400px);line-height:.8;color:transparent;
-  -webkit-text-stroke:4px var(--ink);z-index:0;user-select:none;pointer-events:none;will-change:transform}
+/* anchored clear of the mascot: the mascot never occupies more than ~500px
+   from the right edge, so the K13 right edge always stays left of it */
+.cover .big13{position:absolute;right:max(28vw,500px);top:50%;font-family:var(--serif);font-weight:600;letter-spacing:-.05em;
+  font-size:clamp(140px,17vw,330px);line-height:.8;color:transparent;
+  -webkit-text-stroke:4px var(--ink);z-index:0;user-select:none;pointer-events:none;will-change:transform;
+  transform:translateY(-50%) skewX(-4deg)}
 .cover .big13 b{font-weight:600;color:var(--accent);-webkit-text-stroke:0}
+/* mascot — the K13 spark runner, printed sharp on the paper */
+.mascot-wrap{position:absolute;right:clamp(10px,6vw,100px);bottom:0;z-index:1;width:clamp(220px,23vw,370px);
+  pointer-events:none;display:flex;justify-content:center}
+.mascot-wrap img{width:100%;height:auto;animation:floaty 5.5s ease-in-out infinite;
+  filter:drop-shadow(0 26px 38px rgba(21,19,15,.32)) drop-shadow(0 4px 10px rgba(21,19,15,.18))}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-16px) rotate(1deg)}}
 .cover-inner{position:relative;z-index:1;max-width:1100px}
 .cover-inner::before,.cover-inner::after{content:"";position:absolute;width:20px;height:20px;pointer-events:none;opacity:.55;
   background:linear-gradient(var(--line-strong),var(--line-strong)) center/100% 1.5px no-repeat,
@@ -529,7 +538,12 @@ body.reading .ribbon{transform:none}
   .specs-grid{grid-template-columns:repeat(2,1fr)}
   .spec:nth-child(2){border-right:none}
   .spec:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .cover .big13{right:-18vw;opacity:.6}
+}
+@media(max-width:1280px){
+  /* mascot rises beside the headline; K13 settles below it, centered */
+  .cover .big13{left:50%;right:auto;top:auto;bottom:10px;opacity:.55;
+    font-size:clamp(96px,20vw,200px);transform:translateX(-50%) skewX(-4deg)}
+  .mascot-wrap{opacity:.5;width:clamp(150px,30vw,260px);top:96px;bottom:auto;right:2vw}
 }
 @media(max-width:980px){
   nav .nl{display:none}
@@ -582,13 +596,15 @@ body.reading .ribbon{transform:none}
 
 <!-- COVER -->
 <section class="cover" id="top">
-  <div class="big13" id="big13" aria-hidden="true">1<b>3</b></div>
+  <div class="big13" id="big13" aria-hidden="true">K<b>13</b></div>
+  <div class="mascot-wrap" aria-hidden="true">
+    <img src="assets/mascot-cutout.png" alt="" onerror="this.parentElement.style.display='none'">
+  </div>
   <div class="cover-inner">
     <div class="edition rv"><span class="dot"></span>First edition — open for commissions, 2026</div>
-    <h1 aria-label="The work, collected and in print.">
-      <span class="row"><span>The work,</span></span>
-      <span class="row"><span><em>collected</em> &amp;</span></span>
-      <span class="row"><span class="edge-w"><span class="accent">in print.</span><svg class="scribble" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 70 24, 150 2, 214 12" fill="none" stroke="#FF4F00" stroke-width="5" stroke-linecap="round"/></svg></span></span>
+    <h1 aria-label="Some studios pitch. I publish.">
+      <span class="row"><span>Some studios <em>pitch.</em></span></span>
+      <span class="row"><span class="edge-w"><span class="accent">I publish.</span><svg class="scribble" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 16 C 70 24, 150 2, 214 12" fill="none" stroke="#FF4F00" stroke-width="5" stroke-linecap="round"/></svg></span></span>
     </h1>
     <p class="cover-sub rv">This is not a portfolio. It is a record of <strong>decisions</strong> — six shipped works, each presented as a plate: why I built it the way I built it, footnoted from the real commit log, its interface <em>rebuilt in situ, not screenshotted.</em> Most studios show you what they made. I'd rather show you <em>what I meant.</em></p>
     <div class="cover-cta rv">
@@ -1183,8 +1199,12 @@ function onScroll(){
   hdr.classList.toggle("scrolled", y > 40);
   var h = document.documentElement.scrollHeight - window.innerHeight;
   pbar.style.transform = "scaleX(" + (h > 0 ? y/h : 0) + ")";
-  if (big13 && !reduced && window.innerWidth > 1060) {
-    big13.style.transform = "translateY(" + (-50 + y * -0.05) + "%)";
+  if (big13 && !reduced) {
+    if (window.innerWidth > 1280) {
+      big13.style.transform = "translateY(" + (-50 + y * -0.05) + "%) skewX(-4deg)";
+    } else {
+      big13.style.transform = ""; /* CSS handles placement on small screens */
+    }
   }
   stockCheck();
 }
