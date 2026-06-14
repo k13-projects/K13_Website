@@ -3,19 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K13 — Studio of Kazim K. · Shipped work, told straight</title>
-<meta name="description" content="I'm Kazim — I design and ship software that people actually use. This is a live showreel of my real, shipped work: AI products, brand sites, dashboards. Open for projects when there's a connection.">
+<title>K13 Software Studio · Kazim K. · Shipped work, told straight</title>
+<meta name="description" content="K13 Software Studio. I'm Kazim, I design and ship software where every screen says what it means. A live showreel of real, shipped work. Open for projects when there's a connection.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="%230C0B0A"/><text x="50" y="68" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="46" text-anchor="middle"><tspan fill="%23F3EEE3">K</tspan><tspan fill="%23FF5A24">13</tspan></text></svg>'>
 <style>
 /* =========================================================
-   K13 — beta_v5  ·  "THE SHOWREEL"
-   A fresh, separate version. Dark, cinematic, motion-first.
-   The work is shown as real screenshots — shot live from the
-   running products — framed and brought alive with scroll.
-   Built single-file. Motion: GSAP ScrollTrigger + Lenis.
+   K13 Software Studio · beta_v5  ·  "THE SHOWREEL"
+   Dark, cinematic, motion-first. The work is shown live:
+   real sites embedded as interactive mini-browsers, or shot
+   straight from production. Single file. GSAP + Lenis.
    ========================================================= */
 :root{
   --bg:#0C0B0A;
@@ -29,7 +28,6 @@
   --molten:#FF5A24;
   --amber:#FFB23E;
   --ice:#74E0D6;
-  --maroon:#3A1A12;
   --line:rgba(243,238,227,.12);
   --line-2:rgba(243,238,227,.22);
   --disp:"Bricolage Grotesque",system-ui,sans-serif;
@@ -37,21 +35,16 @@
   --mono:"Space Mono",ui-monospace,monospace;
   --story:"Newsreader",Georgia,serif;
   --ease:cubic-bezier(.22,1,.36,1);
-  --ease-io:cubic-bezier(.65,0,.35,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-.lenis.lenis-stopped{overflow:hidden}
-body{
-  background:var(--bg);color:var(--bone);
-  font-family:var(--body);font-size:17px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--bone);font-family:var(--body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
 ::selection{background:var(--molten);color:#0C0B0A}
 a{color:inherit;text-decoration:none}
-img,svg{display:block;max-width:100%}
+img,svg,iframe{display:block;max-width:100%}
 button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
 
 /* ---------- atmosphere ---------- */
@@ -60,8 +53,7 @@ button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
   animation:grain 7s steps(8) infinite;mix-blend-mode:overlay}
 @keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-3%,-3%)}}
 .aura{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(60vw 60vw at 78% -8%,rgba(255,90,36,.16),transparent 60%),
+  background:radial-gradient(60vw 60vw at 78% -8%,rgba(255,90,36,.16),transparent 60%),
     radial-gradient(46vw 46vw at -6% 18%,rgba(58,26,18,.7),transparent 62%),
     radial-gradient(50vw 50vw at 50% 118%,rgba(255,178,62,.06),transparent 60%)}
 .spot{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .6s;
@@ -71,14 +63,11 @@ button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
 .progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--molten),var(--amber));transform-origin:0 50%;transform:scaleX(0)}
 
 /* ---------- cursor ---------- */
-.cur,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;
-  transform:translate(-50%,-50%);will-change:transform}
+.cur,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);will-change:transform}
 .cur{width:7px;height:7px;background:var(--molten);transition:opacity .3s}
 .cur-ring{width:38px;height:38px;border:1px solid var(--line-2);mix-blend-mode:difference;
   transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,opacity .3s}
-.cur-ring.grow{width:74px;height:74px;border-color:var(--molten)}
-.cur-ring.read::after{content:"DRAG";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:var(--molten)}
+.cur-ring.grow{width:72px;height:72px;border-color:var(--molten)}
 @media(hover:none){.cur,.cur-ring,.spot{display:none}}
 
 /* ---------- header ---------- */
@@ -90,9 +79,8 @@ header.scrolled{padding:11px clamp(18px,4vw,52px);background:rgba(12,11,10,.72);
 .brand .k{font-family:var(--disp);font-weight:800;font-size:30px;line-height:1;letter-spacing:-.02em;transition:font-size .4s var(--ease)}
 .brand .k b{color:var(--bone)}.brand .k i{color:var(--molten);font-style:normal}
 header.scrolled .brand .k{font-size:25px}
-.brand .tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);
-  border-left:1px solid var(--line);padding-left:12px;line-height:1.5;transition:opacity .3s}
-header.scrolled .brand .tag{opacity:0}
+.brand .tag{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+  border-left:1px solid var(--line);padding-left:12px;line-height:1.55}
 nav{display:flex;gap:26px;align-items:center}
 .nl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);position:relative;padding:4px 0;transition:color .3s}
 .nl:hover{color:var(--bone)}
@@ -123,68 +111,46 @@ nav .btn{padding:10px 18px}
 .hero-grid{position:relative;z-index:2;max-width:1320px;margin:0 auto;width:100%}
 .hello{display:inline-flex;align-items:center;gap:11px;font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--bone-2);border:1px solid var(--line);border-radius:100px;padding:8px 16px;margin-bottom:30px;background:rgba(25,23,20,.5)}
-.hello .live{width:8px;height:8px;border-radius:50%;background:var(--ice);box-shadow:0 0 0 0 rgba(116,224,214,.6);animation:beat 2s infinite}
+.hello .live{width:8px;height:8px;border-radius:50%;background:var(--ice);animation:beat 2s infinite}
 @keyframes beat{0%,100%{box-shadow:0 0 0 0 rgba(116,224,214,.5)}60%{box-shadow:0 0 0 9px rgba(116,224,214,0)}}
-h1{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:.92;
-  font-size:clamp(48px,9.6vw,158px);text-transform:none}
+h1{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:.92;font-size:clamp(54px,11vw,178px)}
 h1 .l{display:block}
-h1 .ink{color:var(--bone)}
 h1 .hot{color:var(--molten)}
-h1 .out{color:transparent;-webkit-text-stroke:1.6px var(--bone-2)}
-h1 em{font-family:var(--story);font-style:italic;font-weight:400;letter-spacing:-.01em;-webkit-text-stroke:0;color:var(--amber)}
-.hero-sub{max-width:560px;margin-top:32px;font-size:clamp(16.5px,1.4vw,19px);color:var(--muted);line-height:1.66}
+.hero-sub{max-width:540px;margin-top:30px;font-size:clamp(16.5px,1.4vw,19px);color:var(--muted);line-height:1.66}
 .hero-sub strong{color:var(--bone);font-weight:600}
 .hero-sub .sv{font-family:var(--story);font-style:italic;color:var(--amber)}
 .hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;align-items:center}
 .kb{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:inline-flex;align-items:center;gap:7px}
 .kb kbd{border:1px solid var(--line-2);border-bottom-width:2px;border-radius:5px;padding:2px 7px;color:var(--bone)}
 @media(hover:none){.kb{display:none}}
-/* mascot + badge */
+/* hero art: sculptural extruded 13 + ember spark (pure code) */
 .hero-art{position:absolute;right:clamp(-20px,3vw,40px);bottom:0;top:0;width:min(46vw,640px);z-index:1;pointer-events:none}
-/* sculptural extruded 13 + an ember spark that runs its orbit — built native to v5, pure code */
-.sculpt{position:absolute;right:6%;top:50%;transform:translateY(-50%);
-  width:clamp(240px,30vw,440px);height:clamp(300px,40vw,560px);
+.sculpt{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:clamp(240px,30vw,440px);height:clamp(300px,40vw,560px);
   display:flex;align-items:center;justify-content:center;will-change:transform}
-.mono{position:relative;width:100%;height:100%;font-family:var(--disp);font-weight:800;
-  font-size:clamp(170px,21vw,320px);line-height:1;letter-spacing:-.05em}
+.mono{position:relative;width:100%;height:100%;font-family:var(--disp);font-weight:800;font-size:clamp(170px,21vw,320px);line-height:1;letter-spacing:-.05em}
 .mono .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.mono .ex{color:transparent;
-  -webkit-text-stroke:1.4px color-mix(in srgb, var(--molten) 55%, #0a0807 calc(var(--i) * 9%));
+.mono .ex{color:transparent;-webkit-text-stroke:1.4px color-mix(in srgb, var(--molten) 55%, #0a0807 calc(var(--i) * 9%));
   transform:translate(calc(var(--i) * 2.1px), calc(var(--i) * 2.1px))}
-.mono .face{color:transparent;-webkit-text-stroke:0;
-  background:linear-gradient(158deg,#2c2723,#141110);-webkit-background-clip:text;background-clip:text}
-.mono .front{color:transparent;-webkit-text-stroke:1.8px var(--molten);
-  filter:drop-shadow(0 0 24px rgba(255,90,36,.45))}
+.mono .face{color:transparent;-webkit-text-stroke:0;background:linear-gradient(158deg,#2c2723,#141110);-webkit-background-clip:text;background-clip:text}
+.mono .front{color:transparent;-webkit-text-stroke:1.8px var(--molten);filter:drop-shadow(0 0 24px rgba(255,90,36,.45))}
 .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:3}
 .orbit circle{fill:var(--amber)}
 .orbit .t2{opacity:.42}.orbit .t1{opacity:.68}
 .orbit .spark{fill:var(--molten);filter:drop-shadow(0 0 7px var(--molten)) drop-shadow(0 0 16px rgba(255,178,62,.75))}
-.sculpt .ember{position:absolute;bottom:16%;width:4px;height:4px;border-radius:50%;background:var(--amber);
-  opacity:0;filter:blur(.3px);animation:rise 4.4s ease-in infinite}
+.sculpt .ember{position:absolute;bottom:16%;width:4px;height:4px;border-radius:50%;background:var(--amber);opacity:0;filter:blur(.3px);animation:rise 4.4s ease-in infinite}
 @keyframes rise{0%{opacity:0;transform:translateY(0) scale(1)}12%{opacity:.85}100%{opacity:0;transform:translateY(-240px) scale(.3)}}
 .badge{position:absolute;right:5%;top:18%;width:clamp(116px,12vw,168px);height:clamp(116px,12vw,168px);will-change:transform;z-index:4}
 .badge text{font-family:var(--mono);font-size:8.1px;letter-spacing:.34em;fill:var(--bone-2);text-transform:uppercase}
-.badge .core{font-family:var(--disp);font-weight:800;font-size:23px;fill:var(--molten);letter-spacing:-.02em}
-.scroll-cue{position:absolute;left:clamp(18px,4vw,52px);bottom:26px;z-index:2;font-family:var(--mono);font-size:10px;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:11px}
+.badge .core{font-family:var(--disp);font-weight:800;font-size:23px;fill:var(--molten)}
+.scroll-cue{position:absolute;left:clamp(18px,4vw,52px);bottom:26px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:11px}
 .scroll-cue .bar{width:46px;height:1px;background:var(--line-2);position:relative;overflow:hidden}
 .scroll-cue .bar::after{content:"";position:absolute;inset:0;background:var(--molten);transform:translateX(-101%);animation:slide 2.4s var(--ease) infinite}
 @keyframes slide{40%{transform:translateX(0)}100%{transform:translateX(101%)}}
 
-/* ---------- velocity marquee ---------- */
-.belt{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;
-  padding:18px 0;position:relative;z-index:2;background:var(--bg-2)}
-.belt .row{display:inline-flex;will-change:transform}
-.belt .u{display:inline-flex;align-items:center;gap:26px;padding-right:26px;font-family:var(--disp);font-weight:700;
-  font-size:clamp(20px,2.6vw,34px);letter-spacing:-.01em;text-transform:uppercase;color:var(--bone)}
-.belt .u em{font-family:var(--story);font-style:italic;font-weight:400;text-transform:none;color:var(--amber)}
-.belt .u .star{color:var(--molten);font-size:.62em}
-
 /* ---------- sections ---------- */
 section{position:relative;z-index:2}
 .wrap{max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,170px) clamp(18px,4vw,52px)}
-.kick{display:flex;align-items:center;gap:13px;font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:26px}
+.kick{display:flex;align-items:center;gap:13px;font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:26px}
 .kick::before{content:"";width:30px;height:1px;background:var(--molten)}
 .kick .n{color:var(--molten)}
 .h2{font-family:var(--disp);font-weight:800;letter-spacing:-.025em;line-height:1.0;font-size:clamp(34px,5.6vw,86px)}
@@ -203,8 +169,7 @@ section{position:relative;z-index:2}
 .about-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--surface),var(--bg-2));padding:30px 28px;position:relative;overflow:hidden}
 .about-card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--molten),var(--amber))}
 .about-card .who{display:flex;align-items:center;gap:14px;margin-bottom:22px}
-.about-card .ava{width:52px;height:52px;border-radius:13px;background:var(--bg);display:flex;align-items:center;justify-content:center;
-  font-family:var(--disp);font-weight:800;font-size:22px;flex:none;border:1px solid var(--line-2)}
+.about-card .ava{width:52px;height:52px;border-radius:13px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:22px;flex:none;border:1px solid var(--line-2)}
 .about-card .ava b{color:var(--bone)}.about-card .ava i{color:var(--molten);font-style:normal}
 .about-card .who b{display:block;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em}
 .about-card .who span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -213,8 +178,6 @@ section{position:relative;z-index:2}
 .fact .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fact .v{color:var(--bone);text-align:right}
 .fact .v .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ice);margin-right:7px;animation:beat 2s infinite}
-
-/* count stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--line)}
 .stat{padding:clamp(22px,3vw,36px) clamp(10px,2vw,28px);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stat:last-child{border-right:none}
@@ -224,48 +187,55 @@ section{position:relative;z-index:2}
 
 /* ---------- stack ---------- */
 .stack-sec{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stack-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(40px,5vw,64px)}
-.chip{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--bone-2);
-  border:1px solid var(--line-2);border-radius:100px;padding:11px 18px;background:var(--surface);
+.stack-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,64px)}
+.scat .ct{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--molten);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.scat .ct::after{content:"";flex:1;height:1px;background:var(--line)}
+.scat .items{display:flex;flex-wrap:wrap;gap:9px}
+.chip{font-family:var(--mono);font-size:12.5px;color:var(--bone-2);border:1px solid var(--line-2);border-radius:100px;padding:9px 15px 9px 12px;background:var(--surface);
   display:inline-flex;align-items:center;gap:9px;transition:transform .35s var(--ease),border-color .35s,color .35s,background .35s;will-change:transform}
-.chip .d{width:7px;height:7px;border-radius:50%;background:var(--molten)}
+.chip img{width:16px;height:16px;opacity:.85;flex:none}
 .chip:hover{transform:translateY(-4px);border-color:var(--molten);color:var(--bone);background:var(--surface-2)}
-.chip.ice .d{background:var(--ice)}
-.chip.amber .d{background:var(--amber)}
-.stack-note{margin-top:34px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);max-width:640px;line-height:1.7}
+.chip:hover img{opacity:1}
+.stack-note{margin-top:36px;font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--muted);max-width:660px;line-height:1.7}
 .stack-note b{color:var(--bone)}
 
 /* ---------- exhibits ---------- */
-.exhibit{position:relative;padding:clamp(60px,8vw,120px) 0;border-top:1px solid var(--line)}
+.exhibit{position:relative;padding:clamp(60px,8vw,118px) 0;border-top:1px solid var(--line)}
 .ex-wrap{max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,52px);position:relative}
-.ex-bgnum{position:absolute;top:-2vw;font-family:var(--disp);font-weight:800;font-size:clamp(150px,26vw,400px);line-height:.8;
-  color:transparent;-webkit-text-stroke:1px var(--line);z-index:0;pointer-events:none;user-select:none;will-change:transform}
-.ex-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.04fr;gap:clamp(34px,5vw,80px);align-items:center}
-.exhibit.flip .ex-grid{grid-template-columns:1.04fr 1fr}
+.ex-bgnum{position:absolute;top:-2vw;font-family:var(--disp);font-weight:800;font-size:clamp(150px,26vw,400px);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--line);z-index:0;pointer-events:none;user-select:none;will-change:transform}
+.ex-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.06fr 1fr;gap:clamp(34px,5vw,80px);align-items:center}
 .exhibit.flip .ex-frame{order:2}
 .exhibit.flip .ex-text{order:1}
-/* frame */
-.ex-frame{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line-2);
-  background:var(--surface);box-shadow:0 40px 90px -40px rgba(0,0,0,.85);transform-style:preserve-3d;will-change:transform}
-.ex-frame .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
-.ex-frame .bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
-.ex-frame .bar i:nth-child(1){background:#ff5f57}.ex-frame .bar i:nth-child(2){background:#febc2e}.ex-frame .bar i:nth-child(3){background:#28c840}
-.ex-frame .bar .addr{margin-left:8px;flex:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted);
-  background:var(--bg);border-radius:6px;padding:5px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ex-frame .bar .live{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);display:inline-flex;align-items:center;gap:6px;flex:none}
-.ex-frame .bar .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ice);animation:beat 2s infinite}
-.ex-shot{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg)}
-.ex-shot img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;object-position:top center;will-change:transform}
-.ex-shot .glare{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
-  background:radial-gradient(360px circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.16),transparent 60%);mix-blend-mode:screen}
-.ex-frame:hover .glare{opacity:1}
-.ex-tag{position:absolute;left:14px;bottom:14px;z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--bone);background:rgba(12,11,10,.74);backdrop-filter:blur(6px);
-  border:1px solid var(--line-2);border-radius:100px;padding:7px 13px;display:flex;align-items:center;gap:8px}
-.ex-tag .c{width:8px;height:8px;border-radius:50%;background:var(--molten)}
+/* the live mini-browser */
+.browser{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line-2);background:var(--surface);box-shadow:0 40px 90px -40px rgba(0,0,0,.85);transition:transform .6s var(--ease),box-shadow .6s}
+.browser:hover{transform:translateY(-5px);box-shadow:0 50px 100px -42px rgba(0,0,0,.9)}
+.browser .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.browser .bar .dt{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.browser .bar .dt:nth-child(1){background:#ff5f57}.browser .bar .dt:nth-child(2){background:#febc2e}.browser .bar .dt:nth-child(3){background:#28c840}
+.browser .bar .addr{margin-left:8px;flex:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--muted);background:var(--bg);border-radius:6px;padding:5px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.browser .bar .live{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);display:inline-flex;align-items:center;gap:6px;flex:none}
+.browser .bar .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ice);animation:beat 2s infinite}
+.browser .bar .live.shot{color:var(--amber)}.browser .bar .live.shot::before{background:var(--amber)}
+.browser .bar .rel{display:none;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:100px;padding:4px 9px;flex:none}
+.browser.engaged .bar .rel{display:inline-block}
+.screen{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg)}
+.screen iframe{position:absolute;top:0;left:0;border:0;width:1440px;max-width:none;height:900px;transform-origin:top left;pointer-events:none;background:#fff}
+.browser.engaged .screen iframe{pointer-events:auto}
+.poster{position:absolute;inset:0;background-size:cover;background-position:top center;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px;transition:opacity .55s}
+.poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(12,11,10,.5));z-index:0}
+.browser.engaged .poster{opacity:0;pointer-events:none}
+.poster .enter{position:relative;z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#0C0B0A;background:var(--bone);border-radius:100px;padding:11px 20px;display:inline-flex;gap:9px;align-items:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.7);transition:transform .3s,background .3s}
+.poster .enter:hover{transform:translateY(-2px);background:var(--molten)}
+.poster .enter.shot{background:transparent;color:var(--bone);border:1px solid var(--line-2);box-shadow:none}
+a.poster{cursor:pointer}
+a.poster:hover .enter.shot{background:var(--bone);color:#0C0B0A;border-color:var(--bone)}
+
+.see-full{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);
+  background:var(--surface-2);border-top:1px solid var(--line);padding:12px 16px;transition:color .3s;width:100%;justify-content:space-between}
+.see-full:hover{color:var(--molten)}
+.see-full span:first-child{color:var(--muted)}
 /* text */
-.ex-meta{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);font-size:11px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.ex-meta{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
 .ex-meta .yr{color:var(--molten)}
 .ex-name{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:.96;font-size:clamp(38px,5vw,74px)}
 .ex-name em{font-family:var(--story);font-style:italic;font-weight:400;color:var(--amber);letter-spacing:-.01em}
@@ -278,95 +248,122 @@ section{position:relative;z-index:2}
 .ex-built .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--molten);margin-bottom:6px}
 .ex-built p{font-size:15px;color:var(--bone-2);line-height:1.6}
 .ex-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.ex-chips .c{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-2);border:1px solid var(--line-2);
-  border-radius:100px;padding:7px 13px;display:inline-flex;gap:7px;align-items:center;transition:border-color .3s,transform .3s}
+.ex-chips .c{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-2);border:1px solid var(--line-2);border-radius:100px;padding:7px 13px;display:inline-flex;gap:7px;align-items:center;transition:border-color .3s,transform .3s}
 .ex-chips .c:hover{border-color:var(--amber);transform:translateY(-2px)}
 .ex-chips .c b{color:var(--molten);font-weight:700}
-.ex-links{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;align-items:center}
-.ex-visit{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);
-  display:inline-flex;align-items:center;gap:9px;border-bottom:1px solid var(--molten);padding-bottom:5px;transition:gap .3s,color .3s}
-.ex-visit:hover{gap:15px;color:var(--molten)}
-.ex-visit .nolink{color:var(--muted);border:none}
+/* odometer (Miramar flip feature) */
+.odo-wrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px;max-width:560px}
+.odo-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.odo{display:inline-flex;gap:7px}
+.odo .col{width:clamp(38px,5vw,52px);height:clamp(56px,7vw,74px);overflow:hidden;background:#0a3d35;border-radius:7px;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.odo .col::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.4);z-index:2}
+.odo .col .strip{display:flex;flex-direction:column;transition:transform 1.15s cubic-bezier(.7,0,.18,1)}
+.odo .col .strip span{height:clamp(56px,7vw,74px);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:clamp(30px,4vw,44px);color:#F1ECE2}
+.odo-cap{margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted)}
+.odo-cap b{color:var(--bone)}
 
-/* ---------- ledger ---------- */
-.ledger{margin-top:clamp(44px,5vw,72px);border-top:1px solid var(--line)}
-.led{display:grid;grid-template-columns:minmax(130px,210px) 1fr auto;gap:clamp(14px,2.6vw,40px);align-items:center;
-  padding:clamp(20px,2.6vw,28px) 6px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-.led::before{content:"";position:absolute;inset:0;background:var(--molten);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--ease);z-index:0}
-.led:hover::before{transform:scaleY(1);transform-origin:50% 0}
-.led>*{position:relative;z-index:1;transition:color .4s}
-.led .nm{font-family:var(--disp);font-weight:700;font-size:clamp(17px,1.8vw,24px);letter-spacing:-.01em}
-.led .ds{color:var(--muted);font-size:14.5px;line-height:1.5}
-.led .st{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line-2);border-radius:100px;padding:5px 12px;flex:none}
-.led:hover .nm,.led:hover .ds,.led:hover .st{color:#0C0B0A}
-.led:hover .st{border-color:rgba(12,11,10,.4)}
+/* ---------- more / registry ---------- */
+.registry{margin-top:clamp(40px,5vw,64px);border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:#0a0908;box-shadow:0 30px 70px -40px rgba(0,0,0,.8)}
+.reg-head{display:flex;align-items:center;gap:8px;padding:13px 16px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.reg-head .d{width:10px;height:10px;border-radius:50%}
+.reg-head .d.r{background:#ff5f57}.reg-head .d.y{background:#febc2e}.reg-head .d.g{background:#28c840}
+.reg-head .path{margin-left:10px;font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--muted)}
+.reg-head .path b{color:var(--amber)}
+.reg{display:grid;grid-template-columns:170px 130px 1fr auto;gap:clamp(12px,2vw,28px);align-items:baseline;padding:18px 20px;border-bottom:1px solid var(--line);transition:background .3s}
+.reg:last-child{border-bottom:none}
+.reg:hover{background:rgba(255,90,36,.05)}
+.reg .rn{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--bone)}
+.reg .rc{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--amber);opacity:.85}
+.reg .rd{color:var(--muted);font-size:14.5px;line-height:1.55}
+.reg .rs{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:100px;padding:5px 11px;flex:none;white-space:nowrap}
+.reg .rs.live{color:var(--amber);border-color:rgba(255,178,62,.5)}
+.reg a.rn:hover{color:var(--molten)}
 
 /* ---------- work-with-me ---------- */
 .sell{background:var(--bg-2);border-top:1px solid var(--line)}
-.manifest{max-width:900px}
-.manifest .big{font-family:var(--story);font-style:italic;font-weight:400;font-size:clamp(24px,3.3vw,46px);line-height:1.36;color:var(--bone)}
+.manifest{max-width:880px}
+.manifest .big{font-family:var(--story);font-style:italic;font-weight:400;font-size:clamp(23px,3.1vw,42px);line-height:1.4;color:var(--bone)}
 .manifest .big .hot{font-style:normal;font-family:var(--disp);font-weight:700;color:var(--molten)}
 .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(44px,5vw,70px)}
-.offer{border:1px solid var(--line);border-radius:18px;padding:30px 26px;background:var(--surface);position:relative;overflow:hidden;
-  transition:transform .5s var(--ease),border-color .5s}
+.offer{border:1px solid var(--line);border-radius:18px;padding:30px 26px;background:var(--surface);transition:transform .5s var(--ease),border-color .5s}
 .offer:hover{transform:translateY(-7px);border-color:var(--molten)}
 .offer .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--molten)}
 .offer h3{font-family:var(--disp);font-weight:700;font-size:clamp(20px,1.9vw,26px);letter-spacing:-.01em;margin:14px 0 10px}
 .offer p{color:var(--muted);font-size:15px;line-height:1.65}
 .offer ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
 .offer li{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--bone-2);display:flex;gap:9px;align-items:flex-start}
-.offer li::before{content:"→";color:var(--molten);flex:none}
+.offer li::before{content:"›";color:var(--molten);flex:none}
 .criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px);margin-top:clamp(48px,6vw,84px)}
 .crit{border-top:1px solid var(--line-2);padding-top:24px}
 .crit .cn{font-family:var(--story);font-style:italic;font-size:clamp(40px,4vw,64px);line-height:1;color:var(--molten)}
 .crit h4{font-family:var(--disp);font-weight:700;font-size:clamp(18px,1.7vw,23px);letter-spacing:-.01em;margin:16px 0 10px}
 .crit p{color:var(--muted);font-size:14.5px;line-height:1.6;max-width:340px}
 
-/* ---------- book ---------- */
+/* ---------- book (multi-step) ---------- */
 .book{background:linear-gradient(180deg,var(--bg),#0a0908)}
-.book-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,100px);margin-top:clamp(48px,5vw,76px)}
-.book-left p{color:var(--muted);max-width:460px;font-size:16.5px;line-height:1.72}
+.book-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,90px);margin-top:clamp(48px,5vw,72px);align-items:start}
+.book-left p{color:var(--muted);max-width:430px;font-size:16.5px;line-height:1.72}
 .book-left p em{font-family:var(--story);font-style:italic;color:var(--bone)}
-.mailto{display:inline-block;margin-top:30px;font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.2vw,32px);
-  letter-spacing:-.01em;color:var(--molten);position:relative}
+.mailto{display:inline-block;margin-top:28px;font-family:var(--disp);font-weight:700;font-size:clamp(19px,2.1vw,30px);letter-spacing:-.01em;color:var(--molten);position:relative}
 .mailto::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:var(--amber);transform:scaleX(.25);transform-origin:0 50%;transition:transform .5s var(--ease)}
 .mailto:hover::after{transform:scaleX(1)}
-.book-meta{margin-top:40px;display:flex;flex-direction:column;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.book-meta{margin-top:36px;display:flex;flex-direction:column;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .book-meta b{color:var(--bone);font-weight:400}
 .book-meta a:hover b{color:var(--molten)}
-form{display:flex;flex-direction:column}
-.flab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:18px}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin:11px 0 16px}
-.chips .p{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line-2);border-radius:100px;padding:9px 15px;transition:all .3s var(--ease)}
-.chips .p:hover{border-color:var(--molten);color:var(--bone)}
-.chips .p.sel{background:var(--molten);border-color:var(--molten);color:#0C0B0A}
-.field{position:relative;border-bottom:1px solid var(--line);padding:22px 0 12px;transition:border-color .4s}
-.field:focus-within{border-color:var(--molten)}
-.field label{position:absolute;top:26px;left:0;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);pointer-events:none;transition:all .35s var(--ease)}
-.field input,.field textarea{width:100%;background:transparent;border:none;outline:none;color:var(--bone);font-family:var(--body);font-size:18px;padding:6px 0;resize:vertical}
-.field textarea{min-height:84px}
-.field.has label,.field:focus-within label{top:0;font-size:10px;color:var(--molten)}
-form .btn{margin-top:34px;align-self:flex-start;padding:17px 32px}
-.fnote{margin-top:16px;font-size:13px;color:var(--faint)}
-.fok{display:none;margin-top:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--ice)}
-.fok.show{display:block}
+/* stepper */
+.stepper{border:1px solid var(--line-2);border-radius:20px;background:linear-gradient(180deg,var(--surface),var(--bg-2));overflow:hidden;position:relative;min-height:430px;display:flex;flex-direction:column}
+.step-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.step-back{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:7px;opacity:0;pointer-events:none;transition:opacity .3s,color .3s}
+.step-back.on{opacity:1;pointer-events:auto}
+.step-back:hover{color:var(--bone)}
+.step-prog{display:flex;gap:6px;align-items:center}
+.step-prog i{width:22px;height:3px;border-radius:2px;background:var(--line-2);transition:background .4s}
+.step-prog i.on{background:var(--molten)}
+.step-sum{display:flex;flex-wrap:wrap;gap:7px;padding:0 20px;min-height:0;max-height:0;overflow:hidden;transition:max-height .4s,padding .4s}
+.step-sum.on{max-height:60px;padding:14px 20px 0}
+.step-sum .sc{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--bone-2);background:var(--bg);border:1px solid var(--line-2);border-radius:100px;padding:6px 12px;cursor:pointer;transition:border-color .3s}
+.step-sum .sc:hover{border-color:var(--molten)}
+.step-sum .sc b{color:var(--muted);font-weight:400;margin-right:6px}
+.step-stage{position:relative;flex:1;overflow:hidden}
+.screen-s{position:absolute;inset:0;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;transform:translateX(40px);pointer-events:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.screen-s.on{opacity:1;transform:none;pointer-events:auto}
+.screen-s.past{transform:translateX(-40px)}
+.screen-s .q{font-family:var(--disp);font-weight:700;font-size:clamp(22px,2.4vw,32px);letter-spacing:-.02em;line-height:1.12}
+.screen-s .q em{font-family:var(--story);font-style:italic;font-weight:400;color:var(--amber)}
+.screen-s .hint{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.opt{position:relative;text-align:center;font-family:var(--body);font-size:17px;color:var(--bone);border:1px solid var(--line-2);border-radius:13px;padding:16px 40px;display:flex;align-items:center;justify-content:center;gap:12px;transition:all .3s var(--ease);background:var(--bg)}
+.opt:hover{border-color:var(--molten);background:var(--surface-2)}
+.opt .ar{position:absolute;right:18px;color:var(--molten);font-family:var(--mono);opacity:.6;transition:transform .3s,opacity .3s}
+.opt:hover .ar{transform:translateX(4px);opacity:1}
+.s-field{margin-top:22px;border-bottom:1px solid var(--line-2);padding-bottom:10px}
+.s-field input,.s-field textarea{width:100%;background:transparent;border:none;outline:none;color:var(--bone);font-family:var(--body);font-size:21px;padding:6px 0;resize:none}
+.s-field textarea{min-height:90px;font-size:17px}
+.s-row{display:flex;gap:12px;margin-top:24px;align-items:center}
+.s-next{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#0C0B0A;background:var(--molten);border-radius:100px;padding:13px 24px;display:inline-flex;gap:9px;align-items:center;transition:transform .3s,background .3s}
+.s-next:hover{transform:translateY(-2px);background:var(--amber)}
+.s-skip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.s-skip:hover{color:var(--bone)}
+.sent{position:absolute;inset:0;background:var(--bg-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;opacity:0;pointer-events:none;transition:opacity .5s;z-index:5}
+.sent.on{opacity:1;pointer-events:auto}
+.sent .ring{width:64px;height:64px;border-radius:50%;border:2px solid var(--ice);display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:28px;animation:pop .5s var(--ease)}
+@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.sent h3{font-family:var(--disp);font-weight:700;font-size:24px}
+.sent p{color:var(--muted);font-size:15px;max-width:320px}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);background:#0a0908}
 .outro{max-width:1320px;margin:0 auto;padding:clamp(50px,7vw,110px) clamp(18px,4vw,52px) 0;overflow:hidden}
-.outro .w{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.92;
-  font-size:clamp(40px,9vw,150px);white-space:nowrap;color:transparent;-webkit-text-stroke:1.4px var(--line-2);transition:color .6s var(--ease),-webkit-text-stroke .6s}
-.outro .w em{font-family:var(--story);font-style:italic;font-weight:400;-webkit-text-stroke:0;color:var(--molten)}
+.outro .w{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;line-height:.92;font-size:clamp(44px,10vw,160px);white-space:nowrap;color:transparent;-webkit-text-stroke:1.4px var(--line-2);transition:color .6s var(--ease),-webkit-text-stroke .6s}
+.outro .w .hot{-webkit-text-stroke:0;color:var(--molten)}
 .outro:hover .w{color:var(--bone);-webkit-text-stroke:0}
-.foot{max-width:1320px;margin:0 auto;padding:38px clamp(18px,4vw,52px);display:flex;justify-content:space-between;
-  align-items:center;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.foot{max-width:1320px;margin:0 auto;padding:38px clamp(18px,4vw,52px);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .foot .fb{display:flex;align-items:center;gap:10px;color:var(--bone)}
 .foot .fb .k{font-family:var(--disp);font-weight:800;font-size:19px}.foot .fb .k i{color:var(--molten);font-style:normal}
 .foot a:hover{color:var(--molten)}
 
-/* ---------- REEL (story mode) ---------- */
+/* ---------- REEL ---------- */
 .reel{position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:0;transition:opacity .6s}
 body.reeling .reel{opacity:1;pointer-events:auto}
 .reel .bars{position:absolute;left:0;right:0;background:#070605;transition:transform .7s var(--ease)}
@@ -376,13 +373,9 @@ body.reeling .reel .bT{transform:none}body.reeling .reel .bB{transform:none}
 .reel .top{position:absolute;top:18px;left:clamp(16px,4vw,52px);right:clamp(16px,4vw,52px);display:flex;justify-content:space-between;align-items:center;color:var(--bone)}
 .reel .ttl{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 .reel .ttl b{color:var(--molten);font-weight:400}
-.reel .exit{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone);
-  border:1px solid var(--line-2);border-radius:100px;padding:8px 16px;transition:all .3s;pointer-events:auto}
+.reel .exit{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone);border:1px solid var(--line-2);border-radius:100px;padding:8px 16px;transition:all .3s;pointer-events:auto}
 .reel .exit:hover{border-color:var(--molten);color:var(--molten)}
-.reel .cap{position:absolute;left:50%;bottom:130px;transform:translateX(-50%);max-width:min(760px,90vw);text-align:center;
-  font-family:var(--story);font-style:italic;font-size:clamp(15px,1.7vw,22px);line-height:1.5;color:var(--bone);
-  background:rgba(7,6,5,.66);border:1px solid var(--line);border-radius:14px;padding:14px 24px;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .5s}
+.reel .cap{position:absolute;left:50%;bottom:130px;transform:translateX(-50%);max-width:min(760px,90vw);text-align:center;font-family:var(--story);font-style:italic;font-size:clamp(15px,1.7vw,22px);line-height:1.5;color:var(--bone);background:rgba(7,6,5,.66);border:1px solid var(--line);border-radius:14px;padding:14px 24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .5s}
 body.reeling .reel .cap.on{opacity:1}
 .reel .cap .ch{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--molten);margin-bottom:6px}
 .reel .hud{position:absolute;left:0;right:0;bottom:0;height:118px;display:flex;align-items:center;gap:clamp(12px,3vw,30px);padding:0 clamp(16px,4vw,52px);pointer-events:auto;color:var(--bone)}
@@ -392,26 +385,31 @@ body.reeling .reel .cap.on{opacity:1}
 .reel .tl{flex:1;display:flex;gap:6px;align-items:center;min-width:0}
 .reel .tk{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;cursor:pointer;position:relative}
 .reel .tk i{position:absolute;inset:0;background:linear-gradient(90deg,var(--molten),var(--amber));transform:scaleX(0);transform-origin:0 50%}
-.reel .tk.done i{transform:scaleX(1)}.reel .tk.cur i{transform:scaleX(1)}
+.reel .tk.done i,.reel .tk.cur i{transform:scaleX(1)}
 
 /* ---------- responsive ---------- */
 @media(max-width:1080px){
   .about-grid{grid-template-columns:1fr}
-  .ex-grid,.exhibit.flip .ex-grid{grid-template-columns:1fr;gap:30px}
+  .ex-grid{grid-template-columns:1fr;gap:30px}
   .exhibit.flip .ex-frame,.exhibit.flip .ex-text{order:0}
+  .stack-cats{grid-template-columns:1fr}
   .offers{grid-template-columns:1fr}
   .criteria{grid-template-columns:1fr}
   .book-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
-  .hero-art{width:min(60vw,460px)}
+  .reg{grid-template-columns:1fr auto}
+  .reg .rc{grid-column:1;order:2}
+  .reg .rd{grid-column:1/-1;order:4}
+  .reg .rs{order:3}
+}
+@media(max-width:1280px){
+  .sculpt{opacity:.4;right:-6%;transform:translateY(-50%) scale(.82)}
+  .badge{display:none}
 }
 @media(max-width:860px){
   nav .nl{display:none}
-  .sculpt{opacity:.4;right:-6%;transform:translateY(-50%) scale(.82)}
-  .badge{display:none}
-  .led{grid-template-columns:1fr auto}
-  .led .ds{grid-column:1/-1;order:3;margin-top:4px}
+  .led .ds{grid-column:1/-1}
 }
 @media(max-width:560px){
   .brand .tag{display:none}
@@ -437,13 +435,13 @@ body.reeling .reel .cap.on{opacity:1}
 <header id="hdr">
   <a class="brand" href="#top" data-c>
     <span class="k"><b>K</b><i>13</i></span>
-    <span class="tag">Studio of<br>Kazim K.</span>
+    <span class="tag">Software<br>Studio</span>
   </a>
   <nav>
     <a class="nl" href="#about" data-c>Who</a>
     <a class="nl" href="#work" data-c>The work</a>
     <a class="nl" href="#stack" data-c>Stack</a>
-    <a class="nl" href="#sell" data-c>Work with me</a>
+    <a class="nl" href="#sell" data-c>Together</a>
     <button class="btn" id="reelBtn" type="button" data-c><span>▶ Play the reel</span></button>
     <a class="btn solid" href="#book" data-c><span>Start a project</span></a>
   </nav>
@@ -454,7 +452,7 @@ body.reeling .reel .cap.on{opacity:1}
   <div class="hero-art" aria-hidden="true">
     <svg class="badge" id="badge" viewBox="0 0 200 200">
       <defs><path id="bcirc" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
-      <text><textPath href="#bcirc" startOffset="0%">K13 · SOFTWARE STUDIO · BUILT WITH PASSION · SHIPPED FOR REAL · </textPath></text>
+      <text><textPath href="#bcirc" startOffset="0%">K13 SOFTWARE STUDIO · BUILT WITH INTENT · SHIPPED FOR REAL · </textPath></text>
       <text class="core" x="100" y="108" text-anchor="middle">↑</text>
     </svg>
     <div class="sculpt" id="sculpt">
@@ -475,13 +473,12 @@ body.reeling .reel .cap.on{opacity:1}
     </div>
   </div>
   <div class="hero-grid">
-    <div class="hello rv"><span class="live"></span>Open for projects when there's a connection · 2026</div>
+    <div class="hello rv"><span class="live"></span>Open for projects when there's a connection</div>
     <h1>
-      <span class="l lines" data-line><span><i>I build software</i></span></span>
-      <span class="l lines" data-line><span><i>people <em>actually</em></i></span></span>
-      <span class="l lines" data-line><span><i class="hot">use.</i></span></span>
+      <span class="l lines" data-line><span><i>Built to be</i></span></span>
+      <span class="l lines" data-line><span><i class="hot">understood.</i></span></span>
     </h1>
-    <p class="hero-sub rv">I'm Kazim. I design and ship products end to end — <strong>AI tools, brand sites, dashboards</strong> — and this page proves it the only honest way: <span class="sv">with my real work, shot live from the running products.</span> Scroll, or hit play and let me walk you through it.</p>
+    <p class="hero-sub rv">I'm Kazim. I build software where every screen says what it means. Good product is good communication, and that's the part most teams skip. <span class="sv">Hit play, or just scroll.</span></p>
     <div class="hero-cta rv">
       <button class="btn solid" type="button" data-reel data-c><span>▶ Play the reel</span></button>
       <a class="btn" href="#work" data-c><span>See the work</span></a>
@@ -491,24 +488,16 @@ body.reeling .reel .cap.on{opacity:1}
   <div class="scroll-cue" aria-hidden="true"><span class="bar"></span>Scroll to begin</div>
 </section>
 
-<!-- ===================== BELT ===================== -->
-<div class="belt" aria-hidden="true">
-  <div class="row" id="belt">
-    <span class="u">AI products <span class="star">✦</span> Brand sites <span class="star">✦</span> <em>Dashboards</em> <span class="star">✦</span> Real-time tools <span class="star">✦</span> <em>Shipped, not mocked</em> <span class="star">✦</span>&nbsp;</span>
-    <span class="u">AI products <span class="star">✦</span> Brand sites <span class="star">✦</span> <em>Dashboards</em> <span class="star">✦</span> Real-time tools <span class="star">✦</span> <em>Shipped, not mocked</em> <span class="star">✦</span>&nbsp;</span>
-  </div>
-</div>
-
 <!-- ===================== ABOUT ===================== -->
 <section id="about">
   <div class="wrap">
     <div class="kick rv"><span class="n">01</span>&nbsp;Who you'd be working with</div>
     <div class="about-grid">
       <div>
-        <p class="about-lead rv">I don't think of myself as an agency. I'm one builder who takes a handful of projects a year and treats each like <span class="hot">it has my name on it</span> — because it does.</p>
+        <p class="about-lead rv">I don't run an agency. I'm one builder who takes a handful of projects a year and treats each like <span class="hot">it has my name on it,</span> because it does.</p>
         <div class="about-body rv">
-          <p>I'm Kazim K., founder of <strong>K13 Software Studio</strong>. I've spent the last years shipping the kind of software that's easy to demo and hard to fake: a real-time AI meeting copilot used in fifteen languages, restaurant-group brand sites that go live on real domains, food-hall platforms running on a CMS, an odds engine that has to be correct or it's worthless.</p>
-          <p>I work the whole stack — product thinking, design, engineering, the unglamorous launch details — so nothing gets lost in a handoff. I move fast because I use the newest tools every day, but I ship slow where it counts: accessibility, security, the test suite that runs while I sleep. <strong>I'd rather build six things I believe in than sixty I don't.</strong></p>
+          <p>I'm Kazim K., founder of <strong>K13 Software Studio</strong>. For the last few years I've shipped the kind of software that's easy to demo and hard to fake: restaurant and food-hall brand sites live on real domains, a public-market platform running on a CMS, an AI vision system watching a factory floor.</p>
+          <p>I work the whole stack: product thinking, design, engineering, and the unglamorous launch details, so nothing gets lost in a handoff. I move fast because I use the newest tools every day, and I slow down where it counts: accessibility, security, the test suite that runs while I sleep. <strong>I'd rather build six things I believe in than sixty I don't.</strong></p>
         </div>
       </div>
       <aside class="about-card rv">
@@ -518,18 +507,18 @@ body.reeling .reel .cap.on{opacity:1}
         </div>
         <div class="facts">
           <div class="fact"><span class="k">Status</span><span class="v"><span class="dot"></span>Open for a few projects</span></div>
-          <div class="fact"><span class="k">Based</span><span class="v">Remote · worldwide</span></div>
-          <div class="fact"><span class="k">Works as</span><span class="v">Product · Design · Eng</span></div>
+          <div class="fact"><span class="k">Based</span><span class="v">Worldwide</span></div>
+          <div class="fact"><span class="k">Works as</span><span class="v">Software crafter</span></div>
           <div class="fact"><span class="k">Reply time</span><span class="v">Under 24 hours</span></div>
-          <div class="fact"><span class="k">Chooses by</span><span class="v">Connection, not volume</span></div>
+          <div class="fact"><span class="k">What earns a yes</span><span class="v">A real connection</span></div>
         </div>
       </aside>
     </div>
     <div class="stats">
-      <div class="stat rv"><b data-count="1122">0</b><span>commits on the flagship</span></div>
       <div class="stat rv"><b data-count="14">0</b><span>products shipped</span></div>
-      <div class="stat rv"><b data-count="8">0</b><span>live in production</span></div>
-      <div class="stat rv"><b>15<i>+</i></b><span>languages, one product</span></div>
+      <div class="stat rv"><b data-count="6">0</b><span>live in production</span></div>
+      <div class="stat rv"><b>4</b><span>food halls, one coastline</span></div>
+      <div class="stat rv"><b>1</b><span>builder, end to end</span></div>
     </div>
   </div>
 </section>
@@ -538,309 +527,273 @@ body.reeling .reel .cap.on{opacity:1}
 <section class="stack-sec" id="stack">
   <div class="wrap">
     <div class="kick rv"><span class="n">02</span>&nbsp;The tools I reach for</div>
-    <h2 class="h2 rv">A stack chosen for<br><em>outcomes,</em> <span class="out">not résumés.</span></h2>
+    <h2 class="h2 rv">A stack chosen for<br><em>outcomes,</em> <span class="out">not resumes.</span></h2>
     <p class="lede rv">I pick boring where it should be boring and sharp where it earns its keep. Here's what actually shipped the work below.</p>
-    <div class="stack-grid" id="stackGrid">
-      <span class="chip"><span class="d"></span>TypeScript</span>
-      <span class="chip"><span class="d"></span>React</span>
-      <span class="chip"><span class="d"></span>Next.js</span>
-      <span class="chip"><span class="d"></span>Vite</span>
-      <span class="chip"><span class="d"></span>Node</span>
-      <span class="chip amber"><span class="d"></span>Tailwind</span>
-      <span class="chip ice"><span class="d"></span>Supabase</span>
-      <span class="chip ice"><span class="d"></span>Prisma</span>
-      <span class="chip amber"><span class="d"></span>Stripe</span>
-      <span class="chip ice"><span class="d"></span>Deepgram</span>
-      <span class="chip ice"><span class="d"></span>Multi-LLM routing</span>
-      <span class="chip amber"><span class="d"></span>Mapbox / Leaflet</span>
-      <span class="chip ice"><span class="d"></span>Sanity CMS</span>
-      <span class="chip"><span class="d"></span>GSAP</span>
-      <span class="chip"><span class="d"></span>Motion</span>
-      <span class="chip"><span class="d"></span>Lenis</span>
-      <span class="chip amber"><span class="d"></span>Playwright</span>
-      <span class="chip"><span class="d"></span>Vitest + axe</span>
-      <span class="chip ice"><span class="d"></span>Resend</span>
-      <span class="chip"><span class="d"></span>GitHub Actions</span>
-    </div>
-    <p class="stack-note rv">Orange is the everyday. <b style="color:var(--ice)">Teal</b> marks the parts most studios outsource or skip — realtime speech, payments, CMS, accessibility testing, transactional email. I keep those in-house, because that's usually where projects quietly break.</p>
-  </div>
-</section>
-
-<!-- ===================== WORK / EXHIBITS ===================== -->
-<section id="work">
-  <div class="wrap" style="padding-bottom:clamp(30px,4vw,50px)">
-    <div class="kick rv"><span class="n">03</span>&nbsp;The work — real screenshots, shot live</div>
-    <h2 class="h2 rv">Eight things I<br>shipped, <em>and why</em><br><span class="out">they matter.</span></h2>
-    <p class="lede rv">No mockups, no stock UI. Every frame below was captured straight from the running product. Drag your eye across each one — and if a story pulls you in, <em>that's the point.</em></p>
-  </div>
-
-  <!-- EX 1 — EDISYN -->
-  <article class="exhibit" data-ex data-cap="Edisyn — the flagship. A real-time AI copilot that listens to your meeting and hands you the answer before the silence gets awkward. Live, in 15+ languages.">
-    <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>01</div>
-      <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">edisyn.io</span><span class="live">Live</span></div>
-          <div class="ex-shot"><img src="assets/shots/edisyn-hero.jpg" alt="Edisyn live website — real-time AI meeting assistant" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured live · edisyn.io</span>
+    <div class="stack-cats">
+      <div class="scat rv">
+        <div class="ct">Build</div>
+        <div class="items">
+          <span class="chip"><img src="https://cdn.simpleicons.org/typescript/c4bcad" alt="" loading="lazy" onerror="this.remove()">TypeScript</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/react/c4bcad" alt="" loading="lazy" onerror="this.remove()">React</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/nextdotjs/c4bcad" alt="" loading="lazy" onerror="this.remove()">Next.js</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/vite/c4bcad" alt="" loading="lazy" onerror="this.remove()">Vite</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/nodedotjs/c4bcad" alt="" loading="lazy" onerror="this.remove()">Node</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/tailwindcss/c4bcad" alt="" loading="lazy" onerror="this.remove()">Tailwind</span>
         </div>
-        <div class="ex-text">
-          <div class="ex-meta"><span class="yr">2025 → now</span><span>AI product</span><span>Flagship</span></div>
-          <h2 class="ex-name">Edisyn</h2>
-          <div class="ex-role">Product · Engineering · Design · Web + desktop</div>
-          <div class="ex-story">
-            <p class="op">Everyone is brilliant one hour after the meeting ends. I built Edisyn because I wanted that hour to happen inside the room.</p>
-            <p>It listens to your call in real time, tells you who's speaking, hears a question forming, and quietly hands you the answer — and the next question — before the pause gets awkward. <strong>Only you see it.</strong> What started as a transcript panel became a full product: profiles, summaries, billing, a prompt lab, and a desktop overlay that works over any call.</p>
-          </div>
-          <div class="ex-built">
-            <div class="lab">The part I'm proudest of</div>
-            <p>One router stands in front of <strong>five AI providers</strong> and picks per request by cost and latency — and a nightly Playwright suite interrogates production while I sleep. Trust isn't promised here; it's engineered.</p>
-          </div>
-          <div class="ex-chips">
-            <span class="c"><b>1,122</b> commits</span>
-            <span class="c"><b>15+</b> languages</span>
-            <span class="c"><b>5</b> LLMs, one router</span>
-            <span class="c">web <b>+</b> desktop</span>
-          </div>
-          <div class="ex-links">
-            <a class="ex-visit" href="https://edisyn.io" target="_blank" rel="noopener" data-c>Visit edisyn.io →</a>
-          </div>
+      </div>
+      <div class="scat rv">
+        <div class="ct">Data &amp; services</div>
+        <div class="items">
+          <span class="chip"><img src="https://cdn.simpleicons.org/supabase/c4bcad" alt="" loading="lazy" onerror="this.remove()">Supabase</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/prisma/c4bcad" alt="" loading="lazy" onerror="this.remove()">Prisma</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/stripe/c4bcad" alt="" loading="lazy" onerror="this.remove()">Stripe</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/sanity/c4bcad" alt="" loading="lazy" onerror="this.remove()">Sanity</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/mapbox/c4bcad" alt="" loading="lazy" onerror="this.remove()">Mapbox</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/resend/c4bcad" alt="" loading="lazy" onerror="this.remove()">Resend</span>
+        </div>
+      </div>
+      <div class="scat rv">
+        <div class="ct">Motion &amp; quality</div>
+        <div class="items">
+          <span class="chip"><img src="https://cdn.simpleicons.org/greensock/c4bcad" alt="" loading="lazy" onerror="this.remove()">GSAP</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/framer/c4bcad" alt="" loading="lazy" onerror="this.remove()">Motion</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/playwright/c4bcad" alt="" loading="lazy" onerror="this.remove()">Playwright</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/vitest/c4bcad" alt="" loading="lazy" onerror="this.remove()">Vitest</span>
+          <span class="chip"><img src="https://cdn.simpleicons.org/githubactions/c4bcad" alt="" loading="lazy" onerror="this.remove()">GitHub Actions</span>
         </div>
       </div>
     </div>
-  </article>
+    <p class="stack-note rv">The list isn't the point. <b>Knowing when to reach for each one is.</b> I keep the parts most studios outsource in-house: realtime, payments, CMS, accessibility, so the project doesn't quietly break where the handoffs usually are.</p>
+  </div>
+</section>
 
-  <!-- EX 2 — TIGER HOSPITALITY -->
-  <article class="exhibit flip" data-ex data-cap="Tiger Hospitality — a restaurant group's whole family of brands under one black-and-gold roof, with a map where every pin is a bet on a neighborhood. Live in production.">
+<!-- ===================== WORK ===================== -->
+<section id="work">
+  <div class="wrap" style="padding-bottom:clamp(30px,4vw,50px)">
+    <div class="kick rv"><span class="n">03</span>&nbsp;The work, live and embedded</div>
+    <h2 class="h2 rv">Real sites. Real<br>domains. <em>Try them</em><br><span class="out">right here.</span></h2>
+    <p class="lede rv">No mockups. Each window below is the actual live site, embedded. Click to interact, scroll inside, or open the full thing. <em>If a story pulls you in, that's the point.</em></p>
+  </div>
+
+  <!-- EX 1 · TIGER HOSPITALITY -->
+  <article class="exhibit" data-ex data-cap="Tiger Hospitality. A restaurant group's whole family of brands under one black-and-gold roof, with a map where every pin is a bet on a neighborhood. Live in production.">
     <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>02</div>
+      <div class="ex-bgnum" data-num>01</div>
       <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">tigerhospitalitygroup.com</span><span class="live">Live</span></div>
-          <div class="ex-shot"><img src="assets/shots/thg-hero.jpg" alt="Tiger Hospitality Group live website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured live · tigerhospitalitygroup.com</span>
+        <div class="ex-frame">
+          <div class="browser" data-live="https://tigerhospitalitygroup.com">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">tigerhospitalitygroup.com</span><span class="live">Live</span><button class="rel" type="button">✕ release</button></div>
+            <div class="screen">
+              <div class="poster" style="background-image:url(assets/shots/thg-hero.jpg)"><button class="enter" type="button">▶ Interact with the live site</button></div>
+              <iframe title="Tiger Hospitality, live" loading="lazy" data-src="https://tigerhospitalitygroup.com"></iframe>
+            </div>
+            <a class="see-full" href="https://tigerhospitalitygroup.com" target="_blank" rel="noopener" data-c><span>tigerhospitalitygroup.com</span><span>See full site ↗</span></a>
+          </div>
         </div>
         <div class="ex-text">
           <div class="ex-meta"><span class="yr">2025 → 2026</span><span>Brand site · Maps</span></div>
           <h2 class="ex-name">Tiger <em>Hospitality</em></h2>
-          <div class="ex-role">Brand site · Interactive maps · Motion · A11y</div>
+          <div class="ex-role">Brand site · Interactive maps · Motion · Accessibility</div>
           <div class="ex-story">
             <p class="op">A parent brand has one job: make every child look like the favorite. I gave this family one address that raises all its names at once.</p>
-            <p>Velvet black and gold on purpose — a house brand should be the case, not the loudest jewel inside it. The heart is an <strong>interactive map</strong> where each location opens with its concepts' logos side by side, because this group's real story is geography. Every pin is a bet placed on a neighborhood.</p>
+            <p>Velvet black and gold on purpose. A house brand should be the case, not the loudest jewel inside it. The heart is an <strong>interactive map</strong> where each location opens with its concepts' logos side by side, because this group's real story is geography. Every pin is a bet placed on a neighborhood.</p>
           </div>
           <div class="ex-built">
             <div class="lab">A detail people remember</div>
-            <p>Even the vendor pitch is an invitation — a card that flips to reveal the email, like a door quietly opened. When <strong>Oceanside</strong> opened, the pin was on the map before the ribbon was cut.</p>
+            <p>Even the vendor pitch is an invitation: a card that flips to reveal the email, like a door quietly opened. When <strong>Oceanside</strong> opened, the pin was on the map before the ribbon was cut.</p>
           </div>
           <div class="ex-chips">
             <span class="c"><b>LIVE</b> in production</span>
             <span class="c"><b>21</b> release branches</span>
-            <span class="c">every brand · one map</span>
-          </div>
-          <div class="ex-links">
-            <a class="ex-visit" href="https://tigerhospitalitygroup.com" target="_blank" rel="noopener" data-c>Visit the site →</a>
+            <span class="c">every brand, one map</span>
           </div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- EX 3 — STATION8 -->
-  <article class="exhibit" data-ex data-cap="Station8 — a 20,000 sq ft public market at UC San Diego, built like a product: a CMS the team owns, a custom map, and accessibility baked into CI.">
+  <!-- EX 2 · LA VIDA -->
+  <article class="exhibit flip" data-ex data-cap="La Vida San Diego. An all-day healthy spot that needed to feel as fresh as the food. Live on lavida.fit.">
+    <div class="ex-wrap">
+      <div class="ex-bgnum" data-num>02</div>
+      <div class="ex-grid">
+        <div class="ex-frame">
+          <div class="browser" data-live="https://lavida.fit">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">lavida.fit</span><span class="live">Live</span><button class="rel" type="button">✕ release</button></div>
+            <div class="screen">
+              <div class="poster" style="background-image:url(assets/shots/lavida-live.jpg)"><button class="enter" type="button">▶ Interact with the live site</button></div>
+              <iframe title="La Vida San Diego, live" loading="lazy" data-src="https://lavida.fit"></iframe>
+            </div>
+            <a class="see-full" href="https://lavida.fit" target="_blank" rel="noopener" data-c><span>lavida.fit</span><span>See full site ↗</span></a>
+          </div>
+        </div>
+        <div class="ex-text">
+          <div class="ex-meta"><span class="yr">2025 → 2026</span><span>Brand site · Restaurant</span></div>
+          <h2 class="ex-name">La Vida <em>San Diego</em></h2>
+          <div class="ex-role">React · TypeScript · Vite · Tailwind</div>
+          <div class="ex-story">
+            <p class="op">Healthy food has an image problem. It often looks like a punishment. La Vida is the opposite, so the site had to taste like sunshine before you read a word.</p>
+            <p>An all-day spot in San Diego built on fresh, feel-good food. I leaned into bright produce photography, a clean menu, and a flow that moves a hungry visitor from craving to <strong>Order Now</strong> without a single dead end. Fast, friendly, and easy to run.</p>
+          </div>
+          <div class="ex-built">
+            <div class="lab">Built around the real goal</div>
+            <p>Menu, catering, and locations all bend toward one action: getting someone fed. The whole site is paced like an appetite, not an index.</p>
+          </div>
+          <div class="ex-chips">
+            <span class="c"><b>LIVE</b> lavida.fit</span>
+            <span class="c">stakeholder-revised</span>
+            <span class="c">order-ready flow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- EX 3 · MIRAMAR -->
+  <article class="exhibit" data-ex data-cap="Miramar. A 1938 theatre reborn as a food hall. The website opened before the doors did, complete with a flip-clock that rolls the years from 1938 to today.">
     <div class="ex-wrap">
       <div class="ex-bgnum" data-num>03</div>
       <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">station8 · public market</span><span class="live">Built</span></div>
-          <div class="ex-shot"><img src="assets/shots/station8-hero.jpg" alt="Station8 Public Market site" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured from the running build</span>
-        </div>
-        <div class="ex-text">
-          <div class="ex-meta"><span class="yr">2026</span><span>Next-gen site · CMS</span></div>
-          <h2 class="ex-name">Station8</h2>
-          <div class="ex-role">Next.js 15 · Sanity CMS · Mapbox · 508 / axe in CI</div>
-          <div class="ex-story">
-            <p class="op">Twenty thousand square feet at a university isn't a restaurant — it's a public square. So I built it the way you build a public square: to be owned, entered, and to outlive me.</p>
-            <p>Every decision answers one question — <em>who does this belong to?</em> It belongs to the team, so <strong>Sanity CMS</strong> lets them rewrite everything without calling me. It belongs to everyone, so it's <strong>508-compliant and axe-tested in CI</strong>. It even belongs to the building: the map wears a custom Mapbox style mixed to its olive and green-glass.</p>
+        <div class="ex-frame">
+          <div class="browser" data-live="https://miramarfoodhall.com">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">miramarfoodhall.com</span><span class="live">Live</span><button class="rel" type="button">✕ release</button></div>
+            <div class="screen">
+              <div class="poster" style="background-image:url(assets/shots/miramar-live.jpg)"><button class="enter" type="button">▶ Interact with the live site</button></div>
+              <iframe title="Miramar Food Hall, live" loading="lazy" data-src="https://miramarfoodhall.com"></iframe>
+            </div>
+            <a class="see-full" href="https://miramarfoodhall.com" target="_blank" rel="noopener" data-c><span>miramarfoodhall.com</span><span>See full site ↗</span></a>
           </div>
-          <div class="ex-built">
-            <div class="lab">A scar I left in the log on purpose</div>
-            <p>One night a security header silently strangled every animation. The commit that brought it back is titled, plainly, <strong>"Unbreak the homepage."</strong> Real work has scars; I don't hide them.</p>
-          </div>
-          <div class="ex-chips">
-            <span class="c"><b>20,000</b> sq ft, mapped</span>
-            <span class="c"><b>508</b>-compliant</span>
-            <span class="c">team-owned CMS</span>
-          </div>
-          <div class="ex-links"><span class="ex-visit nolink">Pre-launch · UC San Diego</span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- EX 4 — BAA ATELIER -->
-  <article class="exhibit flip" data-ex data-cap="baa atelier — a luxury paint studio that needed to whisper. The hardest voice to engineer is a quiet one.">
-    <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>04</div>
-      <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">baa atelier · artisan finishes</span><span class="live">Shipped</span></div>
-          <div class="ex-shot"><img src="assets/shots/baa-hero.jpg" alt="baa atelier editorial website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured from the running build</span>
-        </div>
-        <div class="ex-text">
-          <div class="ex-meta"><span class="yr">2026</span><span>Editorial · Art direction</span></div>
-          <h2 class="ex-name">baa <em>atelier</em></h2>
-          <div class="ex-role">Next.js 15 · Motion · Lenis · Resend</div>
-          <div class="ex-story">
-            <p class="op">Baha Irs paints surfaces the way other people write memoirs. Her site had to whisper — and a whisper, it turns out, is the hardest voice to engineer.</p>
-            <p>I built it like a magazine: Playfair italics, paper and sage and clay, headlines that unmask as you arrive, scroll that turns like a page. <strong>Every pixel had to earn its quiet.</strong> Maximalism is easy — you keep adding. Reduction is a negotiation with everything you love.</p>
-          </div>
-          <div class="ex-built">
-            <div class="lab">The line that became my quality bar</div>
-            <p>The most honest commit in the repo reads: <strong>"Make the site sell, not just show."</strong> That sentence outgrew the project — it's now the bar every K13 build has to clear.</p>
-          </div>
-          <div class="ex-chips">
-            <span class="c">editorial, <b>AD</b>-energy</span>
-            <span class="c">imagery → inquiry</span>
-            <span class="c"><b>Resend</b> to her inbox</span>
-          </div>
-          <div class="ex-links"><span class="ex-visit nolink">Shipped · private studio</span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- EX 5 — MIRAMAR -->
-  <article class="exhibit" data-ex data-cap="Miramar — a 1938 theatre reborn as a food hall. The website opened before the doors did, with a stamp and monthly reports stakeholders could forward to anyone.">
-    <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>05</div>
-      <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">k13-projects.github.io/Miramar</span><span class="live">Live</span></div>
-          <div class="ex-shot"><img src="assets/shots/miramar-hero.jpg" alt="Miramar Food Hall live website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured live · github.io/Miramar</span>
         </div>
         <div class="ex-text">
           <div class="ex-meta"><span class="yr">2025 → 2026</span><span>Site · Brand · Reporting</span></div>
           <h2 class="ex-name">Miramar</h2>
-          <div class="ex-role">HTML/CSS/JS · GitHub Actions · client reporting</div>
+          <div class="ex-role">A 1938 landmark, reopened</div>
           <div class="ex-story">
-            <p class="op">Some clients hand you a brief. This one handed me a building from 1938 — and the job of being its first impression in a new century.</p>
-            <p>The Miramar Theatre, restored as a food hall. Its Spanish-Colonial bones gave me the teal, cream and burnt orange; the marquee returns as pixels, bulbs and all, with an animated <strong>Coming Soon stamp</strong> that slams across the hero while the kitchen crews move in. A landmark deserves a drumroll, not a placeholder.</p>
+            <p class="op">Some clients hand you a brief. This one handed me a building from 1938, and the job of being its first impression in a new century.</p>
+            <p>The Miramar Theatre, restored as a food hall. Its Spanish-Colonial bones gave me the teal, cream and burnt orange, and the marquee returns as pixels, bulbs and all. A landmark deserves a drumroll, not a placeholder.</p>
           </div>
-          <div class="ex-built">
-            <div class="lab">The move clients rarely get</div>
-            <p>Every month, stakeholders receive progress as a <strong>single HTML file</strong> — images embedded, Gmail-safe, forwardable to any partner in one click. Trust isn't a deliverable; it's a rhythm.</p>
+          <div class="odo-wrap rv">
+            <div class="odo-lab">A feature I loved building</div>
+            <div class="odo" id="mirOdo" aria-hidden="true">
+              <div class="col"><div class="strip"></div></div>
+              <div class="col"><div class="strip"></div></div>
+              <div class="col"><div class="strip"></div></div>
+              <div class="col"><div class="strip"></div></div>
+            </div>
+            <div class="odo-cap">A flip-clock that rolls the years from <b>1938</b> to <b>today</b> as you enter its story.</div>
           </div>
           <div class="ex-chips">
             <span class="c">a <b>1938</b> landmark, online first</span>
-            <span class="c"><b>forwardable</b> reports</span>
+            <span class="c"><b>forwardable</b> monthly reports</span>
             <span class="c">CI auto-deploy</span>
-          </div>
-          <div class="ex-links">
-            <a class="ex-visit" href="https://k13-projects.github.io/Miramar/" target="_blank" rel="noopener" data-c>Visit the site →</a>
           </div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- EX 6 — GLOBAL FORK -->
-  <article class="exhibit flip" data-ex data-cap="Global Fork — a sister food-hall brand with a signature scroll moment: a vendor piazza you walk through as you scroll.">
+  <!-- EX 4 · GLOBAL FORK -->
+  <article class="exhibit flip" data-ex data-cap="Global Fork. A food hall in San Diego's Little Italy, designed by Paul Basile of Basile Studio. We built the site to live up to that name. Live on globalforkfh.com.">
     <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>06</div>
+      <div class="ex-bgnum" data-num>04</div>
       <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">global fork · food hall</span><span class="live">Built</span></div>
-          <div class="ex-shot"><img src="assets/shots/globalfork-hero.jpg" alt="Global Fork food hall website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured from the running build</span>
+        <div class="ex-frame">
+          <div class="browser">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">globalforkfh.com</span><span class="live shot">Live</span></div>
+            <div class="screen">
+              <a class="poster" href="https://globalforkfh.com" target="_blank" rel="noopener" style="background-image:url(assets/shots/globalfork-live.jpg)" data-c><span class="enter shot">Open the live site ↗</span></a>
+            </div>
+            <a class="see-full" href="https://globalforkfh.com" target="_blank" rel="noopener" data-c><span>globalforkfh.com</span><span>See full site ↗</span></a>
+          </div>
         </div>
         <div class="ex-text">
           <div class="ex-meta"><span class="yr">2026</span><span>Brand site · Signature scroll</span></div>
           <h2 class="ex-name">Global <em>Fork</em></h2>
           <div class="ex-role">Next.js · Lenis · scroll choreography</div>
           <div class="ex-story">
-            <p class="op">A food hall is a street you wander. So I made the website a street you scroll — a vendor piazza walk, built to the client's exact vision.</p>
-            <p>Warm sandstone, clay and grove green; a single-page architecture with butter-smooth momentum scroll. The whole site is paced so each vendor arrives like the next stall on a stroll, not the next row in a table.</p>
+            <p class="op">This one came with a standard to meet. The venue was designed by Paul Basile of Basile Studio, and the site had to feel like it belonged in that world.</p>
+            <p>Global Fork is a food hall in San Diego's <strong>Little Italy</strong>: a 4,685 sq ft hall opening onto a 10,000 sq ft cobblestone plaza, five concepts around a central bar. I studied Basile's work and built the site to honor it, warm sandstone and clay, a single-page flow paced like a stroll through a piazza.</p>
           </div>
           <div class="ex-built">
             <div class="lab">The signature moment</div>
-            <p>The <strong>vendor piazza walk</strong> — the deferred, hard-won scroll sequence that turns a list of tenants into a place you move through. It's the kind of detail you only build when you care more than the brief requires.</p>
+            <p>The <strong>vendor piazza walk</strong>, a scroll sequence that turns a list of tenants into a place you move through. The kind of detail you only build when you care more than the brief asks.</p>
           </div>
           <div class="ex-chips">
-            <span class="c">single-page <b>IA</b></span>
-            <span class="c">momentum scroll</span>
-            <span class="c">vendor piazza walk</span>
+            <span class="c"><b>LIVE</b> globalforkfh.com</span>
+            <span class="c">Little Italy, San Diego</span>
+            <span class="c">built to a designer's standard</span>
           </div>
-          <div class="ex-links"><span class="ex-visit nolink">Built · client brand</span></div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- EX 7 — TAP-N-GRAB -->
-  <article class="exhibit" data-ex data-cap="Tap-N-Grab — a smart-store vending pitch aimed at property managers, with a machine lineup and a one-pager that closes the deal.">
+  <!-- EX 5 · STATION8 (screenshot, CSP blocks framing) -->
+  <article class="exhibit" data-ex data-cap="Station8. A 20,000 sq ft public market at UC San Diego. We did our homework so this one launches clean: accessible, compliant, and built not to cause the client problems later.">
     <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>07</div>
+      <div class="ex-bgnum" data-num>05</div>
       <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">tap-n-grab · smart store</span><span class="live">Live</span></div>
-          <div class="ex-shot"><img src="assets/shots/tng-hero.jpg" alt="Tap-N-Grab smart store website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured from the running build</span>
+        <div class="ex-frame">
+          <div class="browser">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">station8publicmarket.com</span><span class="live shot">Live</span></div>
+            <div class="screen">
+              <a class="poster" href="https://station8publicmarket.com" target="_blank" rel="noopener" style="background-image:url(assets/shots/station8-live.jpg)" data-c><span class="enter shot">Open the live site ↗</span></a>
+            </div>
+            <a class="see-full" href="https://station8publicmarket.com" target="_blank" rel="noopener" data-c><span>station8publicmarket.com</span><span>See full site ↗</span></a>
+          </div>
         </div>
         <div class="ex-text">
-          <div class="ex-meta"><span class="yr">2025 → 2026</span><span>Pitch site · Conversion</span></div>
-          <h2 class="ex-name">Tap-N-Grab</h2>
-          <div class="ex-role">React · Vite · sales-focused build</div>
+          <div class="ex-meta"><span class="yr">2026</span><span>Next-gen site · CMS</span></div>
+          <h2 class="ex-name">Station8</h2>
+          <div class="ex-role">Next.js · Sanity CMS · Mapbox · accessibility-first</div>
           <div class="ex-story">
-            <p class="op">This one had a job to do: convince a property manager to put a smart store in their lobby. So I designed it like a closer, not a brochure.</p>
-            <p>A premium glass-front market "that runs itself" — I built the site to say exactly that, with a modular <strong>machine lineup</strong>, warm-luxe lobby photography, and a clear path to a one-pager a manager can forward to their team.</p>
+            <p class="op">A 20,000 sq ft public market at UC San Diego is going to get a lot of traffic. So the brief was simple: launch clean, and don't hand the client a problem six months later.</p>
+            <p>We did the research. We looked at where sites like this go wrong for other people, the broken handoffs, the accessibility complaints, and built to avoid all of it. <strong>508 and WCAG accessibility is baked in and tested in CI</strong>, the team owns their content through a CMS, and the site is fast and stable from day one.</p>
           </div>
           <div class="ex-built">
-            <div class="lab">Built to convert</div>
-            <p>Every section ends in the same place: <strong>schedule a tour</strong> or download the one-pager. When the goal is a signature, the design has to have an opinion about where the eye goes next.</p>
+            <div class="lab">Why it matters</div>
+            <p>An inaccessible public site can mean real legal exposure. We deliver one that won't put the client in that position. That peace of mind is part of the product.</p>
           </div>
           <div class="ex-chips">
-            <span class="c">property-manager <b>one-pager</b></span>
-            <span class="c">modular lineup</span>
-            <span class="c">24/7 story</span>
+            <span class="c"><b>508</b> accessible, tested in CI</span>
+            <span class="c"><b>20,000</b> sq ft, mapped</span>
+            <span class="c">team-owned CMS</span>
           </div>
-          <div class="ex-links"><span class="ex-visit nolink">Live · pitch site</span></div>
         </div>
       </div>
     </div>
   </article>
 
-  <!-- EX 8 — CENGO -->
-  <article class="exhibit flip" data-ex data-cap="CENGO — a DJ and producer's site that pulls live YouTube stats and runs its events off a Google Sheet. Zero backend, zero excuses. Live at cengo.party.">
+  <!-- EX 6 · BAA ATELIER (poster from baa_jun09_v2, live URL pending) -->
+  <article class="exhibit flip" data-ex data-cap="baa atelier. A luxury finishing studio that needed to whisper. The hardest voice to engineer is a quiet one.">
     <div class="ex-wrap">
-      <div class="ex-bgnum" data-num>08</div>
+      <div class="ex-bgnum" data-num>06</div>
       <div class="ex-grid">
-        <div class="ex-frame" data-tilt>
-          <div class="bar"><i></i><i></i><i></i><span class="addr">cengo.party</span><span class="live">Live</span></div>
-          <div class="ex-shot"><img src="assets/shots/cengo-hero.jpg" alt="CENGO DJ and producer website" loading="lazy"><span class="glare" data-glare></span></div>
-          <span class="ex-tag"><span class="c"></span>Captured live · cengo.party</span>
+        <div class="ex-frame">
+          <div class="browser">
+            <div class="bar"><span class="dt"></span><span class="dt"></span><span class="dt"></span><span class="addr">baa atelier · artisan finishes</span><span class="live shot">Shipped</span></div>
+            <div class="screen">
+              <div class="poster" style="background-image:url(assets/shots/baa-stop.jpg)"><button class="enter shot" type="button">Movement &amp; Texture</button></div>
+            </div>
+            <span class="see-full" data-c><span>baa atelier</span><span>Live link coming</span></span>
+          </div>
         </div>
         <div class="ex-text">
-          <div class="ex-meta"><span class="yr">2025</span><span>Artist site · Live data</span></div>
-          <h2 class="ex-name">CENGO</h2>
-          <div class="ex-role">HTML/CSS/JS · YouTube API · Google Sheets</div>
+          <div class="ex-meta"><span class="yr">2026</span><span>Editorial · Art direction</span></div>
+          <h2 class="ex-name">baa <em>atelier</em></h2>
+          <div class="ex-role">Next.js · Motion · Lenis · Resend</div>
           <div class="ex-story">
-            <p class="op">An artist shouldn't need a developer to update their tour dates. So I gave CENGO a site that updates itself.</p>
-            <p>Underground, after-dark, high-contrast — built to feel like the music. It pulls <strong>live YouTube channel stats</strong> and the latest drops automatically, and the entire events calendar runs off a <strong>Google Sheet</strong> the artist edits like a spreadsheet. No CMS to learn, no backend to babysit.</p>
+            <p class="op">Baha works in Roman clay and limewash, the kind of surfaces you want to touch. His site had to whisper, and a whisper is the hardest voice to engineer.</p>
+            <p>I built it like a magazine: serif display, paper and clay tones, headlines that unmask as you arrive, scroll that turns like a page. <strong>Every pixel had to earn its quiet.</strong> Maximalism is easy, you keep adding. Restraint is a negotiation with everything you love.</p>
           </div>
           <div class="ex-built">
-            <div class="lab">The trick under the hood</div>
-            <p>A Google Sheet as a CMS, the YouTube API as a live feed, and a graceful fallback if either hiccups. <strong>Zero backend, zero excuses</strong> — the cheapest infrastructure that still feels alive.</p>
+            <div class="lab">Beauty with a job</div>
+            <p>It looks like an art book and works like a salesperson. Browsing his finishes flows straight into an inquiry that lands in his inbox, so the craft on screen actually books the work.</p>
           </div>
           <div class="ex-chips">
-            <span class="c"><b>LIVE</b> cengo.party</span>
-            <span class="c">YouTube stats, live</span>
-            <span class="c">Sheet-driven events</span>
-          </div>
-          <div class="ex-links">
-            <a class="ex-visit" href="https://cengo.party" target="_blank" rel="noopener" data-c>Visit cengo.party →</a>
+            <span class="c">editorial, gallery energy</span>
+            <span class="c">imagery to inquiry</span>
+            <span class="c">Istanbul · LA · San Diego</span>
           </div>
         </div>
       </div>
@@ -848,109 +801,152 @@ body.reeling .reel .cap.on{opacity:1}
   </article>
 </section>
 
-<!-- ===================== LEDGER ===================== -->
+<!-- ===================== MORE / REGISTRY ===================== -->
 <section id="more">
   <div class="wrap" style="padding-top:clamp(50px,6vw,90px)">
-    <div class="kick rv"><span class="n">04</span>&nbsp;Also on the workbench</div>
-    <h2 class="h2 rv">Not everything gets<br>a frame. <em>Everything</em><br><span class="out">gets shipped.</span></h2>
-    <div class="ledger">
-      <div class="led rv" data-c>
-        <span class="nm">TrustMeBro</span>
-        <span class="ds">A sports-betting EV engine where correctness pays out — voided legs re-price the coupon instead of refunding it, exactly like the real books. 48 PRs of probability.</span>
-        <span class="st">Private beta</span>
+    <div class="kick rv"><span class="n">04</span>&nbsp;The rest of the bench</div>
+    <h2 class="h2 rv">Quietly shipping<br><em>in the background.</em></h2>
+    <div class="registry rv">
+      <div class="reg-head"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="path">~/k13/work $ <b>ls --everything-else</b></span></div>
+      <div class="reg">
+        <span class="rn">TrustMeBro</span>
+        <span class="rc">[ ev-engine ]</span>
+        <span class="rd">A sports-betting expected-value engine where correctness pays out. Voided legs re-price the coupon instead of refunding it, exactly like the real books do.</span>
+        <span class="rs">private beta</span>
       </div>
-      <div class="led rv" data-c>
-        <span class="nm">NoxZipper</span>
-        <span class="ds">An ops dashboard for a kitchen-exhaust cleaning company: customers, a scheduling algorithm, calendar, and 80/10/10 revenue splits.</span>
-        <span class="st">Internal tool</span>
+      <div class="reg">
+        <span class="rn">IndustriEye</span>
+        <span class="rc">[ ai-vision ]</span>
+        <span class="rd">An industrial AI vision system watching a factory floor in real time: object detection, tracking, pose, OCR, and depth-based proximity alerts for worker safety. Built for ALFATEKSAN.</span>
+        <span class="rs">deployed</span>
       </div>
-      <div class="led rv" data-c>
-        <span class="nm">SecuriVision</span>
-        <span class="ds">A market-analysis and sales-strategy engine — city-by-city reports generated as polished, shareable HTML for the sales team.</span>
-        <span class="st">Client</span>
+      <div class="reg">
+        <span class="rn">NoxZipper</span>
+        <span class="rc">[ ops-tool ]</span>
+        <span class="rd">An operations dashboard for a kitchen-exhaust cleaning company: customers, a scheduling algorithm, a calendar, and automatic revenue splits.</span>
+        <span class="rs">internal</span>
       </div>
-      <div class="led rv" data-c>
-        <span class="nm">K13 War Room</span>
-        <span class="ds">The studio's own command center for running every project above. If you're reading this site, it passed through there first.</span>
-        <span class="st">Lab</span>
+      <div class="reg">
+        <a class="rn" href="https://cengo.party" target="_blank" rel="noopener" data-c>CENGO ↗</a>
+        <span class="rc">[ live-data ]</span>
+        <span class="rd">An artist site that runs itself, pulling live YouTube stats and reading its events off a Google Sheet the artist edits like a spreadsheet.</span>
+        <span class="rs live">live</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== WORK WITH ME ===================== -->
+<!-- ===================== TOGETHER ===================== -->
 <section class="sell" id="sell">
   <div class="wrap">
     <div class="kick rv"><span class="n">05</span>&nbsp;Working together</div>
-    <h2 class="h2 rv">I'm not looking<br>for <span class="out">work.</span></h2>
-    <p class="manifest big rv" style="margin-top:clamp(30px,4vw,52px)">I'm looking for the projects I'll <span class="hot">obsess over.</span> I build with passion, and passion needs connection — to you, to the problem, to the people it serves. When it clicks, I stop acting like a vendor and start acting like a partner with skin in the game. <span class="hot">That's when the work gets good.</span></p>
+    <h2 class="h2 rv">It starts with a<br><span class="out">connection.</span></h2>
+    <p class="manifest big rv" style="margin-top:clamp(30px,4vw,52px)">I don't take a project to fill a calendar. I take it because something in it grabs me: the problem, the people, the place. When that's there, I'll pour myself in and be <span class="hot">proud to put my name on it.</span> When it isn't, I'll tell you honestly and point you to a better fit. Either way, you get the truth, and I get to keep loving what I do.</p>
     <div class="offers">
       <div class="offer rv">
-        <div class="n">A —</div>
+        <div class="n">A</div>
         <h3>Products, end to end</h3>
-        <p>From a sentence to a shipped product. AI tools, SaaS, internal platforms — designed, built, and launched by one person who owns the whole thing.</p>
-        <ul><li>Real-time &amp; AI features</li><li>Auth, billing, dashboards</li><li>Built to scale, tested to trust</li></ul>
+        <p>From a sentence to a shipped product. AI tools, SaaS, internal platforms, designed, built, and launched by one person who owns the whole thing.</p>
+        <ul><li>Realtime &amp; AI features</li><li>Auth, billing, dashboards</li><li>Built to scale, tested to trust</li></ul>
       </div>
       <div class="offer rv">
-        <div class="n">B —</div>
+        <div class="n">B</div>
         <h3>Brand sites with edge</h3>
-        <p>Sites that move, persuade, and convert — bold enough to remember, fast enough to rank, and wired to actually sell.</p>
-        <ul><li>Motion &amp; scroll choreography</li><li>CMS so you own your content</li><li>Live on your real domain</li></ul>
+        <p>Sites that move, persuade, and convert. Bold enough to remember, fast enough to rank, and wired to actually sell.</p>
+        <ul><li>Motion &amp; scroll choreography</li><li>A CMS so you own your content</li><li>Live on your real domain</li></ul>
       </div>
       <div class="offer rv">
-        <div class="n">C —</div>
+        <div class="n">C</div>
         <h3>The hard, weird stuff</h3>
-        <p>Odds engines, live-data sites, accessibility-critical builds, things other studios quietly decline. If it's interesting, I'm listening.</p>
-        <ul><li>Custom logic &amp; integrations</li><li>508 / a11y when it matters</li><li>The detail others skip</li></ul>
+        <p>Odds engines, live-data sites, AI vision, accessibility-critical builds. The things other studios quietly decline. If it's interesting, I'm listening.</p>
+        <ul><li>Custom logic &amp; integrations</li><li>Accessibility when it matters</li><li>The detail others skip</li></ul>
       </div>
     </div>
     <div class="criteria">
-      <div class="crit rv"><div class="cn">i.</div><h4>You care how it feels</h4><p>Not just that it works. The stamp, the flip-to-reveal, the re-priced coupon — the details are the product.</p></div>
+      <div class="crit rv"><div class="cn">i.</div><h4>You care how it feels</h4><p>Not just that it works. The flip-clock, the flip-to-reveal, the re-priced coupon. The details are the product.</p></div>
       <div class="crit rv"><div class="cn">ii.</div><h4>The problem is real</h4><p>Someone's day gets better when this ships. A team, a kitchen, a city block. That's fuel I can run on.</p></div>
       <div class="crit rv"><div class="cn">iii.</div><h4>We can talk like humans</h4><p>Two honest sentences beat twenty pages of requirements. If the first call feels like a conversation, we're already building.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== BOOK ===================== -->
+<!-- ===================== BOOK (multi-step) ===================== -->
 <section class="book" id="book">
   <div class="wrap">
     <div class="kick rv"><span class="n">06</span>&nbsp;Start a project</div>
-    <h2 class="h2 rv">If it clicked,<br><em>let's talk.</em></h2>
+    <h2 class="h2 rv">Got something<br><em>in mind?</em></h2>
     <div class="book-grid">
       <div class="book-left rv">
-        <p>I take a few projects at a time, chosen by <em>connection, not calendar pressure.</em> Tell me what you're building and why it matters to you — that's genuinely what I read for. You'll hear back within a day, with honest thoughts either way.</p>
+        <p>No long form to fill. Just a few taps, in your own words. Tell me what you're dreaming up and why it matters to you. <em>That's genuinely what I read for.</em> You'll hear back within a day, with honest thoughts either way.</p>
         <a class="mailto" href="mailto:projects.k13@gmail.com" data-c>projects.k13@gmail.com</a>
         <div class="book-meta">
           <span>Builder: <b>Kazim K.</b></span>
           <a href="tel:+19493066998" data-c><span>Phone: <b>+1 949 306 6998</b></span></a>
           <span>Reply: <b>under 24 hours</b></span>
-          <span>Working: <b>remote, worldwide</b></span>
+          <span>Working: <b>worldwide</b></span>
         </div>
       </div>
-      <form id="inq" novalidate class="rv">
-        <div class="flab">We're building…</div>
-        <div class="chips" id="chips">
-          <button type="button" class="p" data-v="A product">A product</button>
-          <button type="button" class="p" data-v="A brand site">A brand site</button>
-          <button type="button" class="p" data-v="An AI thing">An AI thing</button>
-          <button type="button" class="p" data-v="Something weird">Something weird</button>
+
+      <div class="stepper rv" id="stepper">
+        <div class="step-top">
+          <button class="step-back" id="stepBack" type="button">‹ Back</button>
+          <div class="step-prog" id="stepProg"></div>
         </div>
-        <div class="field"><label for="fn">Your name</label><input id="fn" type="text" autocomplete="name"></div>
-        <div class="field"><label for="fe">Email</label><input id="fe" type="email" autocomplete="email"></div>
-        <div class="field"><label for="fm">Why does it matter to you?</label><textarea id="fm" rows="3"></textarea></div>
-        <button class="btn solid" type="submit" data-c><span>Send it →</span></button>
-        <div class="fnote">Opens your mail app with everything pre-filled. Nothing is stored on this site.</div>
-        <div class="fok" id="fok">✓ Your mail app should open now. Talk soon.</div>
-      </form>
+        <div class="step-sum" id="stepSum"></div>
+        <div class="step-stage" id="stepStage">
+
+          <!-- S0: what -->
+          <div class="screen-s on" data-s="0">
+            <div class="q">What are we <em>building?</em></div>
+            <div class="hint">Tap one. You can change it later.</div>
+            <div class="opts">
+              <button class="opt" data-pick="A product" type="button">A product <span class="ar">→</span></button>
+              <button class="opt" data-pick="A brand site" type="button">A brand site <span class="ar">→</span></button>
+              <button class="opt" data-pick="An AI thing" type="button">An AI thing <span class="ar">→</span></button>
+              <button class="opt" data-pick="Something else" type="button">Something else <span class="ar">→</span></button>
+            </div>
+          </div>
+
+          <!-- S1: name -->
+          <div class="screen-s" data-s="1">
+            <div class="q">Nice. <em>Who are you?</em></div>
+            <div class="hint">First name is plenty.</div>
+            <div class="s-field"><input id="sName" type="text" autocomplete="name" placeholder="Type your name" enterkeyhint="next"></div>
+            <div class="s-row"><button class="s-next" id="nameNext" type="button">Continue →</button></div>
+          </div>
+
+          <!-- S2: email -->
+          <div class="screen-s" data-s="2">
+            <div class="q">Where do I <em>reach you?</em></div>
+            <div class="hint">I reply within a day.</div>
+            <div class="s-field"><input id="sEmail" type="email" autocomplete="email" placeholder="you@email.com" enterkeyhint="next"></div>
+            <div class="s-row"><button class="s-next" id="emailNext" type="button">Continue →</button><button class="s-skip" id="emailSkip" type="button">skip</button></div>
+          </div>
+
+          <!-- S3: why + send -->
+          <div class="screen-s" data-s="3">
+            <div class="q">Last one. <em>Why does it matter to you?</em></div>
+            <div class="hint">The honest version. That's the part I read for.</div>
+            <div class="s-field"><textarea id="sWhy" rows="3" placeholder="Tell me the real reason..."></textarea></div>
+            <div class="s-row"><button class="s-next" id="sendIt" type="button">Send it →</button></div>
+          </div>
+
+        </div>
+        <div class="sent" id="sent">
+          <div class="ring">✓</div>
+          <h3>On its way.</h3>
+          <p>Your mail app just opened with everything filled in. Hit send, and I'll be in touch within a day.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="outro" id="outro" aria-hidden="true"><div class="w">Built. Shipped. <em>Real.</em></div></div>
+  <div class="outro" id="outro" aria-hidden="true"><div class="w">Built with <span class="hot">intent.</span></div></div>
   <div class="foot">
-    <span class="fb"><span class="k">K<i>13</i></span> Studio of Kazim K.</span>
+    <span class="fb"><span class="k">K<i>13</i></span> Software Studio</span>
     <span>Shipped work, told straight.</span>
     <span><a href="mailto:projects.k13@gmail.com" data-c>projects.k13@gmail.com</a> · © 2026 K13 Software Studio</span>
   </div>
@@ -961,7 +957,7 @@ body.reeling .reel .cap.on{opacity:1}
   <div class="bars bT"></div>
   <div class="bars bB"></div>
   <div class="top">
-    <span class="ttl">K13 <b>· The Reel</b> · eight works</span>
+    <span class="ttl">K13 <b>· The Reel</b></span>
     <button class="exit" id="reelExit" type="button">Close ✕ esc</button>
   </div>
   <div class="cap" id="reelCap"><span class="ch" id="reelCh"></span><span id="reelTx"></span></div>
@@ -985,261 +981,193 @@ var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var hasGSAP = !!(window.gsap && window.ScrollTrigger);
 if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
 
-/* ---------- smooth scroll (Lenis) + GSAP sync ---------- */
+/* ---------- smooth scroll ---------- */
 var lenis = null;
 if (!reduced && window.Lenis){
   lenis = new Lenis({ lerp:0.085, wheelMultiplier:1, smoothWheel:true });
-  if (hasGSAP){
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    var raf=function(t){ lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
-  }
+  if (hasGSAP){ lenis.on("scroll", ScrollTrigger.update); gsap.ticker.add(function(t){ lenis.raf(t*1000); }); gsap.ticker.lagSmoothing(0); }
+  else { var raf=function(t){ lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
 }
-function scrollTo(el, dur){
-  if (lenis) lenis.scrollTo(el, { offset:-50, duration:dur||1.3 });
-  else el.scrollIntoView({behavior:reduced?"auto":"smooth"});
-}
+function scrollTo(el, dur){ if (lenis) lenis.scrollTo(el, {offset:-50, duration:dur||1.3}); else el.scrollIntoView({behavior:reduced?"auto":"smooth"}); }
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener("click", function(e){
-    var id=a.getAttribute("href"); if(id.length>1){ var el=document.querySelector(id); if(el){ e.preventDefault(); scrollTo(el); } }
-  });
+  a.addEventListener("click", function(e){ var id=a.getAttribute("href"); if(id.length>1){ var el=document.querySelector(id); if(el){ e.preventDefault(); scrollTo(el); } } });
 });
 
 /* ---------- header + progress ---------- */
 var hdr=document.getElementById("hdr"), pbar=document.getElementById("pbar");
-function onScroll(){
-  var y=window.scrollY||document.documentElement.scrollTop;
-  hdr.classList.toggle("scrolled", y>40);
-  var h=document.documentElement.scrollHeight-window.innerHeight;
-  pbar.style.transform="scaleX("+(h>0?y/h:0)+")";
-}
+function onScroll(){ var y=window.scrollY||document.documentElement.scrollTop; hdr.classList.toggle("scrolled", y>40);
+  var h=document.documentElement.scrollHeight-window.innerHeight; pbar.style.transform="scaleX("+(h>0?y/h:0)+")"; }
 window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
-/* ---------- reveal primitive (IO, works without GSAP) ---------- */
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting){
-      var el=en.target;
-      if(el.hasAttribute("data-line")){ el.classList.add("in"); }
-      else{
-        var sibs=Array.prototype.filter.call(el.parentElement.children,function(c){return c.classList&&c.classList.contains("rv");});
-        el.style.transitionDelay=(Math.max(0,sibs.indexOf(el))*60)+"ms";
-        el.classList.add("in");
-      }
-      io.unobserve(el);
-    }
-  });
-},{threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var el=en.target;
+  if(el.hasAttribute("data-line")) el.classList.add("in");
+  else{ var sibs=Array.prototype.filter.call(el.parentElement.children,function(c){return c.classList&&c.classList.contains("rv");}); el.style.transitionDelay=(Math.max(0,sibs.indexOf(el))*60)+"ms"; el.classList.add("in"); }
+  io.unobserve(el); } }); },{threshold:0.12, rootMargin:"0px 0px -8% 0px"});
 document.querySelectorAll(".rv,[data-line]").forEach(function(el){ io.observe(el); });
-/* hero lines fire immediately */
 setTimeout(function(){ document.querySelectorAll(".hero [data-line], .hero .rv").forEach(function(el){ el.classList.add("in"); }); }, 200);
 
 /* ---------- count-up ---------- */
 var counted=false;
-function countUp(){
-  if(counted) return; var els=document.querySelectorAll("[data-count]"); if(!els.length) return;
+function countUp(){ if(counted) return; var els=document.querySelectorAll("[data-count]"); if(!els.length) return;
   if(els[0].getBoundingClientRect().top>window.innerHeight*0.92) return; counted=true;
-  els.forEach(function(el){
-    var target=parseInt(el.getAttribute("data-count"),10), start=null;
+  els.forEach(function(el){ var target=parseInt(el.getAttribute("data-count"),10), start=null;
     if(reduced){ el.textContent=target.toLocaleString(); return; }
-    function step(t){ if(!start)start=t; var p=Math.min(1,(t-start)/1500); p=1-Math.pow(1-p,3);
-      el.textContent=Math.round(target*p).toLocaleString(); if(p<1) requestAnimationFrame(step); }
-    requestAnimationFrame(step);
-  });
-}
+    function step(t){ if(!start)start=t; var p=Math.min(1,(t-start)/1500); p=1-Math.pow(1-p,3); el.textContent=Math.round(target*p).toLocaleString(); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step); }); }
 window.addEventListener("scroll", countUp, {passive:true});
 
-/* ---------- dramatic cursor + spotlight ---------- */
+/* ---------- cursor + spotlight + magnetic ---------- */
 var cur=document.getElementById("cur"), ring=document.getElementById("curRing"), spot=document.getElementById("spot");
 var mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
 if(window.matchMedia("(hover:hover)").matches && !reduced){
-  document.addEventListener("mousemove", function(e){
-    mx=e.clientX; my=e.clientY;
+  document.addEventListener("mousemove", function(e){ mx=e.clientX; my=e.clientY;
     cur.style.transform="translate("+mx+"px,"+my+"px) translate(-50%,-50%)";
-    spot.style.setProperty("--mx", mx+"px"); spot.style.setProperty("--my", my+"px");
-  });
-  (function ringLoop(){ rx+=(mx-rx)*0.16; ry+=(my-ry)*0.16;
-    ring.style.transform="translate("+rx+"px,"+ry+"px) translate(-50%,-50%)"; requestAnimationFrame(ringLoop); })();
-  document.querySelectorAll("a,button,[data-c],.chip,.led,.offer").forEach(function(el){
+    spot.style.setProperty("--mx", mx+"px"); spot.style.setProperty("--my", my+"px"); });
+  (function loop(){ rx+=(mx-rx)*0.16; ry+=(my-ry)*0.16; ring.style.transform="translate("+rx+"px,"+ry+"px) translate(-50%,-50%)"; requestAnimationFrame(loop); })();
+  document.querySelectorAll("a,button,[data-c],.chip,.opt,.offer,.reg").forEach(function(el){
     el.addEventListener("mouseenter",function(){ ring.classList.add("grow"); });
-    el.addEventListener("mouseleave",function(){ ring.classList.remove("grow"); });
-  });
-  document.querySelectorAll("[data-tilt]").forEach(function(el){
-    el.addEventListener("mouseenter",function(){ ring.classList.add("read"); });
-    el.addEventListener("mouseleave",function(){ ring.classList.remove("read"); });
-  });
-  /* magnetic buttons */
-  document.querySelectorAll(".btn").forEach(function(b){
-    b.addEventListener("mousemove",function(e){ var r=b.getBoundingClientRect();
-      b.style.transform="translate("+(e.clientX-r.left-r.width/2)*0.2+"px,"+(e.clientY-r.top-r.height/2)*0.34+"px)"; });
-    b.addEventListener("mouseleave",function(){ b.style.transition="transform .5s var(--ease)"; b.style.transform="";
-      setTimeout(function(){ b.style.transition=""; },500); });
-  });
-  /* spotlight only over dark sections (hero + sell + book) */
-  ["top","sell","book","work"].forEach(function(id){ var s=document.getElementById(id); if(!s)return;
+    el.addEventListener("mouseleave",function(){ ring.classList.remove("grow"); }); });
+  document.querySelectorAll(".btn,.s-next").forEach(function(b){
+    b.addEventListener("mousemove",function(e){ var r=b.getBoundingClientRect(); b.style.transform="translate("+(e.clientX-r.left-r.width/2)*0.2+"px,"+(e.clientY-r.top-r.height/2)*0.34+"px)"; });
+    b.addEventListener("mouseleave",function(){ b.style.transition="transform .5s var(--ease)"; b.style.transform=""; setTimeout(function(){ b.style.transition=""; },500); }); });
+  ["top","sell","book"].forEach(function(id){ var s=document.getElementById(id); if(!s)return;
     s.addEventListener("mouseenter",function(){ spot.classList.add("on"); });
-    s.addEventListener("mouseleave",function(){ spot.classList.remove("on"); });
-  });
+    s.addEventListener("mouseleave",function(){ spot.classList.remove("on"); }); });
 }
 
-/* ---------- 3D tilt + glare on exhibit frames (pure JS) ---------- */
-if(!reduced && window.matchMedia("(hover:hover)").matches){
-  document.querySelectorAll(".ex-frame[data-tilt]").forEach(function(f){
-    var glare=f.querySelector("[data-glare]"), img=f.querySelector("img");
-    f.addEventListener("mousemove",function(e){
-      var r=f.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-      var rotY=(px-0.5)*9, rotX=(0.5-py)*7;
-      f.style.transform="perspective(1100px) rotateX("+rotX+"deg) rotateY("+rotY+"deg) translateZ(0)";
-      if(glare){ glare.style.setProperty("--gx",(px*100)+"%"); glare.style.setProperty("--gy",(py*100)+"%"); }
-      if(img) img.style.transform="translate("+(px-0.5)*-14+"px,"+(py-0.5)*-10+"px) scale(1.04)";
-    });
-    f.addEventListener("mouseleave",function(){
-      f.style.transition="transform .6s var(--ease)"; f.style.transform="";
-      if(img){ img.style.transition="transform .6s var(--ease)"; img.style.transform=""; }
-      setTimeout(function(){ f.style.transition=""; if(img) img.style.transition=""; },600);
-    });
-  });
-}
+/* ---------- build the extruded 13 ---------- */
+(function(){ var mono=document.querySelector(".mono"); if(!mono) return; var frag=document.createDocumentFragment();
+  for(var i=9;i>=1;i--){ var s=document.createElement("span"); s.className="layer ex"; s.style.setProperty("--i", i); s.textContent="13"; frag.appendChild(s); }
+  mono.insertBefore(frag, mono.firstChild); })();
+
+/* ---------- badge spin + sculpt parallax ---------- */
+var badge=document.getElementById("badge"), sculpt=document.getElementById("sculpt");
+if(!reduced){ var spin=0; (function art(){ var y=window.scrollY||0; spin+=0.18;
+  if(badge) badge.style.transform="rotate("+(spin + y*0.06)+"deg)";
+  if(sculpt) sculpt.style.transform="translateY(calc(-50% + "+(Math.sin(Date.now()/1600)*8 - y*0.05)+"px))";
+  requestAnimationFrame(art); })(); }
 
 /* ---------- GSAP scroll choreography ---------- */
 if(hasGSAP && !reduced){
-  /* parallax on exhibit images */
-  document.querySelectorAll(".ex-shot img").forEach(function(img){
-    gsap.fromTo(img,{yPercent:-8},{yPercent:8,ease:"none",
-      scrollTrigger:{trigger:img,start:"top bottom",end:"bottom top",scrub:true}});
-  });
-  /* huge background numerals drift + rotate with scroll */
-  document.querySelectorAll("[data-num]").forEach(function(n,i){
-    var dir=(i%2===0)?1:-1;
-    gsap.fromTo(n,{yPercent:18,rotate:dir*-6},{yPercent:-18,rotate:dir*6,ease:"none",
-      scrollTrigger:{trigger:n.closest(".exhibit"),start:"top bottom",end:"bottom top",scrub:true}});
-  });
-  /* exhibit text slides in from its side */
-  document.querySelectorAll(".exhibit").forEach(function(ex){
-    var txt=ex.querySelector(".ex-text"), frame=ex.querySelector(".ex-frame");
-    var flip=ex.classList.contains("flip");
-    gsap.from(txt,{x:flip?-46:46,opacity:0,duration:1,ease:"power3.out",
-      scrollTrigger:{trigger:ex,start:"top 70%"}});
-    gsap.from(frame,{y:60,opacity:0,scale:.96,duration:1.1,ease:"power3.out",
-      scrollTrigger:{trigger:ex,start:"top 75%"}});
-  });
-  /* belt velocity: base scroll + flips direction with scroll velocity */
-  var belt=document.getElementById("belt");
-  if(belt){
-    var bx=0, base=-0.4;
-    gsap.ticker.add(function(){
-      var v=(hasGSAP&&ScrollTrigger)?(ScrollTrigger.getVelocity?ScrollTrigger.getVelocity():0):0;
-      bx += base + (-v/3000);
-      var w=belt.scrollWidth/2; if(bx<=-w) bx+=w; if(bx>0) bx-=w;
-      belt.style.transform="translateX("+bx+"px)";
-    });
-  }
-  /* outro word slides on scroll */
-  var ow=document.querySelector(".outro .w");
-  if(ow) gsap.fromTo(ow,{xPercent:6},{xPercent:-6,ease:"none",scrollTrigger:{trigger:".outro",start:"top bottom",end:"bottom top",scrub:true}});
-} else {
-  /* no GSAP: simple CSS belt fallback */
-  var beltEl=document.getElementById("belt"); if(beltEl){ beltEl.style.animation="beltmarq 30s linear infinite"; }
-  var st=document.createElement("style"); st.textContent="@keyframes beltmarq{to{transform:translateX(-50%)}}"; document.head.appendChild(st);
+  document.querySelectorAll(".poster").forEach(function(p){ gsap.fromTo(p,{backgroundPositionY:"42%"},{backgroundPositionY:"58%",ease:"none",scrollTrigger:{trigger:p,start:"top bottom",end:"bottom top",scrub:true}}); });
+  document.querySelectorAll("[data-num]").forEach(function(n,i){ var dir=(i%2===0)?1:-1; gsap.fromTo(n,{yPercent:18,rotate:dir*-6},{yPercent:-18,rotate:dir*6,ease:"none",scrollTrigger:{trigger:n.closest(".exhibit"),start:"top bottom",end:"bottom top",scrub:true}}); });
+  document.querySelectorAll(".exhibit").forEach(function(ex){ var txt=ex.querySelector(".ex-text"), frame=ex.querySelector(".ex-frame"), flip=ex.classList.contains("flip");
+    gsap.from(txt,{x:flip?-46:46,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:ex,start:"top 70%"}});
+    gsap.from(frame,{y:60,opacity:0,scale:.96,duration:1.1,ease:"power3.out",scrollTrigger:{trigger:ex,start:"top 75%"}}); });
+  var ow=document.querySelector(".outro .w"); if(ow) gsap.fromTo(ow,{xPercent:5},{xPercent:-5,ease:"none",scrollTrigger:{trigger:".outro",start:"top bottom",end:"bottom top",scrub:true}});
 }
 
-/* build the extruded body of the 13 (depth layers behind the front face) */
+/* ---------- mini-browser: lazy iframe + scale + interact ---------- */
 (function(){
-  var mono=document.querySelector(".mono");
-  if(!mono) return;
-  var frag=document.createDocumentFragment();
-  for(var i=9;i>=1;i--){
-    var s=document.createElement("span");
-    s.className="layer ex"; s.style.setProperty("--i", i); s.textContent="13";
-    frag.appendChild(s);
-  }
-  mono.insertBefore(frag, mono.firstChild); /* deepest goes furthest back */
+  var browsers=Array.prototype.slice.call(document.querySelectorAll(".browser[data-live]"));
+  function scaleOne(b){ var ifr=b.querySelector("iframe"), sc=b.querySelector(".screen"); if(!ifr||!sc) return;
+    var s=sc.clientWidth/1440; ifr.style.transform="scale("+s+")"; }
+  window.addEventListener("resize", function(){ browsers.forEach(scaleOne); });
+  var lazyIO=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var b=en.target, ifr=b.querySelector("iframe");
+    if(ifr && !ifr.src && ifr.getAttribute("data-src")){ scaleOne(b); ifr.src=ifr.getAttribute("data-src"); }
+    lazyIO.unobserve(b); } }); },{rootMargin:"300px 0px"});
+  browsers.forEach(function(b){ lazyIO.observe(b);
+    var enter=b.querySelector(".enter"), rel=b.querySelector(".rel");
+    if(enter && !enter.classList.contains("shot")) enter.addEventListener("click", function(){ b.classList.add("engaged"); scaleOne(b); });
+    if(rel) rel.addEventListener("click", function(){ b.classList.remove("engaged"); });
+  });
+  setTimeout(function(){ browsers.forEach(scaleOne); }, 400);
 })();
 
-/* badge slow spin + scroll, sculpt parallax + float */
-var badge=document.getElementById("badge"), sculpt=document.getElementById("sculpt");
-if(!reduced){
-  var spin=0;
-  function art(){
-    var y=window.scrollY||0;
-    spin+=0.18;
-    if(badge) badge.style.transform="rotate("+(spin + y*0.06)+"deg)";
-    if(sculpt) sculpt.style.transform="translateY(calc(-50% + "+(Math.sin(Date.now()/1600)*8 - y*0.05)+"px))";
-    requestAnimationFrame(art);
-  }
-  art();
-}
+/* ---------- Miramar odometer ---------- */
+(function(){
+  var odo=document.getElementById("mirOdo"); if(!odo) return;
+  var cols=odo.querySelectorAll(".col .strip");
+  cols.forEach(function(strip){ var h=""; for(var d=0;d<10;d++) h+="<span>"+d+"</span>"; for(var d2=0;d2<10;d2++) h+="<span>"+d2+"</span>"; strip.innerHTML=h; });
+  function digitH(){ return odo.querySelector(".col").clientHeight; }
+  function setYear(y, withWrap){ var s=(""+y).split(""); cols.forEach(function(strip,i){ var dg=parseInt(s[i],10); var off=(withWrap?10:0)+dg; strip.style.transform="translateY(-"+(off*digitH())+"px)"; }); }
+  var started=false;
+  var io2=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting && !started){ started=true; run(); } }); },{threshold:0.4});
+  io2.observe(odo);
+  function reset(){ cols.forEach(function(strip){ strip.style.transition="none"; strip.style.transform="translateY(0)"; }); void odo.offsetWidth; cols.forEach(function(strip){ strip.style.transition=""; }); }
+  function run(){ reset(); setTimeout(function(){ setYear(1938,true); }, 300);
+    setTimeout(function(){ setYear(2026,false); }, 2200);
+    if(!reduced) setInterval(function(){ reset(); setTimeout(function(){ setYear(1938,true); },300); setTimeout(function(){ setYear(2026,false); },2200); }, 7000); }
+})();
 
 /* ===================== REEL ===================== */
 (function(){
   var exhibits=Array.prototype.slice.call(document.querySelectorAll("[data-ex]"));
   var caps=exhibits.map(function(e){ return e.getAttribute("data-cap")||""; });
   var names=exhibits.map(function(e){ var n=e.querySelector(".ex-name"); return n?n.textContent.trim():""; });
-  var reel=document.getElementById("reel"), capBox=document.getElementById("reelCap"),
-      capTx=document.getElementById("reelTx"), capCh=document.getElementById("reelCh"),
-      tl=document.getElementById("reelTL"), playBtn=document.getElementById("rPlay");
-  var ticks=exhibits.map(function(e,i){ var t=document.createElement("div"); t.className="tk"; t.innerHTML="<i></i>";
-    t.addEventListener("click",function(){ go(i,true); }); tl.appendChild(t); return t; });
+  var reel=document.getElementById("reel"), capBox=document.getElementById("reelCap"), capTx=document.getElementById("reelTx"), capCh=document.getElementById("reelCh"), tl=document.getElementById("reelTL"), playBtn=document.getElementById("rPlay");
+  var ticks=exhibits.map(function(e,i){ var t=document.createElement("div"); t.className="tk"; t.innerHTML="<i></i>"; t.addEventListener("click",function(){ go(i,true); }); tl.appendChild(t); return t; });
   var on=false, cur=-1, playing=false, timer=null;
   function setTicks(){ ticks.forEach(function(t,i){ t.classList.toggle("done",i<cur); t.classList.toggle("cur",i===cur); }); }
-  function showCap(i){ capBox.classList.remove("on");
-    setTimeout(function(){ capCh.textContent="0"+(i+1)+" · "+names[i]; capTx.textContent=caps[i]; capBox.classList.add("on"); },240); }
-  function go(i,manual){
-    if(i<0)i=0; if(i>=exhibits.length){ exit(); return; }
-    cur=i; setTicks(); showCap(i); scrollTo(exhibits[i], reduced?0:1.5);
-    clearTimeout(timer); if(playing) sched();
-  }
+  function showCap(i){ capBox.classList.remove("on"); setTimeout(function(){ capCh.textContent="0"+(i+1)+" · "+names[i]; capTx.textContent=caps[i]; capBox.classList.add("on"); },240); }
+  function go(i,manual){ if(i<0)i=0; if(i>=exhibits.length){ exit(); return; } cur=i; setTicks(); showCap(i); scrollTo(exhibits[i], reduced?0:1.5); clearTimeout(timer); if(playing) sched(); }
   function sched(){ clearTimeout(timer); timer=setTimeout(function(){ if(playing) go(cur+1); }, 8500); }
   function setPlay(p){ playing=p; playBtn.textContent=p?"∥":"▶"; if(p) sched(); else clearTimeout(timer); }
-  function enter(){ if(on)return; on=true; document.body.classList.add("reeling"); reel.setAttribute("aria-hidden","false");
-    if(lenis) lenis.stop && lenis.stop(); /* keep scroll for the tour */ if(lenis&&lenis.start) lenis.start();
-    setPlay(true); go(0,true); }
-  function exit(){ if(!on)return; on=false; document.body.classList.remove("reeling"); reel.setAttribute("aria-hidden","true");
-    setPlay(false); capBox.classList.remove("on"); cur=-1; setTicks(); }
+  function enter(){ if(on)return; on=true; document.body.classList.add("reeling"); reel.setAttribute("aria-hidden","false"); setPlay(true); go(0,true); }
+  function exit(){ if(!on)return; on=false; document.body.classList.remove("reeling"); reel.setAttribute("aria-hidden","true"); setPlay(false); capBox.classList.remove("on"); cur=-1; setTicks(); }
   document.getElementById("reelBtn").addEventListener("click", enter);
   document.querySelectorAll("[data-reel]").forEach(function(b){ b.addEventListener("click", enter); });
   document.getElementById("reelExit").addEventListener("click", exit);
   document.getElementById("rPrev").addEventListener("click",function(){ go(cur-1,true); });
   document.getElementById("rNext").addEventListener("click",function(){ go(cur+1,true); });
   playBtn.addEventListener("click",function(){ setPlay(!playing); });
-  document.addEventListener("keydown",function(e){
-    var tag=(document.activeElement&&document.activeElement.tagName)||"";
-    if(tag==="INPUT"||tag==="TEXTAREA") return;
-    if(e.key==="p"||e.key==="P"){ on?exit():enter(); }
-    if(!on) return;
-    if(e.key==="Escape") exit();
-    if(e.key==="ArrowRight") go(cur+1,true);
-    if(e.key==="ArrowLeft") go(cur-1,true);
-    if(e.key===" "){ e.preventDefault(); setPlay(!playing); }
-  });
+  document.addEventListener("keydown",function(e){ var tag=(document.activeElement&&document.activeElement.tagName)||""; if(tag==="INPUT"||tag==="TEXTAREA") return;
+    if(e.key==="p"||e.key==="P"){ on?exit():enter(); } if(!on) return;
+    if(e.key==="Escape") exit(); if(e.key==="ArrowRight") go(cur+1,true); if(e.key==="ArrowLeft") go(cur-1,true);
+    if(e.key===" "){ e.preventDefault(); setPlay(!playing); } });
   window.addEventListener("wheel",function(){ if(on&&playing) setPlay(false); },{passive:true});
-  window.addEventListener("touchmove",function(){ if(on&&playing) setPlay(false); },{passive:true});
 })();
 
-/* ---------- booking form ---------- */
-var chosen="";
-document.querySelectorAll("#chips .p").forEach(function(c){
-  c.addEventListener("click",function(){ document.querySelectorAll("#chips .p").forEach(function(x){x.classList.remove("sel");});
-    c.classList.add("sel"); chosen=c.getAttribute("data-v"); });
-});
-document.querySelectorAll(".field input,.field textarea").forEach(function(inp){
-  function upd(){ inp.closest(".field").classList.toggle("has",!!inp.value); }
-  inp.addEventListener("input",upd); inp.addEventListener("change",upd); upd();
-});
-document.getElementById("inq").addEventListener("submit",function(e){
-  e.preventDefault();
-  var name=document.getElementById("fn").value.trim(), email=document.getElementById("fe").value.trim(), msg=document.getElementById("fm").value.trim();
-  var subject="Project inquiry"+(chosen?": "+chosen:"")+(name?" ("+name+")":"");
-  var body="Hi Kazim,\r\n\r\n"+(chosen?"We're building: "+chosen+"\r\n\r\n":"")+(msg?"Why it matters: "+msg+"\r\n\r\n":"")+"--\r\n"+name+(email?"\r\n"+email:"");
-  window.location.href="mailto:projects.k13@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
-  document.getElementById("fok").classList.add("show");
-});
+/* ===================== MULTI-STEP BOOKING ===================== */
+(function(){
+  var stage=document.getElementById("stepStage"), screens=Array.prototype.slice.call(stage.querySelectorAll(".screen-s"));
+  var prog=document.getElementById("stepProg"), sum=document.getElementById("stepSum"), back=document.getElementById("stepBack"), sent=document.getElementById("sent");
+  var data={type:"",name:"",email:"",why:""};
+  var idx=0;
+  screens.forEach(function(){ var i=document.createElement("i"); prog.appendChild(i); });
+  var dots=prog.querySelectorAll("i");
+  function render(){
+    screens.forEach(function(s,i){ s.classList.toggle("on", i===idx); s.classList.toggle("past", i<idx); });
+    dots.forEach(function(d,i){ d.classList.toggle("on", i<=idx); });
+    back.classList.toggle("on", idx>0);
+    /* summary chips */
+    sum.innerHTML="";
+    var parts=[];
+    if(data.type) parts.push(["Building", data.type, 0]);
+    if(data.name) parts.push(["Name", data.name, 1]);
+    if(data.email) parts.push(["Email", data.email, 2]);
+    parts.forEach(function(p){ var c=document.createElement("button"); c.type="button"; c.className="sc"; c.innerHTML="<b>"+p[0]+"</b>"+p[1];
+      c.addEventListener("click",function(){ idx=p[2]; render(); }); sum.appendChild(c); });
+    sum.classList.toggle("on", parts.length>0);
+    var inp=screens[idx].querySelector("input,textarea"); if(inp) setTimeout(function(){ inp.focus(); },350);
+  }
+  function go(i){ idx=Math.max(0,Math.min(screens.length-1,i)); render(); }
+  back.addEventListener("click",function(){ go(idx-1); });
+  /* S0 picks */
+  stage.querySelectorAll(".opt").forEach(function(o){ o.addEventListener("click",function(){ data.type=o.getAttribute("data-pick"); go(1); }); });
+  /* S1 name */
+  var nameI=document.getElementById("sName");
+  document.getElementById("nameNext").addEventListener("click",function(){ data.name=nameI.value.trim(); go(2); });
+  nameI.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); data.name=nameI.value.trim(); go(2); } });
+  /* S2 email */
+  var emailI=document.getElementById("sEmail");
+  document.getElementById("emailNext").addEventListener("click",function(){ data.email=emailI.value.trim(); go(3); });
+  document.getElementById("emailSkip").addEventListener("click",function(){ data.email=""; go(3); });
+  emailI.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); data.email=emailI.value.trim(); go(3); } });
+  /* S3 send */
+  var whyI=document.getElementById("sWhy");
+  document.getElementById("sendIt").addEventListener("click",function(){
+    data.why=whyI.value.trim();
+    var subject="Project inquiry"+(data.type?": "+data.type:"")+(data.name?" ("+data.name+")":"");
+    var body="Hi Kazim,\r\n\r\n"+(data.type?"We're building: "+data.type+"\r\n":"")+(data.why?"\r\nWhy it matters: "+data.why+"\r\n":"")+"\r\n--\r\n"+data.name+(data.email?"\r\n"+data.email:"");
+    sent.classList.add("on");
+    setTimeout(function(){ window.location.href="mailto:projects.k13@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body); }, 700);
+  });
+  render();
+})();
 
-/* refresh ScrollTrigger after images load */
-if(hasGSAP){ window.addEventListener("load",function(){ ScrollTrigger.refresh(); });
-  setTimeout(function(){ ScrollTrigger.refresh(); }, 1200); }
+if(hasGSAP){ window.addEventListener("load",function(){ ScrollTrigger.refresh(); }); setTimeout(function(){ ScrollTrigger.refresh(); }, 1200); }
 })();
 </script>
 </body>
