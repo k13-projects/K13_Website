@@ -73,10 +73,10 @@ header .bg{position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s
   background:rgba(243,245,250,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 header.scrolled{padding:12px clamp(18px,4vw,56px)}
 header.scrolled .bg{opacity:1}
-.brand{display:flex;align-items:baseline;gap:11px}
+.brand{display:flex;align-items:center;gap:11px}
 .brand .k{font-family:var(--disp);font-weight:700;font-size:27px;line-height:1;letter-spacing:-.01em}
 .brand .k b{color:var(--ink);font-weight:700}.brand .k i{color:var(--blue);font-style:normal}
-.brand .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.brand .tag{font-family:var(--mono);font-size:10px;line-height:1.35;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
 nav{display:flex;gap:30px;align-items:center}
 .nl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);position:relative;padding:4px 0;transition:color .3s}
 .nl:hover{color:var(--ink)}
@@ -298,7 +298,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
   <div class="bg"></div>
   <a class="brand" href="#top" data-c>
     <span class="k"><b>K</b><i>13</i></span>
-    <span class="tag">Software Studio</span>
+    <span class="tag">Software<br>Studio</span>
   </a>
   <nav>
     <a class="nl" href="#approach" data-c>Approach</a>
@@ -426,6 +426,12 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
         <span class="rname">baa atelier</span>
         <span class="rdesc">A finishing studio in Roman clay and limewash, presented like an art book that quietly sells.</span>
         <span class="rmeta"><span class="tag">Editorial</span><span class="go">Open ↗</span></span>
+      </a>
+      <a class="row" href="https://bfx.k13projects.com" target="_blank" rel="noopener" data-peek="assets/shots/barfix-live.jpg" data-c>
+        <span class="rnum">07</span>
+        <span class="rname">BarFix</span>
+        <span class="rdesc">Every bottle steps on a scale, so the liquor that used to quietly walk out the back door has nowhere left to hide.</span>
+        <span class="rmeta"><span class="tag">SaaS · Inventory</span><span class="go">Open ↗</span></span>
       </a>
     </div>
     <p class="index-foot rv">Also on the bench: <b>TrustMeBro</b> betting engine, <b>IndustriEye</b> factory AI vision, <b>CENGO</b> self updating artist site, and more.</p>
