@@ -182,17 +182,72 @@ section{position:relative;z-index:2}
 
 /* ---------- contact ---------- */
 .contact{padding:clamp(70px,9vw,130px) 0 clamp(50px,7vw,90px);border-top:1px solid var(--line);position:relative;overflow:hidden}
-.contact .big{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.04;font-size:clamp(36px,6vw,80px);color:var(--ink);max-width:14ch}
+.contact-grid{display:grid;grid-template-columns:1fr minmax(380px,460px);gap:clamp(40px,5vw,72px);align-items:center}
+.contact .big{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.04;font-size:clamp(34px,5vw,66px);color:var(--ink);max-width:13ch}
 .contact .big i{font-style:italic;font-weight:500;color:var(--blue)}
-.contact p{margin-top:24px;max-width:520px;font-size:18px;color:var(--ink-2);line-height:1.6}
-.contact .mail{display:inline-flex;align-items:center;gap:12px;margin-top:34px;font-family:var(--disp);font-weight:600;font-size:clamp(24px,3.4vw,44px);color:var(--blue);letter-spacing:-.01em;position:relative}
-.contact .mail svg{width:.7em;height:.7em;stroke:var(--blue);stroke-width:2;fill:none;transition:transform .3s}
-.contact .mail:hover svg{transform:translate(4px,-4px)}
-.contact .mail::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:2px;background:var(--blue);transform:scaleX(.18);transform-origin:0 50%;transition:transform .5s var(--ease)}
+.contact p{margin-top:24px;max-width:480px;font-size:18px;color:var(--ink-2);line-height:1.6}
+.contact .mail{display:inline-flex;align-items:center;gap:9px;margin-top:30px;font-family:var(--mono);font-size:14px;letter-spacing:.01em;color:var(--muted);position:relative}
+.contact .mail b{color:var(--blue);font-weight:500}
+.contact .mail svg{width:14px;height:14px;stroke:var(--blue);stroke-width:2;fill:none;transition:transform .3s}
+.contact .mail:hover svg{transform:translate(3px,-3px)}
+.contact .mail::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1.5px;background:var(--blue);transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease)}
 .contact .mail:hover::after{transform:scaleX(1)}
-.contact .lines{margin-top:38px;display:flex;gap:30px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.contact .lines{margin-top:34px;display:flex;gap:30px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted)}
 .contact .lines b{color:var(--ink);font-weight:500}
 .contact .lines a:hover b{color:var(--blue)}
+
+/* ---------- contact stepper ---------- */
+.stepper{position:relative;border-radius:20px;min-height:448px;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 30px 70px -38px rgba(20,29,53,.55)}
+.step-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+.step-back{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);display:inline-flex;align-items:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s,color .3s}
+.step-back.on{opacity:1;pointer-events:auto}
+.step-back:hover{color:var(--ink)}
+.step-lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.step-prog{display:flex;gap:6px;align-items:center}
+.step-prog i{width:22px;height:3px;border-radius:2px;background:var(--line-2);transition:background .4s}
+.step-prog i.on{background:var(--blue)}
+.step-sum{display:flex;flex-wrap:wrap;gap:7px;padding:0 20px;max-height:0;overflow:hidden;transition:max-height .4s,padding .4s;position:relative;z-index:2}
+.step-sum.on{max-height:70px;padding:14px 20px 0}
+.step-sum .sc{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid var(--line-2);border-radius:100px;padding:6px 12px;cursor:pointer;transition:border-color .3s,color .3s}
+.step-sum .sc:hover{border-color:var(--blue);color:var(--blue)}
+.step-sum .sc b{color:var(--faint);font-weight:400;margin-right:6px}
+.step-stage{position:relative;flex:1;overflow:hidden;z-index:2}
+.screen-s{position:absolute;inset:0;padding:28px 24px;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;transform:translateX(34px);pointer-events:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.screen-s.on{opacity:1;transform:none;pointer-events:auto}
+.screen-s.past{transform:translateX(-34px)}
+.screen-s[data-s="0"]{justify-content:flex-start;padding-top:26px}
+.screen-s .q{font-family:var(--disp);font-weight:600;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.02em;line-height:1.14;color:var(--ink)}
+.screen-s .q i{font-style:italic;font-weight:500;color:var(--blue)}
+.screen-s .hint{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:24px}
+.opt{position:relative;text-align:center;font-family:var(--body);font-weight:500;font-size:16px;color:var(--ink);border:1.5px solid var(--line-2);border-radius:13px;padding:15px 44px;display:flex;align-items:center;justify-content:center;gap:12px;transition:border-color .3s,background .3s,transform .3s;background:rgba(255,255,255,.5)}
+.opt:hover{border-color:var(--blue);background:rgba(255,255,255,.85);transform:translateY(-2px)}
+.opt .ar{position:absolute;right:18px;color:var(--blue);font-family:var(--mono);opacity:.55;transition:transform .3s,opacity .3s}
+.opt:hover .ar{transform:translateX(4px);opacity:1}
+.s-field{margin-top:24px;border-bottom:1.5px solid var(--line-2);padding-bottom:9px;transition:border-color .3s}
+.s-field:focus-within{border-color:var(--blue)}
+.s-field+.s-field{margin-top:18px}
+.s-field input,.s-field textarea{width:100%;background:transparent;border:none;outline:none;color:var(--ink);font-family:var(--body);font-size:19px;padding:6px 0;resize:none;line-height:1.4}
+.s-field input::placeholder,.s-field textarea::placeholder{color:var(--faint)}
+.s-field textarea{min-height:80px;font-size:16.5px}
+.s-row{display:flex;gap:14px;margin-top:24px;align-items:center}
+.s-next{font-family:var(--body);font-weight:600;font-size:14.5px;color:#fff;background:var(--blue);border-radius:100px;padding:12px 24px;display:inline-flex;gap:9px;align-items:center;transition:transform .3s,background .3s}
+.s-next:hover{transform:translateY(-2px);background:var(--ink)}
+.s-skip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint)}
+.s-skip:hover{color:var(--ink)}
+.sent{position:absolute;inset:0;background:var(--paper-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:34px;opacity:0;pointer-events:none;transition:opacity .5s;z-index:5}
+.sent.on{opacity:1;pointer-events:auto}
+.sent .ring{width:62px;height:62px;border-radius:50%;border:2px solid #27B584;display:flex;align-items:center;justify-content:center;color:#27B584;font-size:27px;animation:pop .5s var(--ease)}
+@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.sent h3{font-family:var(--disp);font-weight:600;font-size:24px;color:var(--ink)}
+.sent p{color:var(--muted);font-size:14.5px;max-width:300px;line-height:1.5}
+@media(max-width:880px){
+  .contact-grid{grid-template-columns:1fr;gap:44px}
+  .stepper{min-height:400px}
+}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index:2}
@@ -268,7 +323,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
           <a class="btn ghost" href="#work" data-c>See the work</a>
         </div>
         <div class="hero-meta rv">
-          <span>Open for <b>a few projects</b></span>
+          <span>Open for <b>a new project</b></span>
           <span>Reply in <b>under 24 hours</b></span>
           <span>Working <b>worldwide</b></span>
         </div>
@@ -431,7 +486,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
         <div class="about-sig">Kazim K. · founder of <b>K13 Software Studio</b></div>
       </div>
       <div class="facts rv">
-        <div class="f"><span class="k">Status</span><span class="v">Open for a few projects</span></div>
+        <div class="f"><span class="k">Status</span><span class="v">Open for a new project</span></div>
         <div class="f"><span class="k">Based</span><span class="v">Worldwide, remote</span></div>
         <div class="f"><span class="k">Track record</span><span class="v">14 shipped, 6 live</span></div>
         <div class="f"><span class="k">What earns a yes</span><span class="v">A real connection</span></div>
@@ -443,16 +498,64 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 <!-- ===================== CONTACT ===================== -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="eyebrow rv">Start a project</span>
-    <h2 class="big rv" style="margin-top:18px">Have something worth <i>building?</i></h2>
-    <p class="rv">Tell me what it is and why it matters to you. Two honest sentences are plenty. You will hear back within a day, with real thoughts either way.</p>
-    <a class="mail rv" href="mailto:projects.k13@gmail.com?subject=Project%20inquiry" data-c>projects.k13@gmail.com
-      <svg viewBox="0 0 24 24"><path d="M7 17 L17 7 M9 7 H17 V15"/></svg>
-    </a>
-    <div class="lines rv">
-      <a href="tel:+19493066998" data-c>Phone <b>+1 949 306 6998</b></a>
-      <span>Reply <b>under 24 hours</b></span>
-      <span>Working <b>worldwide</b></span>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <span class="eyebrow rv">Start a project</span>
+        <h2 class="big rv" style="margin-top:18px">Have something worth <i>building?</i></h2>
+        <p class="rv">Tell me what it is and why it matters to you. A few taps, in your own words. You will hear back within a day, with real thoughts either way.</p>
+        <a class="mail rv" href="mailto:projects.k13@gmail.com?subject=Project%20inquiry" data-c>Or just email <b>projects.k13@gmail.com</b>
+          <svg viewBox="0 0 24 24"><path d="M7 17 L17 7 M9 7 H17 V15"/></svg>
+        </a>
+        <div class="lines rv">
+          <a href="tel:+19493066998" data-c>Phone <b>+1 949 306 6998</b></a>
+          <span>Reply <b>under 24 hours</b></span>
+          <span>Working <b>worldwide</b></span>
+        </div>
+      </div>
+
+      <div class="stepper rv" id="stepper">
+        <div class="step-top">
+          <button class="step-back" id="stepBack" type="button">&lsaquo; Back</button>
+          <span class="step-lab" id="stepLab">Step 1 of 3</span>
+          <div class="step-prog" id="stepProg"></div>
+        </div>
+        <div class="step-sum" id="stepSum"></div>
+        <div class="step-stage" id="stepStage">
+          <div class="screen-s on" data-s="0">
+            <div class="q">What are we <i>building?</i></div>
+            <div class="hint">Tap one. You can change it later.</div>
+            <div class="opts">
+              <button class="opt" data-pick="A product" type="button">A product <span class="ar">&rarr;</span></button>
+              <button class="opt" data-pick="A brand site" type="button">A brand site <span class="ar">&rarr;</span></button>
+              <button class="opt" data-pick="An AI thing" type="button">An AI thing <span class="ar">&rarr;</span></button>
+              <button class="opt" data-pick="Something else" type="button">Something else <span class="ar">&rarr;</span></button>
+            </div>
+          </div>
+          <div class="screen-s" data-s="1">
+            <div class="q">Nice. <i>Who are you?</i></div>
+            <div class="hint">First name is plenty.</div>
+            <div class="s-field"><input id="sName" type="text" autocomplete="name" placeholder="Type your name" enterkeyhint="next"></div>
+            <div class="s-row"><button class="s-next" id="nameNext" type="button">Continue &rarr;</button></div>
+          </div>
+          <div class="screen-s" data-s="2">
+            <div class="q">Where do I <i>reach you?</i></div>
+            <div class="hint">I reply within a day.</div>
+            <div class="s-field"><input id="sEmail" type="email" autocomplete="email" placeholder="you@email.com" enterkeyhint="next"></div>
+            <div class="s-row"><button class="s-next" id="emailNext" type="button">Continue &rarr;</button><button class="s-skip" id="emailSkip" type="button">skip</button></div>
+          </div>
+          <div class="screen-s" data-s="3">
+            <div class="q">Last one. <i>Why does it matter to you?</i></div>
+            <div class="hint">The honest version. That is the part I read for.</div>
+            <div class="s-field"><textarea id="sWhy" rows="3" placeholder="Tell me the real reason..."></textarea></div>
+            <div class="s-row"><button class="s-next" id="sendIt" type="button">Send it &rarr;</button></div>
+          </div>
+        </div>
+        <div class="sent" id="sent">
+          <div class="ring">&check;</div>
+          <h3>Your email is ready.</h3>
+          <p>Your mail app just opened with everything filled in. Give it a read, hit send, and I will be in touch within a day.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -530,6 +633,52 @@ window.addEventListener("scroll",countUp,{passive:true}); countUp();
     row.addEventListener("mouseleave",function(){ active=false; peek.classList.remove("on"); });
   });
   document.addEventListener("mousemove",function(e){ tx=e.clientX+150; ty=e.clientY; });
+})();
+
+/* multi-step contact -> drafts a pre-filled email */
+(function(){
+  var stage=document.getElementById("stepStage"); if(!stage) return;
+  var screens=Array.prototype.slice.call(stage.querySelectorAll(".screen-s"));
+  var prog=document.getElementById("stepProg"), sum=document.getElementById("stepSum");
+  var back=document.getElementById("stepBack"), lab=document.getElementById("stepLab"), sent=document.getElementById("sent");
+  var data={type:"",name:"",email:"",why:""}, idx=0;
+  screens.forEach(function(){ var i=document.createElement("i"); prog.appendChild(i); });
+  var dots=prog.querySelectorAll("i");
+  function render(){
+    screens.forEach(function(s,i){ s.classList.toggle("on",i===idx); s.classList.toggle("past",i<idx); });
+    dots.forEach(function(d,i){ d.classList.toggle("on",i<=idx); });
+    back.classList.toggle("on",idx>0);
+    lab.textContent="Step "+(idx+1)+" of "+screens.length;
+    sum.innerHTML=""; var parts=[];
+    if(data.type) parts.push(["Building",data.type,0]);
+    if(data.name) parts.push(["Name",data.name,1]);
+    if(data.email) parts.push(["Email",data.email,2]);
+    parts.forEach(function(p){ var c=document.createElement("button"); c.type="button"; c.className="sc"; c.innerHTML="<b>"+p[0]+"</b>"+p[1];
+      c.addEventListener("click",function(){ idx=p[2]; render(); }); sum.appendChild(c); });
+    sum.classList.toggle("on",parts.length>0 && idx>0);
+    var inp=screens[idx].querySelector("input,textarea"); if(inp) setTimeout(function(){ inp.focus(); },360);
+  }
+  function go(i){ idx=Math.max(0,Math.min(screens.length-1,i)); render(); }
+  back.addEventListener("click",function(){ go(idx-1); });
+  stage.querySelectorAll(".opt").forEach(function(o){ o.addEventListener("click",function(){ data.type=o.getAttribute("data-pick"); go(1); }); });
+  var nameI=document.getElementById("sName");
+  document.getElementById("nameNext").addEventListener("click",function(){ data.name=nameI.value.trim(); go(2); });
+  nameI.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); data.name=nameI.value.trim(); go(2); } });
+  var emailI=document.getElementById("sEmail");
+  document.getElementById("emailNext").addEventListener("click",function(){ data.email=emailI.value.trim(); go(3); });
+  document.getElementById("emailSkip").addEventListener("click",function(){ data.email=""; go(3); });
+  emailI.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); data.email=emailI.value.trim(); go(3); } });
+  document.getElementById("sendIt").addEventListener("click",function(){
+    data.why=document.getElementById("sWhy").value.trim();
+    var subject="Project inquiry"+(data.type?": "+data.type:"")+(data.name?" ("+data.name+")":"");
+    var body="Hi Kazim,\r\n\r\n"
+      +(data.type?"We're building: "+data.type+"\r\n":"")
+      +(data.why?"\r\nWhy it matters: "+data.why+"\r\n":"")
+      +"\r\n--\r\n"+(data.name||"")+(data.email?"\r\n"+data.email:"");
+    sent.classList.add("on");
+    setTimeout(function(){ window.location.href="mailto:projects.k13@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body); },700);
+  });
+  render();
 })();
 })();
 </script>
