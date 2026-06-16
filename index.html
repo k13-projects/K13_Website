@@ -125,14 +125,17 @@ h1 .hot{color:var(--molten)}
 @media(hover:none){.kb{display:none}}
 /* hero art: sculptural extruded 13 + ember spark (pure code) */
 .hero-art{position:absolute;right:clamp(-20px,3vw,40px);bottom:0;top:0;width:min(46vw,640px);z-index:1;pointer-events:none}
-.sculpt{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:clamp(240px,30vw,440px);height:clamp(300px,40vw,560px);
+.sculpt{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:clamp(270px,34vw,520px);height:clamp(300px,40vw,560px);
   display:flex;align-items:center;justify-content:center;will-change:transform}
-.mono{position:relative;width:100%;height:100%;font-family:var(--disp);font-weight:800;font-size:clamp(170px,21vw,320px);line-height:1;letter-spacing:-.05em}
+.mono{position:relative;width:100%;height:100%;font-family:var(--disp);font-weight:800;font-size:clamp(106px,13.5vw,205px);line-height:1;letter-spacing:-.06em}
 .mono .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.mono .ex{color:transparent;-webkit-text-stroke:1.4px color-mix(in srgb, var(--molten) 55%, #0a0807 calc(var(--i) * 9%));
-  transform:translate(calc(var(--i) * 2.1px), calc(var(--i) * 2.1px))}
-.mono .face{color:transparent;-webkit-text-stroke:0;background:linear-gradient(158deg,#2c2723,#141110);-webkit-background-clip:text;background-clip:text}
-.mono .front{color:transparent;-webkit-text-stroke:1.8px var(--molten);filter:drop-shadow(0 0 24px rgba(255,90,36,.45))}
+.mono .layer .gk,.mono .layer .g13{color:transparent}
+.mono .ex{transform:translate(calc(var(--i) * 2.1px), calc(var(--i) * 2.1px))}
+.mono .ex .gk{-webkit-text-stroke:1.4px color-mix(in srgb, var(--bone) 46%, #0a0807 calc(var(--i) * 9%))}
+.mono .ex .g13{-webkit-text-stroke:1.4px color-mix(in srgb, var(--molten) 55%, #0a0807 calc(var(--i) * 9%))}
+.mono .face .gk,.mono .face .g13{-webkit-text-stroke:0;background:linear-gradient(158deg,#2c2723,#141110);-webkit-background-clip:text;background-clip:text}
+.mono .front .gk{-webkit-text-stroke:1.8px var(--bone);filter:drop-shadow(0 0 16px rgba(243,238,227,.26))}
+.mono .front .g13{-webkit-text-stroke:1.8px var(--molten);filter:drop-shadow(0 0 22px rgba(255,90,36,.42))}
 .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:3}
 .orbit circle{fill:var(--amber)}
 .orbit .t2{opacity:.42}.orbit .t1{opacity:.68}
@@ -457,8 +460,8 @@ body.reeling .reel .cap.on{opacity:1}
     </svg>
     <div class="sculpt" id="sculpt">
       <div class="mono">
-        <span class="layer face">13</span>
-        <span class="layer front">13</span>
+        <span class="layer face"><span class="gk">K</span><span class="g13">13</span></span>
+        <span class="layer front"><span class="gk">K</span><span class="g13">13</span></span>
       </div>
       <svg class="orbit" viewBox="0 0 400 500" aria-hidden="true">
         <path id="track" d="M200,72 C 322,120 322,380 200,428 C 78,380 78,120 200,72 Z" fill="none" stroke="rgba(255,90,36,.16)" stroke-width="1.3" stroke-dasharray="2 8"/>
@@ -1038,7 +1041,7 @@ if(window.matchMedia("(hover:hover)").matches && !reduced){
 
 /* ---------- build the extruded 13 ---------- */
 (function(){ var mono=document.querySelector(".mono"); if(!mono) return; var frag=document.createDocumentFragment();
-  for(var i=9;i>=1;i--){ var s=document.createElement("span"); s.className="layer ex"; s.style.setProperty("--i", i); s.textContent="13"; frag.appendChild(s); }
+  for(var i=9;i>=1;i--){ var s=document.createElement("span"); s.className="layer ex"; s.style.setProperty("--i", i); s.innerHTML='<span class="gk">K</span><span class="g13">13</span>'; frag.appendChild(s); }
   mono.insertBefore(frag, mono.firstChild); })();
 
 /* ---------- badge spin + sculpt parallax ---------- */
