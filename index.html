@@ -609,14 +609,21 @@ window.addEventListener("scroll",countUp,{passive:true}); countUp();
 (function(){
   var feed=document.getElementById("feed"); if(!feed||reduced) return;
   var items=[
-    "Launching a public market site for UC San Diego",
-    "Drafting an AI copilot that listens in real time",
-    "Running overnight tests so mornings stay quiet",
-    "Rebuilding a 1938 landmark, online first"
+    "Wiring up a stadium-sized food hall at UC San Diego",
+    "Teaching an AI to actually pay attention in meetings",
+    "Crunching live betting math so nobody gets short-changed",
+    "Turning a 1938 movie theatre into a food hall, online first",
+    "Making a clay-and-limewash studio look like an art book",
+    "Dropping black-and-gold pins across a family of restaurants",
+    "Bottling San Diego sunshine into an all-day kitchen",
+    "Giving a Little Italy food hall the scroll it deserves",
+    "Teaching factory cameras to catch what tired eyes miss",
+    "Building an artist a site that updates itself overnight",
+    "Weighing bottles to catch the booze a bar never rings up"
   ];
   var i=0;
   setInterval(function(){ i=(i+1)%items.length; feed.style.opacity=0;
-    setTimeout(function(){ feed.textContent=items[i]; feed.style.opacity=1; },420); },3600);
+    setTimeout(function(){ feed.textContent=items[i]; feed.style.opacity=1; },420); },3800);
 })();
 
 /* work index cursor preview */
