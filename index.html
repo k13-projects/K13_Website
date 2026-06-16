@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="%23F3F5FA"/><text x="50" y="68" font-family="Georgia,serif" font-weight="700" font-size="46" text-anchor="middle"><tspan fill="%2316203A">K</tspan><tspan fill="%232E54D4">13</tspan></text></svg>'>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="%23F3F5FA"/><text x="50" y="68" font-family="Georgia,serif" font-weight="700" font-size="46" text-anchor="middle"><tspan fill="%2316203A">K</tspan><tspan fill="%23C2410C">13</tspan></text></svg>'>
 <style>
 /* =========================================================
    K13 Software Studio · beta_v7 · "THE DRAFTING TABLE"
@@ -20,8 +20,8 @@
   --paper:#F3F5FA; --paper-2:#FFFFFF; --paper-3:#E9EDF7;
   --ink:#141D35; --ink-2:#2A3554;
   --muted:#515C78; --faint:#8089A1;
-  --blue:#2E54D4; --blue-2:#5277EE;
-  --wash-blue:#DCE6FC; --wash-lilac:#E8E1FB; --wash-mint:#D6F0E6; --wash-peach:#FBE6DD;
+  --blue:#C2410C; --blue-2:#E8590C;
+  --wash-blue:#FBE2D1; --wash-lilac:#E8E1FB; --wash-mint:#D6F0E6; --wash-peach:#FBE6DD;
   --line:rgba(20,29,53,.12); --line-2:rgba(20,29,53,.22);
   --glass:rgba(255,255,255,.62);
   --disp:"Fraunces",Georgia,serif;
@@ -43,7 +43,7 @@ strong{color:var(--ink);font-weight:600}
 
 /* ---------- atmosphere ---------- */
 .draft-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6;
-  background-image:radial-gradient(rgba(46,84,212,.14) 1px,transparent 1.4px);
+  background-image:radial-gradient(rgba(194,65,12,.14) 1px,transparent 1.4px);
   background-size:30px 30px;
   mask-image:radial-gradient(120vw 90vh at 70% -10%,#000,transparent 80%);
   animation:drift 30s linear infinite}
@@ -84,7 +84,7 @@ nav{display:flex;gap:30px;align-items:center}
 .nl:hover::after{transform:scaleX(1)}
 .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-weight:600;font-size:14.5px;
   padding:11px 20px;border-radius:10px;background:var(--blue);color:#fff;transition:transform .3s var(--ease),background .3s,box-shadow .3s;
-  box-shadow:0 10px 24px -12px rgba(46,84,212,.7)}
+  box-shadow:0 10px 24px -12px rgba(194,65,12,.7)}
 .btn:hover{background:var(--ink);transform:translateY(-2px)}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line-2)}
 .btn.ghost:hover{background:transparent;border-color:var(--blue);color:var(--blue)}
