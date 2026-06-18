@@ -246,7 +246,12 @@ section{position:relative;z-index:2}
 .sent p{color:var(--muted);font-size:14.5px;max-width:300px;line-height:1.5}
 @media(max-width:880px){
   .contact-grid{grid-template-columns:1fr;gap:44px}
-  .stepper{min-height:400px}
+  /* let the card grow to fit the active step instead of clipping it */
+  .stepper{min-height:340px}
+  .step-stage{overflow:visible}
+  .screen-s{position:absolute}
+  .screen-s.on{position:relative}
+  .screen-s,.screen-s[data-s="0"]{padding:24px 20px}
 }
 
 /* ---------- footer ---------- */
@@ -274,7 +279,6 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 }
 @media(max-width:600px){
   nav .nl{display:none}
-  .brand .tag{display:none}
   .hero-meta{gap:14px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -634,18 +638,49 @@ window.addEventListener("scroll",countUp,{passive:true}); countUp();
 (function(){
   var feed=document.getElementById("feed"); if(!feed||reduced) return;
   var items=[
-    "Wiring up a stadium-sized food hall at UC San Diego",
-    "Teaching an AI to actually pay attention in meetings",
-    "Crunching live betting math so nobody gets short-changed",
+    "Teaching an AI to actually pay attention in meetings, so people don't have to",
+    "Getting five different AI models to agree on what your meeting actually decided",
+    "Turning a one hour call into a summary you can read before it ends",
+    "Keeping a meeting copilot honest across 1,100 plus commits and counting",
+    "Dropping black-and-gold pins across a whole family of restaurants",
+    "Giving a restaurant group one online home, without the brands stepping on each other",
+    "Putting every location on one map, so a new neighborhood is just one more pin",
+    "Making a hospitality group look as considered as the plating",
+    "Bottling San Diego sunshine into an all-day kitchen, before a word is read",
+    "Making a healthy menu feel like a vacation the moment the page loads",
+    "Building a kitchen's site to sell the mood first and the calories never",
     "Turning a 1938 movie theatre into a food hall, online first",
-    "Making a clay-and-limewash studio look like an art book",
-    "Dropping black-and-gold pins across a family of restaurants",
-    "Bottling San Diego sunshine into an all-day kitchen",
+    "Giving an 87 year old theatre a second opening night, this one on the web",
+    "Mailing a food hall its own monthly report, no spreadsheet to open",
+    "Reopening a cinema as a food hall, the drumroll built right into the scroll",
+    "Building a DJ a site that restocks its own mixes overnight",
+    "Wiring up an artist's page that updates its own tour dates while he plays",
+    "Letting a producer ship new music without ever opening the code",
+    "Wiring up a 20,000 square foot public market at UC San Diego",
+    "Making twenty thousand square feet of food hall load like a single snack",
+    "Building a campus market that every student can use, from day one",
+    "Handing a food hall a CMS its team can run without ever calling me",
     "Giving a Little Italy food hall the scroll it deserves",
-    "Teaching factory cameras to catch what tired eyes miss",
-    "Building an artist a site that updates itself overnight",
-    "Weighing bottles to catch the booze a bar never rings up"
+    "Building a food hall to the exact standard of the designer who shaped the room",
+    "Making a menu worth scrolling slowly, the way Sunday dinner is eaten",
+    "Crunching live betting math so the odds never quietly short-change you",
+    "Building a betting brain brave enough to grade its own picks each morning",
+    "Re-pricing a coupon when one leg gets voided, instead of refunding the lot",
+    "Doing the cold EV math on every wager, with feelings left at the door",
+    "Making a clay and limewash studio look like an art book",
+    "Turning a finishing studio into an art book that quietly closes the sale",
+    "Selling the feel of a Roman clay wall before anyone touches one",
+    "Putting the bar's disappearing whiskey on a scale, and on notice",
+    "Turning a bottle's weight into the exact pour, and the exact loss",
+    "Giving a bar the honest gap between what it poured and what it sold",
+    "Putting every bottle on a scale, so free pours have nowhere left to hide",
+    "Teaching factory cameras to catch the flaw tired eyes miss",
+    "Giving a production line a second set of eyes that never blink",
+    "Spotting the bad part before it ever reaches the box",
+    "Catching defects at line speed, one frame at a time"
   ];
+  for(var j=items.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=items[j];items[j]=items[k];items[k]=t;}
+  feed.textContent=items[0];
   var i=0;
   setInterval(function(){ i=(i+1)%items.length; feed.style.opacity=0;
     setTimeout(function(){ feed.textContent=items[i]; feed.style.opacity=1; },420); },3800);
