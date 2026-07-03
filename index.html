@@ -187,7 +187,7 @@ section{position:relative;z-index:2}
 .p-cap{position:absolute;z-index:2;right:22px;bottom:20px;text-align:right;will-change:transform;
   text-shadow:0 0 10px rgba(255,255,255,.95),0 0 24px rgba(255,255,255,.8)}
 .p-cap b{display:block;font-family:var(--disp);font-weight:600;font-size:20px;color:var(--ink);letter-spacing:-.01em;line-height:1.25}
-.p-cap span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);line-height:1.7}
+.p-cap span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);line-height:1.7}
 .facts{display:flex;flex-direction:column;margin-top:36px}
 .facts .f{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
 .facts .f:first-child{border-top:none}
@@ -282,8 +282,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
   .cap-grid{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr;gap:44px}
   .portrait{width:100%;max-width:430px;margin:0 auto}
-  /* caption moves below the photo on touch/narrow, museum-label style */
-  .p-cap{position:static;margin-top:12px;padding-right:4px;text-shadow:none;transform:none!important}
+  /* caption stays on the photo, compacted to clear the shoe (person right edge <=60% in the lower band) */
+  .p-cap{right:14px;bottom:12px}
+  .p-cap b{font-size:17px}
+  .p-cap span{font-size:8px;letter-spacing:.1em}
   .row{grid-template-columns:30px 1fr;gap:8px 16px}
   .row .rdesc{grid-column:2}
   .row .rmeta{grid-column:1/-1;justify-content:flex-start;margin-top:4px}
