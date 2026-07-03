@@ -169,12 +169,28 @@ section{position:relative;z-index:2}
 
 /* ---------- about strip ---------- */
 .about{padding:clamp(60px,8vw,110px) 0;border-top:1px solid var(--line)}
-.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
+.about-grid{display:grid;grid-template-columns:minmax(290px,410px) 1fr;gap:clamp(40px,6vw,90px);align-items:center}
 .about p{font-family:var(--disp);font-weight:500;font-style:italic;font-size:clamp(22px,2.5vw,32px);line-height:1.38;color:var(--ink);letter-spacing:-.01em}
 .about p .hl{font-style:normal;color:var(--blue);font-weight:600}
-.about-sig{margin-top:24px;font-family:var(--body);font-size:15px;color:var(--muted)}
-.about-sig b{color:var(--ink);font-weight:600}
-.facts{display:flex;flex-direction:column}
+
+/* ---------- about portrait (layered scroll depth) ---------- */
+.portrait{position:relative;margin:0}
+.p-back{position:absolute;top:9%;left:13%;right:-16px;bottom:-16px;border-radius:20px;
+  background-color:var(--paper-3);border:1px solid var(--line);
+  background-image:radial-gradient(rgba(203,77,20,.22) 1px,transparent 1.4px);background-size:14px 14px;
+  will-change:transform}
+.p-frame{position:relative;z-index:1;border-radius:18px;overflow:hidden;border:1px solid var(--line-2);background:var(--paper-3);
+  box-shadow:0 36px 80px -44px rgba(20,29,53,.65);will-change:transform;
+  clip-path:inset(9% 7% round 18px);transition:clip-path 1.1s var(--ease) .1s}
+.rv.in .p-frame{clip-path:inset(0% 0% round 18px)}
+.p-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;transform:scale(1.12);will-change:transform}
+.p-chip{position:absolute;z-index:2;left:-16px;bottom:34px;padding:13px 20px 11px;border-radius:13px;
+  background:var(--glass);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.85);box-shadow:0 20px 44px -26px rgba(20,29,53,.55);will-change:transform}
+.p-chip b{display:block;font-family:var(--disp);font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.p-chip span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.p-chip .scrawl{display:block;width:100%;height:9px;margin-top:6px}
+.facts{display:flex;flex-direction:column;margin-top:36px}
 .facts .f{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
 .facts .f:first-child{border-top:none}
 .facts .f .k{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
@@ -266,7 +282,8 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
   .hero-grid{grid-template-columns:1fr;gap:44px}
   .cards{grid-template-columns:1fr}
   .cap-grid{grid-template-columns:1fr}
-  .about-grid{grid-template-columns:1fr;gap:36px}
+  .about-grid{grid-template-columns:1fr;gap:44px}
+  .portrait{width:100%;max-width:430px;margin:0 auto}
   .row{grid-template-columns:30px 1fr;gap:8px 16px}
   .row .rdesc{grid-column:2}
   .row .rmeta{grid-column:1/-1;justify-content:flex-start;margin-top:4px}
@@ -514,15 +531,25 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 <section class="about" id="about">
   <div class="wrap">
     <div class="about-grid">
+      <figure class="portrait rv" id="portrait">
+        <div class="p-back" data-depth="-.45" aria-hidden="true"></div>
+        <div class="p-frame" data-depth=".08">
+          <img src="assets/kazim.jpg" alt="Kazim K., founder of K13 Software Studio, leaning on a plinth in front of a burnt-orange circle" loading="lazy" decoding="async" data-depth=".28" data-scale="1.12">
+        </div>
+        <figcaption class="p-chip" data-depth=".55">
+          <b>Kazim K.</b>
+          <span>Founder · K13 Software Studio</span>
+          <svg class="scrawl" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path class="draw" pathLength="400" d="M3 8 C 55 2, 120 11, 197 5" stroke-width="2"/></svg>
+        </figcaption>
+      </figure>
       <div class="rv">
         <p>I don't run an agency. I'm one builder who treats every project like <span class="hl">it has my name on it,</span> because it does. I would rather make six things I believe in than sixty I don't.</p>
-        <div class="about-sig">Kazim K. · founder of <b>K13 Software Studio</b></div>
-      </div>
-      <div class="facts rv">
-        <div class="f"><span class="k">Status</span><span class="v">Open for a new project</span></div>
-        <div class="f"><span class="k">Based</span><span class="v">Worldwide, remote</span></div>
-        <div class="f"><span class="k">Track record</span><span class="v">16 shipped, 10 live</span></div>
-        <div class="f"><span class="k">What earns a yes</span><span class="v">A real connection</span></div>
+        <div class="facts">
+          <div class="f"><span class="k">Status</span><span class="v">Open for a new project</span></div>
+          <div class="f"><span class="k">Based</span><span class="v">Worldwide, remote</span></div>
+          <div class="f"><span class="k">Track record</span><span class="v">16 shipped, 10 live</span></div>
+          <div class="f"><span class="k">What earns a yes</span><span class="v">A real connection</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -728,6 +755,27 @@ window.addEventListener("scroll",countUp,{passive:true}); countUp();
     row.addEventListener("mouseleave",function(){ active=false; peek.classList.remove("on"); kick(); });
   });
   document.addEventListener("mousemove",function(e){ tx=e.clientX+150; ty=e.clientY; if(active) kick(); },{passive:true});
+})();
+
+/* about portrait: layered scroll depth (transform-only, runs only while visible) */
+(function(){
+  var wrap=document.getElementById("portrait"); if(!wrap||reduced) return;
+  var layers=Array.prototype.map.call(wrap.querySelectorAll("[data-depth]"),function(el){
+    return { el:el, d:parseFloat(el.getAttribute("data-depth"))||0, s:el.getAttribute("data-scale")||"" };
+  });
+  var vis=false,ticking=false;
+  function update(){
+    ticking=false;
+    var r=wrap.getBoundingClientRect(), vh=window.innerHeight||1;
+    var p=(r.top+r.height/2-vh/2)/vh; /* 0 at viewport centre, ±~0.8 at the edges */
+    for(var i=0;i<layers.length;i++){ var l=layers[i];
+      l.el.style.transform="translate3d(0,"+(p*l.d*90).toFixed(2)+"px,0)"+(l.s?" scale("+l.s+")":"");
+    }
+  }
+  function ask(){ if(vis&&!ticking){ ticking=true; requestAnimationFrame(update); } }
+  new IntersectionObserver(function(es){ vis=es[0].isIntersecting; ask(); },{rootMargin:"12% 0px"}).observe(wrap);
+  window.addEventListener("scroll",ask,{passive:true});
+  window.addEventListener("resize",ask,{passive:true});
 })();
 
 /* multi-step contact -> drafts a pre-filled email */
