@@ -1,0 +1,41 @@
+{
+  "project": "K13_Website",
+  "date": "2026-08-09",
+  "tester": "Olga (QA Test Engineer)",
+  "method": "Playwright + Chromium, real browser load, not source-inference",
+  "pages_tested": [
+    "index.html",
+    "pricing/tiger/index.html"
+  ],
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 900 },
+    { "name": "mobile", "width": 390, "height": 844 },
+    { "name": "tablet_breakpoint_880", "width": 880, "height": 1024 },
+    { "name": "mobile_breakpoint_600", "width": 600, "height": 900 },
+    { "name": "narrow_320", "width": 320, "height": 700 }
+  ],
+  "checks": {
+    "console_errors": "none at any viewport, either page",
+    "failed_requests_or_4xx": "none at any viewport, either page",
+    "horizontal_overflow": "none at any viewport, either page (verified down to 320px)",
+    "nav_anchor_links": "pass (all 4 anchors scroll to target)",
+    "contact_wizard": "pass (step 1->2 advance + back button, desktop click and mobile tap)",
+    "hover_peek_preview": "pass (correct image loads on hover, desktop)",
+    "touch_inline_thumbnail_fallback": "pass (correct image loads inline, mobile/touch)",
+    "external_links_target_rel": "pass (10/10 have target=_blank rel=noopener)",
+    "mailto_tel_links": "pass (hrefs correct)",
+    "scroll_reveal_animation": "pass (24/24 .rv elements reveal on real incremental scroll-through)",
+    "prefers_reduced_motion": "pass (honoured; all .rv elements render opacity:1 immediately, 0 console errors)",
+    "pricing_calculator_tiger": "pass (quantity steppers, auto-open drawer, deposit/launch math all correct; initial apparent failure was a test-script artifact - forced click at a stale scroll position - not a site bug, re-verified 3 ways clean)"
+  },
+  "defects_found": [],
+  "observations_non_blocking": [
+    {
+      "note": "Below 600px viewport width, nav .nl{display:none} hides Approach/Work/Studio nav links with no hamburger/menu fallback present in markup. CTA (Start a project) remains reachable. Design trade-off for a short single-page site, not treated as a defect.",
+      "severity": "advisory",
+      "requires": "Kazim's call"
+    }
+  ],
+  "status": "PASS",
+  "approved": true
+}
