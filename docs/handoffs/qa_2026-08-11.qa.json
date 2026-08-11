@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-11",
+  "tester": "Olga (QA Test Engineer)",
+  "project": "K13_Website",
+  "commit": "d152fe4",
+  "branch": "main",
+  "method": "Playwright + Chromium, headless, local static server (python3 -m http.server 8971)",
+  "status": "PASS",
+  "re_run_of": "docs/handoffs/qa_2026-08-10.md",
+  "checks": [
+    {
+      "id": "skip_link_focus",
+      "description": "Tab to skip link, Enter moves focus into <main>, next Tab stays inside <main>",
+      "result": "PASS",
+      "evidence": "first Tab -> .skip-link; Enter -> activeElement {tag:MAIN,id:main}; next Tab -> 'Start a project' button, main.contains(activeElement)===true"
+    },
+    {
+      "id": "no_focus_leak_behind_sent_panel",
+      "description": "Zero focusable controls behind .sent panel after send (.sc chips, #sWhy, #sendIt, #stepBack previously leaked)",
+      "result": "PASS",
+      "evidence": "8-stop tab trace after send: first stop = footer email link (correct/expected), then wraps to body/top; none of the previously-leaking elements appear; stepBody.inert===true, sent.inert===false"
+    },
+    {
+      "id": "sendit_guard_empty_data",
+      "description": "#sendIt cannot fire with empty data via forced .click()",
+      "result": "PASS",
+      "evidence": "sent.classList.contains('on') before=false after=false"
+    },
+    {
+      "id": "sendit_guard_dispatched_mouseevent",
+      "description": "#sendIt cannot fire with empty data via dispatched MouseEvent",
+      "result": "PASS",
+      "evidence": "sent.on stayed false after dispatchEvent(new MouseEvent('click', {bubbles:true}))"
+    },
+    {
+      "id": "sendit_guard_partial_data",
+      "description": "#sendIt cannot fire with partial data (type set, name empty) via forced click",
+      "result": "PASS",
+      "evidence": "sent.on stayed false, redirected to step 1 (data-s=1)"
+    },
+    {
+      "id": "success_copy_honest",
+      "description": "Success panel states process, not a false 'email sent' claim",
+      "result": "PASS",
+      "evidence": "title='Opening your mail app…' msg='Your message is filled in and ready. Review it in your mail app, then hit send.'"
+    },
+    {
+      "id": "feedtoggle_outside_aria_hidden",
+      "description": "#feedToggle not a descendant of any aria-hidden=true ancestor",
+      "result": "PASS",
+      "evidence": "ancestor walk found insideAriaHidden=false"
+    },
+    {
+      "id": "feedtoggle_focusable_and_sized",
+      "description": "#feedToggle reachable via focus(), meets target size",
+      "result": "PASS",
+      "evidence": "focus() succeeded, measured 63x24px"
+    },
+    {
+      "id": "feedtoggle_pause_functional",
+      "description": "Pause genuinely stops the 3.8s #feed rotation; resume genuinely restarts it",
+      "result": "PASS",
+      "evidence": "#feed.textContent unchanged across 4.2s while paused (>3.8s interval); changed within 4.5s after resume. Re-verified with correct #feed selector after an initial run mistakenly read the static .status .now label and produced a false negative."
+    },
+    {
+      "id": "console_errors",
+      "description": "Zero console errors across index.html (5 viewports), pricing/tiger/, 404.html",
+      "result": "PASS"
+    },
+    {
+      "id": "failed_requests",
+      "description": "Zero 4xx/5xx responses across all pages tested",
+      "result": "PASS"
+    },
+    {
+      "id": "horizontal_overflow",
+      "description": "scrollWidth - clientWidth === 0 at 1440/880/600/390/320",
+      "result": "PASS"
+    },
+    {
+      "id": "imagery_loads_after_scroll",
+      "description": "Zero broken images (naturalWidth===0) after real incremental scroll-through at every width",
+      "result": "PASS",
+      "note": "#peekImg has empty src by design (hover-preview container), not a defect"
+    },
+    {
+      "id": "reduced_motion",
+      "description": "prefers-reduced-motion collapses transitions and never initialises Lenis",
+      "result": "PASS",
+      "evidence": "html.lenis absent, .card transition-duration=0.001s, zero console errors, .feed-toggle{display:none} under the media query"
+    },
+    {
+      "id": "pricing_tiger_calculator",
+      "description": "pricing/tiger/ still functional (client-confidential, exercised not deep-tested)",
+      "result": "PASS",
+      "evidence": "+/- stepper quantity display went 0 -> 2 after two clicks, zero console errors"
+    },
+    {
+      "id": "404_page",
+      "description": "404.html renders correctly",
+      "result": "PASS",
+      "evidence": "title='Page not found · K13 Software Studio', zero overflow, zero console errors"
+    }
+  ],
+  "viewports_tested": [
+    {"width": 1440, "height": 900, "label": "desktop"},
+    {"width": 880, "height": 1000, "label": "bp880"},
+    {"width": 600, "height": 1000, "label": "bp600"},
+    {"width": 390, "height": 844, "label": "mobile"},
+    {"width": 320, "height": 900, "label": "bp320"}
+  ],
+  "screenshots_dir": "/private/tmp/claude-501/-Users-k13-Desktop-PROJECTS-K13-WarRoom/a6004703-2000-4d54-a848-923162446c20/scratchpad/qa_shots_0811/",
+  "files_modified": [],
+  "human_gate": "none",
+  "next": "release-engineer (Kate)"
+}

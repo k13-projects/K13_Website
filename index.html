@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://k13projects.com/assets/kazim.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="K13 Software Studio · Kazim K.">
-<meta name="twitter:description" content="Clear software, built end to end — from the first sketch to the deploy.">
+<meta name="twitter:description" content="Clear software, built end to end: from the first sketch to the deploy.">
 <meta name="twitter:image" content="https://k13projects.com/assets/kazim.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -331,7 +331,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;position:relative;z-index
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   .rv{opacity:1;transform:none}
-  .feed-toggle{display:none}
+  /* Must out-specify `.status-wrap .feed-toggle` (0,2,0) or reduced-motion users get a visible,
+     focusable Pause button with no listener attached — the feed script bails before wiring it.
+     A control that does nothing is worse than no control. */
+  .status-wrap .feed-toggle{display:none}
 }
 </style>
 </head>
