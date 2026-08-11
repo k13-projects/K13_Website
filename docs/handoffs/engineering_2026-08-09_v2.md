@@ -167,3 +167,50 @@ Transitions still collapse under reduced-motion:            PASS (0.001s)
 ## Risks       none new — this was a scoped regression fix with no behavior change to ordinary anchors.
 ## Next        qa-test-engineer
 ## Human gate  none
+
+---
+
+## Addendum 2026-08-10b — compliance's final round: 4 items closed
+
+1. **Inert reopened after send, fixed.** Wrapped `.step-top`/`.step-sum`/`.step-stage` in a new
+   `#stepBody` container (`.step-body{display:flex;flex-direction:column;flex:1;min-height:0}` to
+   preserve the exact prior flex layout). The `sendIt` handler now sets `stepBody.inert=true` the
+   moment it shows `.sent`, so the back button, `.sc` chips, and the active screen's field/button are
+   all excluded from the tab order and AX tree regardless of which step was active — not just the
+   per-screen `inert` flags, which only ever tracked the *step*, not the *sent* state.
+2. **`#feedToggle` restructured out of the `aria-hidden` subtree.** It's no longer a descendant of
+   `<aside class="status" aria-hidden="true">` — moved to a sibling `<button>` inside a new
+   `.status-wrap` positioning context, absolutely placed on the card's top edge
+   (`aria-hidden="false"` removed; it's a no-op once outside the hidden ancestor anyway). Bumped to a
+   real `min-height:24px;min-width:24px` box (measured live: 63×24) for SC 2.5.8.
+3. **`.sent` now starts `inert`** (matching the `.screen-s` pattern) and the handler flips
+   `sent.inert=false` at reveal, at the same moment it writes fresh `textContent` into `#sentTitle`/
+   `#sentMsg` (they start empty in markup) — a live region that was already inert/hidden at load
+   never "changes" when merely un-hidden, so the fresh text write is what gives `role="status"
+   aria-live="polite"` something to actually announce.
+4. **`404.html` moved onto the corrected tokens** (`--faint:#646B7E`, `--blue:#B94612` — same values
+   as `index.html`; nothing else in that file touched, including the favicon/head which weren't in
+   scope).
+
+**Verified live in Chromium (Playwright + axe-core 4.11, port 8933, killed after):**
+```
+Success panel shown after a valid send:                         PASS
+Zero focusable elements behind the panel (inside #stepBody):    PASS (0 found; next Tab lands on the footer email link)
+#stepBody.inert === true after send:                             PASS
+#sent.inert === false after send:                                PASS
+axe-core: zero violations on the page post-send:                PASS
+#feedToggle not inside an aria-hidden subtree:                  PASS
+#feedToggle target size:                                        PASS (63x24, was 53x23)
+#feedToggle reachable/focusable:                                PASS
+Lenis still never initialised under reduced-motion:              PASS
+Skip link still moves focus into <main>:                         PASS
+404.html .code (--blue on --paper):    4.175 -> 4.877  (>= 4.5)
+404.html footer (--faint on --paper):  3.203 -> 4.879  (>= 4.5)
+```
+
+## Status      PASS
+## Summary     Closed compliance's final 4 findings: inert now holds behind the success panel (stepBody wrapper), #feedToggle moved out of the aria-hidden subtree with a real 24x24 target, .sent starts inert and gets fresh text at reveal so the live region actually announces, and 404.html now uses the corrected contrast tokens. Verified live: axe-core zero violations, zero focusable elements behind the panel, both 404.html pairs above 4.5, skip link and reduced-motion unaffected.
+## Files       /Users/k13/Desktop/PROJECTS/K13_Website/index.html (modified); /Users/k13/Desktop/PROJECTS/K13_Website/404.html (modified — --faint/--blue tokens only)
+## Risks       none new.
+## Next        qa-test-engineer
+## Human gate  none
