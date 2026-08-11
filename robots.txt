@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pricing/
+Disallow: /pricing/tiger/
+
+Sitemap: https://k13projects.com/sitemap.xml

@@ -1,0 +1,66 @@
+{
+  "project": "K13_Website",
+  "date": "2026-08-10",
+  "tester": "Olga (QA Test Engineer)",
+  "context": "Re-run following the 2026-08-09 contact-stepper accessibility/security bug (invisible-but-focusable tab stops + empty-data #sendIt) found by compliance+engineering, missed by the 2026-08-09 QA happy-path pass. This pass is adversarial: full tab-order traces, forced programmatic bypasses.",
+  "method": "Playwright + Chromium, real browser load, not source-inference. Served python3 -m http.server 8923 (outside 9130-9199, away from 5000/7000), killed after testing.",
+  "pages_tested": [
+    "index.html",
+    "pricing/tiger/index.html",
+    "404.html"
+  ],
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 900 },
+    { "name": "mobile", "width": 390, "height": 844 },
+    { "name": "tablet_breakpoint_880", "width": 880, "height": 1024 },
+    { "name": "mobile_breakpoint_600", "width": 600, "height": 900 },
+    { "name": "narrow_320", "width": 320, "height": 700 }
+  ],
+  "checks": {
+    "tab_order_no_invisible_focusable": "PASS - full 27-stop trace from page top, 0 invisible/inert-but-focused; re-verified at each stepper step (step1: only nameNext+footer reachable; step3: only sendIt+footer reachable)",
+    "sendIt_blocked_keyboard_from_step1": "PASS - #sendIt never in tab order until step 3 reached via real flow",
+    "sendIt_blocked_forced_click_empty_data": "PASS - forced .click() and dispatched MouseEvent both fail to show success panel with data fully empty",
+    "sendIt_blocked_forced_click_partial_data": "PASS - type set, name empty, forced click redirects to name step, no success panel",
+    "sendIt_legit_flow_still_succeeds": "PASS - real click/keyboard flow through all steps succeeds, success panel shown",
+    "success_copy_no_false_claim": "PASS - shows 'Opening your mail app...' process language, not a completed-action claim",
+    "form_labels": "PASS - sName/sEmail/sWhy all resolve real <label> text via el.labels[0]",
+    "feed_pause_control_reachable": "PASS - in tab order, aria-pressed/aria-label/text toggle correctly",
+    "feed_pause_control_actually_pauses": "PASS - text held unchanged 4.2s while paused (> 3.8s rotation interval), resumes and changes again within 4.5s",
+    "skip_link_moves_focus": "FAIL - Tab to skip link, Enter (also tested via direct .click()), then Tab again lands focus back on the .brand nav link, not inside <main>. location.hash never updates either. Root cause: the site's global a[href^=\"#\"] click handler (~line 667) calls e.preventDefault() and only scrolls (Lenis/scrollIntoView), never calls el.focus(). Skip link is present/visible/correctly-hrefed but non-functional for real keyboard users.",
+    "prefers_reduced_motion_lenis_never_inits": "PASS - html.lenis class absent, window.Lenis loaded but unused",
+    "prefers_reduced_motion_transitions_collapse": "PASS - .card transition-duration = 0.001s",
+    "prefers_reduced_motion_feed_toggle_hidden": "PASS - display:none, consistent with feed IIFE early-return under reduced motion",
+    "console_errors": "none at any viewport, any page tested",
+    "failed_requests_or_4xx": "none at any viewport, any page tested",
+    "horizontal_overflow": "none at any viewport tested, down to 320px",
+    "images_load": "PASS after real incremental scroll-through (initial lazy-load-not-yet-triggered readings were a test-script artifact, not a site bug); only src=\"\" image is #peekImg, empty by design",
+    "pricing_calculator_tiger": "load smoke-test only (unchanged by this pass, already verified working 2026-08-09) - zero console errors, zero failed requests",
+    "404_page": "PASS - renders clean desktop+mobile, zero console errors, zero overflow, correct title/CTA/email; minor pre-flagged non-blocking rust-token shade mismatch vs index.html noted by release-engineer already, not new",
+    "sri_and_link_hardening": "PASS - Lenis script has documented integrity+crossorigin, all 10 target=_blank links have rel=\"noopener noreferrer\", canonical+OG meta present, favicon.svg wired"
+  },
+  "defects_found": [
+    {
+      "title": "Skip link does not move keyboard focus to <main>",
+      "severity": "medium - accessibility regression on a newly-added fix-ticket item",
+      "detail": "The generic in-page anchor click handler (index.html ~line 667) intercepts the skip link's click, calls e.preventDefault(), and only performs a smooth scroll -- it never calls .focus() on the target. The browser's native skip-link behavior (jump + focus the tabindex=-1 target) never fires. Proven live: Tab->Enter->Tab lands back on the .brand nav link, identical to pre-fix behavior.",
+      "recommended_fix": "Call el.focus({preventScroll:true}) after scrollTo() inside the shared anchor handler, or explicitly exclude .skip-link from that handler and let the browser's native anchor navigation (or a small dedicated handler that both scrolls and focuses) run instead.",
+      "reproduction": "playwright: page.keyboard.press('Tab'); page.keyboard.press('Enter'); wait 1400ms; page.keyboard.press('Tab') -> activeElement lands on nav .brand link, not inside #main"
+    }
+  ],
+  "observations_non_blocking": [
+    {
+      "note": "404.html's rust accent token (#CB4D14) is one shade behind index.html's just-updated live value (#B94612). Already flagged by release-engineer in release_2026-08-09_v2.md as a trivial follow-up once Natalia's pass settles. Not re-flagging as new.",
+      "severity": "cosmetic",
+      "requires": "trivial follow-up, no decision needed"
+    },
+    {
+      "note": "Below 600px viewport width, no hamburger/menu fallback for hidden nav links -- unchanged from 2026-08-09, still Kazim's design-trade-off call, not re-tested this pass since nothing here touched it.",
+      "severity": "advisory",
+      "requires": "Kazim's call (carried forward, not new)"
+    }
+  ],
+  "status": "NEEDS-REVIEW",
+  "approved": false,
+  "blocking_reason": "Skip link (new in this fix pass) does not functionally work for keyboard users -- focus never transfers to <main>. The security/lead-capture bug this re-run was created to verify (invisible tab stops + empty-data #sendIt) is fully fixed and proven three independent ways.",
+  "next_recommended": "frontend-engineer (Natalia) to patch the skip-link focus bug, then qa-test-engineer for a fast targeted re-check of only the skip link."
+}
