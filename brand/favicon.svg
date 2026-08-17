@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="K13">
+  <!-- K13 mark, matching the top-nav wordmark: K in ink, 13 in the burnt-orange accent.
+       Background stays white in BOTH colour schemes on purpose (Kazim, 2026-08-13) — the previous
+       version inverted to a navy ground under prefers-color-scheme: dark, which he didn't want.
+       Font stack deliberately excludes Georgia: Georgia ships old-style (text) figures, so its
+       "1" and "3" sit at different heights than the cap-height "K" and the mark reads crooked.
+       That was the "K ile 13'ün seviyesi farklı" complaint. Times has lining figures, which align. -->
+  <style>
+      .bg{fill:#FFFFFF}
+      .k{fill:#141D35}
+      .n{fill:#B94612}
+  </style>
+  <rect class="bg" width="100" height="100" rx="22"/>
+  <text x="50" y="69" text-anchor="middle"
+          font-family="Fraunces,'Times New Roman',Times,serif"
+          font-weight="700" font-size="52" letter-spacing="-1"
+          ><tspan class="k">K</tspan><tspan class="n">13</tspan></text>
+</svg>
