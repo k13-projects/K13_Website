@@ -91,15 +91,28 @@ has actually verified yet.
 - Delivery-pipeline work goes to its named agent (see `K13-WarRoom/starter-kit/ORG.md`);
   handoff artifacts land in `docs/handoffs/<stage>_<YYYY-MM-DD>.md` and feed the War Room Org tab.
 
+## Settled decisions (dated — do not re-litigate)
+- **2026-08-18 · Brand canon is the shipped site, and the square mark is dead.** Kazim saw the
+  rounded-square glyph mark (dark tile, cream "1" stem, `#FF4F00` angular "3" — `k13-mark.svg`
+  and friends) surface in a client deliverable, did not recognize it as his logo, and ordered it
+  destroyed. All `brand/logo/` mark/glyph/lockup files and the mark-based `brand/print/`
+  collateral (business card, letterhead, previews) were removed from the working tree that day.
+  **The official K13 identity is what `index.html` ships:** the typographic nav lockup
+  (Fraunces "K" in ink `#141D35`, "13" in the orange accent, JetBrains Mono "SOFTWARE STUDIO"
+  tag) and the Kazim-approved typographic `favicon.svg`. Never regenerate, reference, or
+  recreate the square mark in any project.
+- **2026-08-19 · Brand triage.** Kazim reviewed the full brand inventory card by card and ruled:
+  keep the typographic identity, the root `favicon.svg`, `assets/kazim.jpg`, all ten Work shots,
+  the 13 live color tokens, and the Fraunces/Inter/JetBrains Mono trio. Removed for good: the
+  duplicate `brand/favicon.svg`, `assets/kazim 2.jpg`, the orphaned root `Kazim Image.png`,
+  Space Grotesk (old README canon), and the entire quarantined mark family (purged, no restore).
+  The `brand/` folder is gone; `README.md` was rewritten the same day to match this canon.
+
 ## Open decisions (do not decide these yourself)
-1. **Brand canon.** `README.md` and `brand/` document Space Grotesk + `#FF4F00` on cream. The
-   shipped `index.html` is `beta_v7 "THE DRAFTING TABLE"` — Fraunces/Inter/JetBrains Mono on navy
-   `#141D35` with rust `#CB4D14`. Two lanes found this independently. **Blocks any DNA styleguide
-   work until Kazim settles it.**
-2. **`pricing/tiger/`** — a named client's confidential pricing, untracked with no git backup.
+1. **`pricing/tiger/`** — a named client's confidential pricing, untracked with no git backup.
    Verified not leaked (404 on production, never pushed). Whether it belongs in this repo is
    Kazim's call; it has been deliberately excluded from every commit so far.
-3. **Branch protection on `main`** is not enabled, so the never-commit-to-main rule is honour-only.
+2. **Branch protection on `main`** is not enabled, so the never-commit-to-main rule is honour-only.
 
 ## Known follow-ups
 - ~2.5MB of oversized `assets/shots/*.jpg` with no WebP or `srcset`; plus an orphaned 1.9MB
