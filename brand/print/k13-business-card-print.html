@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>K13 Business Card print master (File &gt; Print &gt; Save as PDF)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* One card face per page. 96 CSS px = 1in, so the 336x192 px faces print at exactly 3.5x2in. */
+  @page{size:3.5in 2in;margin:0}
+  html,body{margin:0;padding:0}
+  .page{width:336px;height:192px;overflow:hidden;break-after:page;page-break-after:always}
+  .page:last-of-type{break-after:auto;page-break-after:auto}
+  .note{display:none}
+  @media screen{
+    body{background:#2a2927;padding:40px;display:flex;flex-direction:column;align-items:center;gap:28px;font-family:system-ui,sans-serif}
+    .page{box-shadow:0 10px 34px rgba(0,0,0,.4)}
+    .note{display:block;color:#cfcac2;font-size:13px;max-width:420px;text-align:center;line-height:1.5}
+  }
+</style>
+</head>
+<body>
+<p class="note">K13 business card, V22 "Your Idea" (2026-08-20): pages 1-2 light (paper), pages 3-4 black.
+Print via File &gt; Print &gt; Save as PDF at 100% scale, margins none. This note does not print.</p>
+<div class="page"><!-- Front · Light -->
+<div style="position: relative; width: 336px; height: 192px; background: #F3F5FA; overflow: hidden">
+  <div style="position: absolute; left: 0; right: 0; top: 21px; text-align: center">
+    <div style="font-family: Fraunces, Georgia, serif; font-weight: 700; font-size: 19px; line-height: 1; letter-spacing: -0.3px"><span style="color: #141D35">K</span><span style="color: #B94612">13</span></div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 6.5px; letter-spacing: 2.6px; color: #A9862F; margin-top: 5px">SOFTWARE STUDIO LLC</div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 64px; bottom: 62px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 5px">
+    <span style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 16px; color: #141D35">Kazim Korkmaz</span>
+    <div style="display: flex; align-items: center; gap: 7px">
+      <span style="width: 14px; height: 1px; background: #A9862F"></span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 7px; letter-spacing: 2.2px; color: #A9862F">SOFTWARE CRAFTSMAN</span>
+      <span style="width: 14px; height: 1px; background: #A9862F"></span>
+    </div>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .3px; color: #B94612; margin-top: 2px">kazim@k13projects.com</span>
+  </div>
+  <div style="position: absolute; left: 24px; right: 24px; bottom: 26px; text-align: center">
+    <div style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.2px; color: #141D35; white-space: nowrap">You have an idea. I’ll <span style="color: #B94612">build it</span> for you.</div>
+    
+  </div>
+</div>
+</div>
+<div class="page"><!-- Back · Light -->
+<div style="width: 336px; height: 192px; background: #F3F5FA; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+  <div style="font-family: Fraunces, Georgia, serif; font-weight: 700; font-size: 36px; line-height: 1; letter-spacing: -0.7px"><span style="color: #141D35">K</span><span style="color: #B94612">13</span></div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 7.5px; letter-spacing: 3.2px; color: #646B7E; margin-top: 7px">SOFTWARE STUDIO</div>
+  <div style="width: 24px; height: 1px; background: #A9862F; margin: 13px 0"></div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .3px; color: #515C78">info@k13projects.com</div>
+  <div style="font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 400; font-size: 11px; color: #646B7E; margin-top: 11px; max-width: 250px">That <span style="color: #B94612">simple</span>.</div>
+</div>
+</div>
+<div class="page"><!-- Front · Black -->
+<div style="position: relative; width: 336px; height: 192px; background: #000000; overflow: hidden">
+  <div style="position: absolute; left: 0; right: 0; top: 21px; text-align: center">
+    <div style="font-family: Fraunces, Georgia, serif; font-weight: 700; font-size: 19px; line-height: 1; letter-spacing: -0.3px"><span style="color: #F3F5FA">K</span><span style="color: #D65A1F">13</span></div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 6.5px; letter-spacing: 2.6px; color: #D3B15F; margin-top: 5px">SOFTWARE STUDIO LLC</div>
+  </div>
+  <div style="position: absolute; left: 0; right: 0; top: 64px; bottom: 62px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 5px">
+    <span style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 16px; color: #F3F5FA">Kazim Korkmaz</span>
+    <div style="display: flex; align-items: center; gap: 7px">
+      <span style="width: 14px; height: 1px; background: #D3B15F"></span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 7px; letter-spacing: 2.2px; color: #D3B15F">SOFTWARE CRAFTSMAN</span>
+      <span style="width: 14px; height: 1px; background: #D3B15F"></span>
+    </div>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .3px; color: #D65A1F; margin-top: 2px">kazim@k13projects.com</span>
+  </div>
+  <div style="position: absolute; left: 24px; right: 24px; bottom: 26px; text-align: center">
+    <div style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.2px; color: #F3F5FA; white-space: nowrap">You have an idea. I’ll <span style="color: #D65A1F">build it</span> for you.</div>
+  </div>
+</div>
+</div>
+<div class="page"><!-- Back · Black -->
+<div style="width: 336px; height: 192px; background: #000000; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+  <div style="font-family: Fraunces, Georgia, serif; font-weight: 700; font-size: 36px; line-height: 1; letter-spacing: -0.7px"><span style="color: #F3F5FA">K</span><span style="color: #D65A1F">13</span></div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 7.5px; letter-spacing: 3.2px; color: #8C8C8C; margin-top: 7px">SOFTWARE STUDIO</div>
+  <div style="width: 24px; height: 1px; background: #D3B15F; margin: 13px 0"></div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .3px; color: #B3B3B3">info@k13projects.com</div>
+  <div style="font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 400; font-size: 11px; color: #8C8C8C; margin-top: 11px; max-width: 250px">That <span style="color: #D65A1F">simple</span>.</div>
+</div>
+</div>
+</body>
+</html>
