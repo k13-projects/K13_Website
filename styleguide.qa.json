@@ -1,0 +1,26 @@
+{
+  "file": "/Users/k13/Desktop/PROJECTS/K13_Website/styleguide.html",
+  "date": "2026-08-28",
+  "reviewer": "qa-test-engineer",
+  "desktop": "pass",
+  "mobile": "pass",
+  "checks": [
+    { "id": "layout-overflow", "result": "pass (after fix)", "note": "Initial mobile (375px) fail: 3x .sg-ref code badges used white-space:nowrap and overflowed the viewport by up to 92px, silently clipped by html/body's overflow-x:hidden (invisible content). Fixed with a max-width:640px media query allowing .sg-ref to wrap and drop its auto left-margin. Re-verified: 0 elements exceed viewport bounds outside intentional overflow-x:auto demo containers (the nav-demo component preview, which is deliberately shown at native width in a scrollable box)." },
+    { "id": "hierarchy-spacing", "result": "pass", "note": "Consistent with the .sg-* framework reference look across Colors/Type/Motion/Buttons/Forms/Components/Patterns/Tokens: card padding, radii, label pills, and dt/dd spec grids all consistent." },
+    { "id": "palette-hexes", "result": "pass", "note": "Swatches confirmed against canon: paper #F3F5FA, ink #141D35, accent #B94612/#EA5E14 all present with matching rendered swatch backgrounds." },
+    { "id": "toc-anchors", "result": "pass", "note": "All 8 TOC links (#colors #type #motion #buttons #forms #components #patterns #tokens) resolve to a matching id in the DOM; verified live in-browser." },
+    { "id": "console-errors", "result": "pass", "note": "Zero console errors/warnings from the page itself on desktop or mobile load. (Unrelated cross-tab noise from other concurrently-open browser tabs in the shared browse daemon, e.g. gstatic.com boq-labs-tailwind/boq-bard-web preload warnings, was observed and excluded; the page never references those domains.)" },
+    { "id": "fonts", "result": "pass", "note": "Fraunces/Inter/JetBrains Mono loaded via Google Fonts preconnect + stylesheet link, with sane fallback stacks (Georgia serif, system-ui sans, ui-monospace mono)." },
+    { "id": "em-dash-ban", "result": "pass", "note": "Zero unicode em-dashes (—) and zero &mdash; HTML entities anywhere in the file (grepped, both forms)." },
+    { "id": "left-accent-bars", "result": "pass", "note": "Only border-left usage is .sg-note, a documentation callout/blockquote pattern (not a content card), acceptable and distinct from the banned 'colored strip down a card edge' AI-slop pattern." },
+    { "id": "reduced-motion", "result": "pass", "note": "Global blanket rule @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}} covers every animation/transition in the file, including the always-looping demo-*, beat, pop and feedCross keyframes." },
+    { "id": "contrast", "result": "pass (after fix)", "note": "Automated WCAG contrast sweep + visual screenshot inspection found 3 real defects in the dark Motion section, all now fixed: (1) '.step-demo' (Contact stepper transition demo) was missing the standard .sg-stage light-paper wrapper used by every other demo, so its dark-navy '--ink'/'--muted'/'--blue' text rendered nearly invisibly on the dark card background (~1.0-2.3:1) -- fixed by wrapping it in .sg-stage like its siblings. (2) '.count-demo' (Count-up stats) had the identical missing-wrapper bug, same fix applied. (3) The 'Easing & reduced motion' demo box had its paragraph text set to rgba(255,255,255,.62) (a dark-section text color) while sitting on the light .sg-stage background, rendering as pale-on-pale; fixed to var(--muted)/var(--blue) set directly on the <p>/<b> tags (an ancestor-div color didn't take effect because a more specific '.sg-section.dark p' rule overrode inherited color). Re-swept after fixes: 0 elements below the 4.5:1 (normal text) / 3.0:1 (large text) threshold." }
+  ],
+  "fixed": [
+    "Added @media(max-width:640px){.sg-ref{white-space:normal;margin-left:0}} so long component-reference badges wrap instead of overflowing off-screen on mobile.",
+    "Wrapped .step-demo (Contact stepper transition, Motion section) in .sg-stage to restore the light-paper backdrop its text colors were designed for -- was rendering as near-invisible dark-on-dark text.",
+    "Wrapped .count-demo (Count-up stats, Motion section) in .sg-stage for the same reason -- '16 SHIPPED' etc. were nearly unreadable.",
+    "Fixed the Easing & reduced motion demo's paragraph/label colors (moved from a non-effective wrapper-div style to var(--muted)/var(--blue) set directly on the <p>/<b> elements) -- was rendering pale white-ish text on a light background, nearly invisible."
+  ],
+  "verdict": "PASS"
+}
